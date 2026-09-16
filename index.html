@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HyeonBin Im</title>
+  <meta name="description" content="Security & Cloud Engineer · The University of Suwon. Research on L7 DDoS defense, eBPF-based security visibility, and nuclear cybersecurity regulation." />
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+  <meta name="googlebot" content="noindex, nofollow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://portfolio.hyeonbin.net" />
+  <meta property="og:title" content="HyeonBin Im" />
+  <meta property="og:description" content="Security & Cloud Engineer · The University of Suwon" />
+  <meta property="og:image" content="https://portfolio.hyeonbin.net/avatar.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="HyeonBin Im" />
+  <meta name="twitter:description" content="Security & Cloud Engineer · The University of Suwon" />
+  <meta name="twitter:image" content="https://portfolio.hyeonbin.net/avatar.jpg" />
+  <link rel="icon" href="favicon.png?v=2" />
+  <link rel="apple-touch-icon" href="favicon.png?v=2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+::selection { background: var(--indigo-l); }
+
+:root {
+  --bg:       #ffffff;
+  --bg-sub:   #fafafa;
+  --ink:      #09090b;
+  --ink-2:    #52525b;
+  --ink-3:    #a1a1aa;
+  --border:   #f4f4f5;
+  --border-2: #e4e4e7;
+  --indigo:   #6366f1;
+  --indigo-l: #eef2ff;
+  --nav-bg:   rgba(255,255,255,.85);
+  --card-hover: #fafafa;
+  --shadow:   rgba(0,0,0,.08);
+}
+[data-theme="dark"] {
+  --bg:       #0a0a0a;
+  --bg-sub:   #18181b;
+  --ink:      #fafafa;
+  --ink-2:    #a1a1aa;
+  --ink-3:    #71717a;
+  --border:   #27272a;
+  --border-2: #27272a;
+  --indigo:   #818cf8;
+  --indigo-l: #1e1b4b;
+  --nav-bg:   rgba(10,10,10,.8);
+  --card-hover: #18181b;
+  --shadow:   rgba(0,0,0,.4);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background .2s, color .2s;
+}
+
+/* ── SCROLL PROGRESS ── */
+#progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--indigo);
+  z-index: 200;
+  transition: width .08s linear;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  justify-content: space-between;
+  transition: background .2s, box-shadow .2s;
+}
+nav.up {
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--border-2);
+}
+.n-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.n-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-2);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.n-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.n-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.n-menu { display: flex; gap: 4px; list-style: none; }
+.n-menu a {
+  display: block;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink-2);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background .12s, color .12s;
+}
+.n-menu a:hover { background: var(--bg-sub); color: var(--ink); }
+.n-menu a.active { color: var(--indigo); font-weight: 500; background: var(--indigo-l); }
+.n-tool.n-hamburger { display: none; }
+
+.n-tools { display: flex; align-items: center; gap: 4px; }
+.n-tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  min-width: 30px;
+  padding: 0 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--ink-2);
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background .12s, color .12s, border-color .12s;
+  letter-spacing: .02em;
+}
+.n-tool:hover { background: var(--bg-sub); color: var(--ink); border-color: var(--ink-3); }
+.n-tool svg { width: 14px; height: 14px; }
+
+/* ── WRAP ── */
+.wrap {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 80px);
+}
+
+/* ── HERO ── */
+.hero {
+  padding-top: clamp(100px, 14vh, 160px);
+  padding-bottom: clamp(64px, 10vh, 112px);
+  display: grid;
+  grid-template-columns: clamp(200px, 22vw, 320px) 1fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+.hero-text {}
+.hero-photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  justify-self: start;
+}
+.hero-photo-img {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 3px solid var(--border-2);
+  box-shadow: 0 8px 32px var(--shadow);
+  display: block;
+}
+.hero-photo-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -.02em;
+  text-align: center;
+  width: 220px;
+}
+.hero-photo-name-ko {
+  font-size: 13px;
+  color: var(--ink-3);
+  text-align: center;
+  width: 220px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: var(--indigo-l);
+  border: 1px solid var(--border-2);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--indigo);
+  margin-bottom: 28px;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--indigo);
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: .3; }
+}
+
+.hero-h1 {
+  font-size: clamp(28px, 3.2vw, 48px);
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 16px;
+  white-space: nowrap;
+}
+.hero-h1 span {
+  color: var(--ink-3);
+  font-weight: 400;
+}
+
+.hero-sub {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  font-weight: 400;
+  max-width: 480px;
+  letter-spacing: -.01em;
+  margin-bottom: 36px;
+}
+.hero-sub b { color: var(--ink); font-weight: 500; }
+
+.hero-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.hero-links a, .hero-links button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .12s, color .12s, box-shadow .12s;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+}
+.btn-primary:hover {
+  opacity: .9;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.btn-ghost {
+  background: var(--bg-sub);
+  color: var(--ink-2);
+  border: 1px solid var(--border-2);
+}
+.btn-ghost:hover {
+  background: var(--card-hover);
+  color: var(--ink);
+}
+
+/* ── SECTION ── */
+.sec {
+  padding: clamp(40px, 6vh, 72px) 0;
+  border-top: 1px solid var(--border-2);
+  display: grid;
+  grid-template-columns: clamp(140px, 18vw, 240px) 1fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+.sec-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-top: 4px;
+  position: sticky;
+  top: 72px;
+}
+
+/* ── ABOUT ── */
+.about-bio {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  margin-bottom: 32px;
+  font-weight: 400;
+  letter-spacing: -.01em;
+}
+.about-bio b { color: var(--ink); font-weight: 500; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  background: var(--bg-sub);
+  border: 1px solid var(--border-2);
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--ink-2);
+  letter-spacing: -.01em;
+}
+
+/* ── STACK GROUPS ── */
+.stack-groups { display: flex; flex-direction: column; gap: 22px; }
+.stack-group { display: grid; grid-template-columns: 110px 1fr; gap: 18px; align-items: start; }
+.stack-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding-top: 6px;
+}
+@media (max-width: 600px) {
+  .stack-group { grid-template-columns: 1fr; gap: 8px; }
+  .stack-label { padding-top: 0; }
+}
+
+/* ── CARD LIST ── */
+.card-list { display: flex; flex-direction: column; gap: 2px; }
+.card-group { display: flex; flex-direction: column; gap: 2px; }
+.card-group-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 12px 0 4px 0;
+}
+.card-group + .card-group { border-top: 1px solid var(--border-2); margin-top: 4px; }
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 10px;
+  transition: background .12s;
+  cursor: default;
+}
+.card:hover { background: var(--card-hover); }
+.card-clickable { cursor: pointer; }
+.card-clickable:hover { background: var(--card-hover); transform: translateX(2px); transition: background .12s, transform .18s; }
+
+.card-body { flex: 1; }
+.card-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -.02em;
+  margin-bottom: 2px;
+}
+.card-desc {
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+.card-right { flex-shrink: 0; }
+.card-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--ink-2);
+  flex-shrink: 0;
+  width: 36px;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: 100px;
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.pill::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+}
+.pill-amber  { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+.pill-amber::before { background: #f59e0b; }
+.pill-indigo { background: var(--indigo-l); color: var(--indigo); border: 1px solid var(--border-2); }
+.pill-indigo::before { background: var(--indigo); }
+.pill-green  { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+.pill-green::before { background: #22c55e; }
+[data-theme="dark"] .pill-amber { background: #422006; color: #fbbf24; border-color: #78350f; }
+[data-theme="dark"] .pill-green { background: #052e16; color: #4ade80; border-color: #14532d; }
+
+/* ── CONTACT ── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+@media (max-width: 600px) { .contact-grid { grid-template-columns: 1fr; } }
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--border-2);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--ink);
+  cursor: pointer;
+  background: transparent;
+  width: 100%;
+  font-family: inherit;
+  text-align: left;
+  transition: background .12s, border-color .12s, transform .18s;
+}
+.contact-item:hover { background: var(--bg-sub); border-color: var(--ink-3); transform: translateY(-1px); }
+.contact-icon {
+  width: 34px; height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--indigo-l);
+  color: var(--indigo);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.contact-icon svg { width: 16px; height: 16px; }
+.contact-text { flex: 1; min-width: 0; }
+.contact-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 2px;
+}
+.contact-value {
+  font-size: 13px;
+  color: var(--ink);
+  letter-spacing: -.01em;
+  overflow-wrap: anywhere;
+}
+
+/* ── HERO STATS ── */
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--ink-3);
+  letter-spacing: .02em;
+  margin: 0 0 24px;
+}
+.hero-stats span + span::before {
+  content: '·';
+  margin-right: 14px;
+  color: var(--border-2);
+}
+.hero-stats b { color: var(--ink-2); font-weight: 500; }
+@media (max-width: 600px) {
+  .hero-stats { justify-content: center; }
+}
+
+/* ── HOMELAB DIAGRAM ── */
+.homelab-svg {
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  margin: 0 auto 22px;
+  display: block;
+}
+.hl-edges line { stroke: var(--border-2); stroke-width: 1.5; fill: none; }
+.hl-node rect {
+  fill: var(--bg-sub);
+  stroke: var(--border-2);
+  stroke-width: 1;
+  transition: stroke .2s, fill .2s;
+}
+.hl-node text {
+  fill: var(--ink);
+  font-size: 12px;
+  font-weight: 500;
+  text-anchor: middle;
+  font-family: 'JetBrains Mono', monospace;
+}
+.hl-node .hl-sub { fill: var(--ink-3); font-size: 10.5px; font-weight: 400; }
+.hl-node--accent rect { fill: var(--indigo-l); stroke: var(--indigo); }
+.hl-node--accent text { fill: var(--indigo); }
+.hl-node:hover rect { stroke: var(--indigo); }
+
+/* ── HOMELAB ── */
+.homelab-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.homelab-head .updated { display: inline-flex; align-items: center; gap: 6px; }
+.homelab-head .live-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: blink 2s ease-in-out infinite;
+}
+.homelab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+}
+.vm-card {
+  border: 1px solid var(--border-2);
+  border-radius: 12px;
+  padding: 16px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: background .12s, border-color .12s;
+}
+.vm-card:hover { background: var(--bg-sub); border-color: var(--ink-3); }
+.vm-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.vm-host {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -.01em;
+}
+.vm-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.vm-status .dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--ink-3);
+}
+.vm-status.online { color: #16a34a; }
+.vm-status.online .dot { background: #22c55e; box-shadow: 0 0 8px rgba(34,197,94,.5); }
+.vm-status.offline { color: #dc2626; }
+.vm-status.offline .dot { background: #ef4444; }
+[data-theme="dark"] .vm-status.online { color: #4ade80; }
+[data-theme="dark"] .vm-status.offline { color: #f87171; }
+
+.vm-role {
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.vm-meta {
+  display: flex;
+  gap: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-3);
+}
+.vm-bars { display: flex; flex-direction: column; gap: 6px; }
+.vm-bar-row {
+  display: grid;
+  grid-template-columns: 28px 1fr 34px;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--ink-3);
+  letter-spacing: .04em;
+}
+.vm-bar {
+  height: 4px;
+  background: var(--border-2);
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+}
+.vm-bar-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--indigo);
+  border-radius: 100px;
+  transition: width .5s cubic-bezier(.16,1,.3,1);
+}
+.vm-bar-fill.warn { background: #f59e0b; }
+.vm-bar-fill.crit { background: #ef4444; }
+.vm-val { text-align: right; color: var(--ink-2); }
+
+/* ── MODAL ── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+.modal-backdrop.open { opacity: 1; pointer-events: auto; }
+.modal {
+  background: var(--bg);
+  border: 1px solid var(--border-2);
+  border-radius: 14px;
+  max-width: 620px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 28px 32px;
+  box-shadow: 0 24px 60px var(--shadow);
+  transform: translateY(10px);
+  transition: transform .25s cubic-bezier(.16,1,.3,1);
+}
+.modal-backdrop.open .modal { transform: none; }
+.modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.modal-close {
+  width: 32px; height: 32px;
+  background: var(--bg-sub);
+  border: 1px solid var(--border-2);
+  border-radius: 8px;
+  color: var(--ink-2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+  line-height: 1;
+}
+.modal-close:hover { background: var(--card-hover); color: var(--ink); }
+.modal-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--ink-3);
+  letter-spacing: .04em;
+  margin-bottom: 20px;
+}
+.modal-body {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+.modal-body h4 {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin: 20px 0 8px;
+}
+.modal-body h4:first-child { margin-top: 0; }
+.modal-body ul { padding-left: 18px; margin: 4px 0; }
+.modal-body li { margin-bottom: 4px; }
+.modal-body p { margin-bottom: 10px; }
+.modal-body b { color: var(--ink); font-weight: 500; }
+.modal-body a {
+  color: var(--indigo);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-2);
+  transition: border-color .12s;
+}
+.modal-body a:hover { border-bottom-color: var(--indigo); }
+.modal-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.modal-stack .tag { font-size: 11.5px; height: 24px; padding: 0 10px; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border-2);
+  padding: 24px 0 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ft-left {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+.ft-right a {
+  font-size: 13px;
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color .12s;
+}
+.ft-right a:hover { color: var(--ink); }
+
+/* ── FADE ── */
+.f {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1);
+}
+.f.on { opacity: 1; transform: none; }
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .f { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── PRINT (Resume) ── */
+@media print {
+  @page { size: A4; margin: 14mm; }
+  :root, [data-theme="dark"] {
+    --bg: #fff !important; --bg-sub: #fff !important;
+    --ink: #000 !important; --ink-2: #222 !important; --ink-3: #555 !important;
+    --border: #ddd !important; --border-2: #ccc !important;
+    --indigo: #3730a3 !important; --indigo-l: #eef2ff !important;
+    --shadow: rgba(0,0,0,.1) !important; --card-hover: transparent !important;
+  }
+  html, body { background: #fff !important; color: #000 !important; }
+  #progress, nav, footer, #homelab, .modal-backdrop, .n-tools, .hero-links { display: none !important; }
+  .f { opacity: 1 !important; transform: none !important; }
+  .wrap { padding: 0 !important; max-width: none !important; }
+  .hero {
+    padding: 0 0 12mm !important;
+    grid-template-columns: 30mm 1fr !important;
+    gap: 10mm !important;
+    align-items: start !important;
+  }
+  .hero-photo-img { width: 28mm !important; height: 28mm !important; border-width: 1px !important; box-shadow: none !important; }
+  .hero-photo-name, .hero-photo-name-ko { width: auto !important; font-size: 9pt !important; }
+  .hero-badge { display: none !important; }
+  .hero-h1 { font-size: 20pt !important; white-space: normal !important; margin-bottom: 4mm !important; }
+  .hero-sub { font-size: 10pt !important; line-height: 1.5 !important; margin-bottom: 2mm !important; max-width: none !important; }
+  .sec {
+    padding: 6mm 0 !important;
+    grid-template-columns: 30mm 1fr !important;
+    gap: 10mm !important;
+    page-break-inside: avoid !important;
+    border-color: #ccc !important;
+  }
+  .sec-title { position: static !important; font-size: 9pt !important; }
+  .about-bio { font-size: 10pt !important; line-height: 1.6 !important; margin-bottom: 0 !important; }
+  .card { padding: 2mm 0 !important; page-break-inside: avoid !important; }
+  .card:hover { background: transparent !important; transform: none !important; }
+  .card-clickable { cursor: default !important; }
+  .card-name { font-size: 10.5pt !important; }
+  .card-desc { font-size: 9pt !important; color: #444 !important; }
+  .card-year { font-size: 9pt !important; }
+  .pill { border: 1px solid #777 !important; background: transparent !important; color: #000 !important; }
+  .pill::before { display: none !important; }
+  .tag { border: 1px solid #aaa !important; background: transparent !important; color: #000 !important; font-size: 9pt !important; height: auto !important; padding: 1mm 2.5mm !important; }
+  .tags { gap: 2mm !important; }
+  .contact-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 3mm !important; }
+  .contact-item { padding: 2mm 3mm !important; border-color: #bbb !important; }
+  .contact-icon { display: none !important; }
+  .contact-label { font-size: 8pt !important; }
+  .contact-value { font-size: 9pt !important; }
+  a { color: inherit !important; text-decoration: none !important; }
+}
+
+/* ── NEWS ── */
+.news-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.news-list li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: baseline; font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+.news-list a { color: var(--indigo); text-decoration: none; border-bottom: 1px solid var(--border-2); white-space: nowrap; }
+.news-list a:hover { border-bottom-color: var(--indigo); }
+.news-list time { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+@media (max-width: 600px) { .news-list li { grid-template-columns: 56px 1fr; gap: 12px; font-size: 13.5px; } }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .sec {
+    grid-template-columns: 160px 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  nav { padding: 0 16px; height: 52px; }
+  .n-tool.n-hamburger { display: inline-flex; }
+  .n-menu {
+    display: none;
+    position: fixed;
+    top: 52px;
+    left: 0; right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border-2);
+    flex-direction: column;
+    padding: 10px 16px 14px;
+    gap: 2px;
+    box-shadow: 0 8px 24px var(--shadow);
+  }
+  .n-menu.open { display: flex; }
+  .n-menu a { padding: 10px 12px; font-size: 14px; }
+  .n-right { gap: 6px; }
+
+  .wrap { padding: 0 20px; }
+  .hero {
+    padding-top: 80px;
+    padding-bottom: 48px;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    justify-items: center;
+    text-align: center;
+  }
+  .hero-photo { order: -1; align-self: center; justify-self: center; }
+  .hero-links { justify-content: center; }
+  .hero-photo-img { width: 120px; height: 120px; }
+
+  .sec {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 36px 0;
+  }
+  .sec-title { position: static; }
+
+  .hero-badge { font-size: 11px; padding: 4px 10px; }
+  .hero-sub { font-size: 14px; }
+  .hero-links { flex-wrap: wrap; gap: 8px; }
+  .btn-primary, .btn-ghost { height: 40px; font-size: 13px; }
+
+  .card { padding: 14px 12px; flex-wrap: wrap; align-items: flex-start; row-gap: 10px; }
+  .card-body { flex: 1 1 0; min-width: 0; }
+  .card-right { flex-basis: 100%; }
+  .card-year + .card-body ~ .card-right { padding-left: 52px; }
+  .card-year { font-size: 11px; padding-top: 2px; }
+
+  .tags { gap: 6px; }
+  .tag { font-size: 12px; height: 26px; padding: 0 10px; }
+
+  .modal { padding: 22px 20px; }
+  .modal-title { font-size: 17px; }
+
+  footer { flex-direction: column; align-items: flex-start; gap: 8px; padding-bottom: 48px; }
+}
+
+  </style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav id="nav">
+  <a class="n-logo" href="#">
+    <div class="n-avatar">
+      <img id="avatar-img" src="avatar.jpg" alt="HyeonBin Im" />
+    </div>
+    HyeonBin Im
+  </a>
+  <div class="n-right">
+    <ul class="n-menu">
+      <li><a href="#about" data-i18n="nav.about">About</a></li>
+      <li><a href="#education" data-i18n="nav.education">Education</a></li>
+      <li><a href="#research" data-i18n="nav.research">Research</a></li>
+      <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+      <li><a href="#news" data-i18n="nav.news">News</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div class="n-tools">
+      <button class="n-tool" id="lang-toggle" title="Language" aria-label="Toggle language">KR</button>
+      <button class="n-tool" id="theme-toggle" title="Theme" aria-label="Toggle theme">
+        <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+      <button class="n-tool n-hamburger" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg id="hamburger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="7" x2="20" y2="7"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="17" x2="20" y2="17"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="hero-photo">
+      <img class="hero-photo-img" src="avatar.jpg" alt="HyeonBin Im" />
+      <p class="hero-photo-name">HyeonBin Im</p>
+    </div>
+
+    <div class="hero-text">
+      <h1 class="hero-h1" data-i18n="hero.h1">Security &amp; <span>Cloud Engineer</span></h1>
+
+      <div class="hero-stats">
+        <span><b>3</b> papers <span style="color:var(--ink-3)">(1 journal · 2 conference)</span></span>
+        <span>🏆 <b>1</b> award</span>
+      </div>
+
+      <p class="hero-sub" data-i18n="hero.sub">
+        <b>수원대학교</b> 정보보호 · 클라우드융복합 전공.<br>
+        보안이 실제로 작동하는 시스템을 만드는 것에 관심이 있습니다.
+      </p>
+
+      <div class="hero-links">
+        <a class="btn-primary" href="https://github.com/Im-HyeonBin" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+        <a class="btn-ghost" href="/cv.pdf" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          CV
+        </a>
+        <a class="btn-ghost" href="#" id="mail" data-u="im" data-d="hyeonbin.net"></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec f" id="about">
+    <p class="sec-title" data-i18n="sec.about">About</p>
+    <p class="about-bio" data-i18n="about.bio">
+      <b>시스템 · 클라우드 · 네트워크 보안</b>과 그 규제 전반에 관심이 있습니다.
+    </p>
+  </section>
+
+  <section class="sec f" id="education">
+    <p class="sec-title" data-i18n="sec.education">Education</p>
+    <div class="card-list">
+      <div class="card">
+        <span class="card-year">2022</span>
+        <div class="card-body">
+          <p class="card-name" data-i18n="edu.univ.name">수원대학교</p>
+          <p class="card-desc" data-i18n="edu.univ.desc">정보보호학과 · 클라우드융복합학과 (복수전공) · 2028.02 졸업 예정</p>
+        </div>
+        <div class="card-right">
+          <span class="pill pill-green" data-i18n="edu.univ.pill">Enrolled</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec f" id="research">
+    <p class="sec-title" data-i18n="sec.research">Research</p>
+    <div class="card-list">
+      <div class="card-group">
+        <p class="card-group-label">KCI</p>
+        <div class="card card-clickable" data-modal="hada">
+          <div class="card-body">
+            <p class="card-name">HADA: A Hierarchical Anti-DDoS Architecture for Mitigating L7 Detection Gaps</p>
+            <p class="card-desc" data-i18n="res.hada.desc">JKIICE Vol.30 No.7, pp.1262–1274 · 2026 · 임현빈, 전상훈</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-green" data-i18n="res.hada.pill">Published</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-group">
+        <p class="card-group-label" data-i18n="res.conf.label">Conference</p>
+        <div class="card card-clickable" data-modal="meca">
+          <div class="card-body">
+            <p class="card-name">MECA: Analysis of Security Visibility Limitations under the Shared Responsibility Model in Medical Cloud Environments and eBPF-based Countermeasures</p>
+            <p class="card-desc" data-i18n="res.meca.desc">의료 클라우드 SRM 가시성 한계 · eBPF 기반 ISMS-P 컴플라이언스 로깅 · 한국융합보안학회 하계학술대회 · 2026.06 · 논문지 풀페이퍼 확장 투고 (심사 중)</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-amber" data-i18n="res.meca.pill">🏆 Best Paper Award</span>
+          </div>
+        </div>
+        <div class="card card-clickable" data-modal="wisa">
+          <div class="card-body">
+            <p class="card-name">Design and Preliminary Validation of a Multi-Layer Cybersecurity Testbed for Nuclear I&amp;C Systems</p>
+            <p class="card-desc" data-i18n="res.wisa.desc">원자력 I&amp;C 다층 사이버보안 테스트베드 설계 · 예비 검증 · WISA 2026 · 제주 · 2026.08 · 포스터 · 공저</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-green" data-i18n="res.wisa.pill">Poster</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-group">
+        <p class="card-group-label" data-i18n="res.prep.label">In Preparation</p>
+        <div class="card card-clickable" data-modal="icsids">
+          <div class="card-body">
+            <p class="card-name">Protocol Interpretation Divergence between ICS Intrusion Detection Systems and DNP3 Endpoints, and a Reassembly-Normalization Defense</p>
+            <p class="card-desc" data-i18n="res.icsids.desc">Snort · Zeek · Suricata vs. opendnp3 차등 감사 · 과탐 4 · 회피 2 실측 · 재조립 정규화기로 발산 9→0 · KSC 2026 (한국정보과학회) 투고 예정</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-indigo" data-i18n="res.icsids.pill">In Preparation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec f" id="projects">
+    <p class="sec-title" data-i18n="sec.projects">Projects</p>
+    <div class="card-list">
+      <div class="card-group">
+        <p class="card-group-label" data-i18n="proj.group.research">Research</p>
+        <div class="card card-clickable" data-modal="nuclear">
+          <span class="card-year">2026</span>
+          <div class="card-body">
+            <p class="card-name" data-i18n="proj.nuclear.name">원자력시설 사이버보안 가시성(Visibility) 확보 규제 방안 연구</p>
+            <p class="card-desc" data-i18n="proj.nuclear.desc">원자력안전위원회 규제 프레임워크 · CDA 보안 가시성 · RG 5.71 / 5.96 · RS-015 · 1단계 1차년도 참여 · N-STAR 공저 · 2026</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-green" data-i18n="proj.nuclear.pill">Contributed</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-group">
+        <p class="card-group-label" data-i18n="proj.group.competition">Competition</p>
+        <div class="card card-clickable" data-modal="hanium">
+          <span class="card-year">2026</span>
+          <div class="card-body">
+            <p class="card-name" data-i18n="proj.hanium.name">한이음 ICT멘토링 — 몰래카메라 탐지 시스템 (CAMWATCH)</p>
+            <p class="card-desc" data-i18n="proj.hanium.desc">802.11 메타데이터 기반 몰래카메라 탐지 · 5인 팀 · 관제 대시보드 프론트엔드 · 백엔드 일부 · 인프라 · 배포 자동화 · 2026</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-indigo" data-i18n="proj.hanium.pill">In Progress</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-group">
+        <p class="card-group-label" data-i18n="proj.group.startup">Startup</p>
+        <div class="card card-clickable" data-modal="modu">
+          <span class="card-year">2026</span>
+          <div class="card-body">
+            <p class="card-name" data-i18n="proj.modu.name">모두의 창업 — 1인칭 보이스 자서전 서비스</p>
+            <p class="card-desc" data-i18n="proj.modu.desc">중소벤처기업부 · 창업진흥원 주관 예비창업 프로그램 · IT 분야 · 수원대학교 멘토링 · 2026</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-indigo" data-i18n="proj.modu.pill">Round 1 · Concluded</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec f" id="news">
+    <p class="sec-title" data-i18n="sec.news">News</p>
+    <ul class="news-list">
+      <li><time>2026.08</time><span data-i18n="news.1">Poster on a multi-layer cybersecurity testbed for nuclear I&amp;C systems presented at WISA 2026, Jeju</span></li>
+      <li><time>2026.07</time><span data-i18n="news.2">HADA published in JKIICE, vol. 30, no. 7</span></li>
+      <li><time>2026.07</time><span data-i18n="news.3">Co-authored the Year-1 Nuclear Safety Technology Report (N-STAR) on cybersecurity visibility regulation, submitted to NSSC</span></li>
+      <li><time>2026.06</time><span data-i18n="news.4">MECA received the Best Paper Award at the KCSA Summer Conference, Daejeon · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">press →</a></span></li>
+      <li><time>2026.05</time><span data-i18n="news.5">Advanced to Round 1 of Everyone's Startup (MSS · KISED)</span></li>
+    </ul>
+  </section>
+
+  <section class="sec f" id="contact">
+    <p class="sec-title" data-i18n="sec.contact">Contact</p>
+    <div>
+      <div class="contact-grid">
+        <button class="contact-item" id="contact-mail" type="button">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div class="contact-text">
+            <div class="contact-label" data-i18n="contact.email.label">Email</div>
+            <div class="contact-value" data-u="im" data-d="hyeonbin.net"></div>
+          </div>
+        </button>
+        <a class="contact-item" href="https://github.com/Im-HyeonBin" target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </div>
+          <div class="contact-text">
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">@Im-HyeonBin</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://www.linkedin.com/in/hyeonbin-im-220477437/" target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+            </svg>
+          </div>
+          <div class="contact-text">
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">HyeonBin Im</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://map.naver.com/p/search/수원대학교" target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div class="contact-text">
+            <div class="contact-label" data-i18n="contact.loc.label">Location</div>
+            <div class="contact-value" data-i18n="contact.loc.value">수원대학교 · 경기도 화성시</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="ft-left">© 2026 HyeonBin Im · <span id="last-updated">—</span></span>
+    <div class="ft-right"><a href="#" data-u="im" data-d="hyeonbin.net"></a></div>
+  </footer>
+
+</div>
+
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-head">
+      <h3 class="modal-title" id="modal-title"></h3>
+      <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+    </div>
+    <p class="modal-meta" id="modal-meta"></p>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+  // ── SCROLL PROGRESS ──
+  const progress = document.getElementById('progress');
+  const nav = document.getElementById('nav');
+  const updateScroll = () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progress.style.width = pct + '%';
+    nav.classList.toggle('up', scrollY > 8);
+  };
+  addEventListener('scroll', updateScroll, { passive: true });
+  updateScroll();
+
+  // ── REVEAL ──
+  const obs = new IntersectionObserver(
+    es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); }}),
+    { threshold: .08 }
+  );
+  document.querySelectorAll('.f').forEach(el => obs.observe(el));
+
+  // ── MOBILE NAV DRAWER ──
+  const navMenu = document.querySelector('.n-menu');
+  const navToggle = document.getElementById('nav-toggle');
+  navToggle.addEventListener('click', () => {
+    const open = navMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navMenu.addEventListener('click', e => {
+    if (e.target.tagName === 'A') {
+      navMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // ── ACTIVE NAV HIGHLIGHT ──
+  const navLinks = document.querySelectorAll('.n-menu a[href^="#"]');
+  const sections = [...navLinks].map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  const navObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  sections.forEach(s => navObs.observe(s));
+
+  // ── EMAIL (runtime-assembled to evade scrapers) ──
+  document.querySelectorAll('[data-u][data-d]').forEach(el => {
+    const addr = el.dataset.u + '@' + el.dataset.d;
+    if (el.tagName === 'A') el.setAttribute('href', 'mailto:' + addr);
+    if (!el.textContent.trim()) el.textContent = addr;
+  });
+  const EMAIL = 'im' + '@' + 'hyeonbin.net';
+  function copyEmail(targetEl, originalText) {
+    navigator.clipboard?.writeText(EMAIL).then(() => {
+      targetEl.textContent = 'Copied!';
+      setTimeout(() => targetEl.textContent = originalText ?? EMAIL, 1600);
+    });
+  }
+  const mail = document.getElementById('mail');
+  mail.addEventListener('click', e => { e.preventDefault(); copyEmail(mail, EMAIL); });
+  const contactMail = document.getElementById('contact-mail');
+  contactMail.addEventListener('click', () => copyEmail(contactMail.querySelector('.contact-value'), EMAIL));
+
+  // ── LAST UPDATED ──
+  (() => {
+    const lu = document.getElementById('last-updated');
+    if (!lu) return;
+    const lm = new Date(document.lastModified);
+    if (isNaN(lm)) { lu.textContent = 'updated recently'; return; }
+    const days = Math.floor((Date.now() - lm.getTime()) / 86_400_000);
+    lu.textContent = days <= 0 ? 'last update: today' : `last update: ${days}d ago`;
+  })();
+
+  // ── THEME TOGGLE ──
+  const themeBtn = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const sunSVG = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
+  const moonSVG = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  function applyTheme(t, persist) {
+    document.documentElement.setAttribute('data-theme', t);
+    themeIcon.innerHTML = t === 'dark' ? moonSVG : sunSVG;
+    if (persist) localStorage.setItem('theme', t);
+  }
+  const mql = matchMedia('(prefers-color-scheme: dark)');
+  const saved = localStorage.getItem('theme');
+  applyTheme(saved || (mql.matches ? 'dark' : 'light'), false);
+  themeBtn.addEventListener('click', () => {
+    const cur = document.documentElement.getAttribute('data-theme');
+    applyTheme(cur === 'dark' ? 'light' : 'dark', true);
+  });
+  mql.addEventListener('change', e => {
+    if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'dark' : 'light', false);
+  });
+
+  // ── I18N ──
+  const i18n = {
+    kr: {
+      'nav.about': 'About', 'nav.news': 'News', 'nav.education': 'Education',
+      'nav.research': 'Research', 'nav.projects': 'Projects',
+      'nav.contact': 'Contact',
+      'hero.name-ko': '임현빈',
+      'hero.h1': 'Security &amp; <span>Cloud Engineer</span>',
+      'hero.sub': '<b>수원대학교</b> 정보보호 · 클라우드융복합 전공.<br>보안이 실제로 작동하는 시스템을 만드는 것에 관심이 있습니다.',
+      'hero.cv': '이력서',
+      'hero.stats.grad': '<b>2028.02</b>',
+      'sec.about': 'About', 'sec.news': 'News', 'sec.education': 'Education',
+      'sec.research': 'Research', 'sec.projects': 'Projects',
+      'sec.contact': 'Contact',
+      'about.bio': '<b>시스템 · 클라우드 · 네트워크 보안</b>과 그 규제 전반에 관심이 있습니다.',
+      'edu.univ.name': '수원대학교',
+      'edu.univ.desc': '정보보호학과 · 클라우드융복합학과 (복수전공) · 2028.02 졸업 예정',
+      'edu.univ.pill': 'Enrolled',
+      'res.hada.desc': 'JKIICE Vol.30 No.7, pp.1262–1274 · 2026 · 임현빈, 전상훈',
+      'res.hada.pill': 'Published',
+      'res.conf.label': 'Conference',
+      'res.meca.desc': '의료 클라우드 SRM 가시성 한계 · eBPF 기반 ISMS-P 컴플라이언스 로깅 · 한국융합보안학회 하계학술대회 · 2026.06 · 논문지 풀페이퍼 확장 투고 (심사 중)',
+      'res.meca.pill': '🏆 Best Paper Award',
+      'res.wisa.desc': '원자력 I&amp;C 다층 사이버보안 테스트베드 설계 · 예비 검증 · WISA 2026 · 제주 · 2026.08 · 포스터 · 공저',
+      'res.wisa.pill': 'Poster',
+      'res.prep.label': 'In Preparation',
+      'res.icsids.desc': 'Snort · Zeek · Suricata vs. opendnp3 차등 감사 · 과탐 4 · 회피 2 실측 · 재조립 정규화기로 발산 9→0 · KSC 2026 (한국정보과학회) 투고 예정',
+      'res.icsids.pill': 'In Preparation',
+      'proj.group.research': 'Research',
+      'proj.group.competition': 'Competition',
+      'proj.group.startup': 'Startup',
+      'proj.hanium.name': '한이음 ICT멘토링 — 몰래카메라 탐지 시스템 (CAMWATCH)',
+      'proj.hanium.desc': '802.11 메타데이터 기반 몰래카메라 탐지 · 5인 팀 · 관제 대시보드 프론트엔드 · 백엔드 일부 · 인프라 · 배포 자동화 · 2026',
+      'proj.hanium.pill': 'In Progress',
+      'proj.nuclear.name': '원자력시설 사이버보안 가시성(Visibility) 확보 규제 방안 연구',
+      'proj.nuclear.desc': '원자력안전위원회 규제 프레임워크 · CDA 보안 가시성 · RG 5.71 / 5.96 · RS-015 · 1단계 1차년도 참여 · N-STAR 공저 · 2026',
+      'proj.nuclear.pill': 'Contributed',
+      'proj.modu.name': '모두의 창업 — 1인칭 보이스 자서전 서비스',
+      'proj.modu.desc': '중소벤처기업부 · 창업진흥원 주관 예비창업 프로그램 · IT 분야 · 수원대학교 멘토링 · 2026',
+      'proj.modu.pill': 'Round 1 · Concluded',
+      'contact.email.label': 'Email',
+      'contact.loc.label': 'Location',
+      'news.1': 'Poster on a multi-layer cybersecurity testbed for nuclear I&amp;C systems presented at WISA 2026, Jeju',
+      'news.2': 'HADA published in JKIICE, vol. 30, no. 7',
+      'news.3': 'Co-authored the Year-1 Nuclear Safety Technology Report (N-STAR) on cybersecurity visibility regulation, submitted to NSSC',
+      'news.4': 'MECA received the Best Paper Award at the KCSA Summer Conference, Daejeon · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">press →</a>',
+      'news.5': "Advanced to Round 1 of Everyone's Startup (MSS · KISED)",
+      'contact.loc.value': '수원대학교 · 경기도 화성시'
+    },
+    en: {
+      'nav.about': 'About', 'nav.news': 'News', 'nav.education': 'Education',
+      'nav.research': 'Research', 'nav.projects': 'Projects',
+      'nav.contact': 'Contact',
+      'hero.name-ko': 'HyeonBin Im',
+      'hero.h1': 'Security &amp; <span>Cloud Engineer</span>',
+      'hero.sub': "Majoring in <b>Information Security &amp; Cloud Computing</b> at The University of Suwon.<br>Focused on building security systems that actually work.",
+      'hero.cv': 'Resume',
+      'hero.stats.grad': '<b>Feb 2028</b>',
+      'sec.about': 'About', 'sec.news': 'News', 'sec.education': 'Education',
+      'sec.research': 'Research', 'sec.projects': 'Projects',
+      'sec.contact': 'Contact',
+      'about.bio': 'Interested in <b>system, cloud, and network security</b> — and the regulations around them.',
+      'edu.univ.name': 'The University of Suwon',
+      'edu.univ.desc': 'B.S. in Information Security &amp; Cloud Computing (double major) · Expected Feb 2028',
+      'edu.univ.pill': 'Enrolled',
+      'res.hada.desc': 'JKIICE Vol.30 No.7, pp.1262–1274 · 2026 · HyeonBin Im, Sanghoon Jeon',
+      'res.hada.pill': 'Published',
+      'res.conf.label': 'Conference',
+      'res.meca.desc': 'Medical cloud SRM visibility · eBPF-based ISMS-P compliance logging · KCSA Summer Conference · Jun 2026 · extended full paper under review',
+      'res.meca.pill': "🏆 Best Paper Award",
+      'res.wisa.desc': 'Multi-layer cybersecurity testbed for nuclear I&amp;C · WISA 2026 · Jeju · Aug 2026 · poster · co-author',
+      'res.wisa.pill': 'Poster',
+      'res.prep.label': 'In Preparation',
+      'res.icsids.desc': 'Differential audit of Snort · Zeek · Suricata against a live opendnp3 endpoint · 4 false positives, 2 evasions measured · reassembly normalizer cuts divergence 9→0 · short paper targeting KSC 2026 (KIISE Korea Software Congress)',
+      'res.icsids.pill': 'In Preparation',
+      'proj.group.research': 'Research',
+      'proj.group.competition': 'Competition',
+      'proj.group.startup': 'Startup',
+      'proj.hanium.name': 'Hanium ICT Mentoring — Hidden Camera Detection System (CAMWATCH)',
+      'proj.hanium.desc': '802.11 metadata-based hidden camera detection · 5-person team · dashboard frontend · partial backend · infra &amp; CI/CD · 2026',
+      'proj.hanium.pill': 'In Progress',
+      'proj.nuclear.name': 'Cybersecurity Visibility Regulatory Framework for Nuclear Facilities',
+      'proj.nuclear.desc': 'NSSC regulatory framework · CDA security visibility · RG 5.71 / 5.96 · RS-015 · Phase 1 Year 1 · N-STAR co-author · 2026',
+      'proj.nuclear.pill': 'Contributed',
+      'proj.modu.name': "Everyone's Startup — First-Person Voice Memoir Service",
+      'proj.modu.desc': 'MSS · KISED-hosted pre-founder program · IT category · University of Suwon mentoring · 2026',
+      'proj.modu.pill': 'Round 1 · Concluded',
+      'contact.email.label': 'Email',
+      'contact.loc.label': 'Location',
+      'news.1': 'Poster on a multi-layer cybersecurity testbed for nuclear I&amp;C systems presented at WISA 2026, Jeju',
+      'news.2': 'HADA published in JKIICE, vol. 30, no. 7',
+      'news.3': 'Co-authored the Year-1 Nuclear Safety Technology Report (N-STAR) on cybersecurity visibility regulation, submitted to NSSC',
+      'news.4': 'MECA received the Best Paper Award at the KCSA Summer Conference, Daejeon · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">press →</a>',
+      'news.5': "Advanced to Round 1 of Everyone's Startup (MSS · KISED)",
+      'contact.loc.value': 'The University of Suwon · Hwaseong, Gyeonggi'
+    }
+  };
+  const langBtn = document.getElementById('lang-toggle');
+  function applyLang(l) {
+    const dict = i18n[l];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (dict[k] != null) el.innerHTML = dict[k];
+    });
+    document.documentElement.lang = l === 'kr' ? 'ko' : 'en';
+    langBtn.textContent = l === 'kr' ? 'EN' : '한글';
+    localStorage.setItem('lang', l);
+  }
+  if (!localStorage.getItem('lang-default-en')) {
+    localStorage.removeItem('lang');
+    localStorage.setItem('lang-default-en', '1');
+  }
+  const savedLang = localStorage.getItem('lang') || 'en';
+  applyLang(savedLang);
+  langBtn.addEventListener('click', () => {
+    const cur = localStorage.getItem('lang') || 'en';
+    applyLang(cur === 'kr' ? 'en' : 'kr');
+  });
+
+  // ── RESEARCH MODAL ──
+  const modalData = {
+    hada: {
+      title: 'HADA: A Hierarchical Anti-DDoS Architecture for Mitigating L7 Detection Gaps',
+      meta: 'KCI 등재 · JKIICE Vol.30 No.7, pp.1262–1274 · 2026 · HyeonBin Im, Sanghoon Jeon',
+      body: {
+        kr: `
+          <h4>문제 정의</h4>
+          <p>대규모 볼륨 위주의 L3·L4 대응에 최적화된 상용 Anti-DDoS 장비는 가용성 보장을 위해 <b>보수적인 탐지 임계치와 기본 정책</b>을 적용하는 경우가 많다. 이 환경에서 정상 요청과 유사한 <b>저속 자원 고갈형 L7 공격</b>은 탐지를 우회하여 탐지 공백을 만든다.</p>
+          <h4>제안: HADA</h4>
+          <p>제조사 권장 기본 정책이 적용된 상용 장비 <b>후단에 Snort IPS를 인라인으로 결합</b>한 계층형 Anti-DDoS 아키텍처.</p>
+          <h4>실험 설계</h4>
+          <ul>
+            <li>HTTP 중심 <b>물리 테스트베드</b>에서 상용 장비의 L7 탐지 한계를 실험적으로 분석</li>
+            <li>RUDY · Slow Read · Invalid Method · Abnormal Status <b>4종 공격 재현</b></li>
+            <li>피크 CPU 사용률 · 피크 활성 연결 수 · 미탐지율 기준 사전 평가</li>
+            <li>대표 공격 선정 — <b>Invalid Method</b>(연산 자원 부하형), <b>RUDY</b>(연결 자원 점유형)</li>
+          </ul>
+          <h4>탐지 규칙 설계</h4>
+          <p><b>TCP 스트림 재조립 · HTTP 정규화 · Flowbits 기반 상태 추적</b>을 결합한 Snort 다단계 탐지 규칙.</p>
+          <h4>결과</h4>
+          <ul>
+            <li>상용 장비를 통과한 공격 트래픽에 대해 서버 <b>CPU 부하와 활성 연결 수 감소</b></li>
+            <li>RTT와 처리량 변화는 <b>운영상 수용 가능한 범위</b> 내 유지</li>
+          </ul>
+          <h4>Keywords</h4>
+          <div class="modal-stack"><span class="tag">Snort IPS</span><span class="tag">Flowbits</span><span class="tag">TCP Reassembly</span><span class="tag">HTTP Normalization</span><span class="tag">L7 DDoS</span><span class="tag">Defense-in-Depth</span></div>
+          <h4>서지정보</h4>
+          <p>
+            <b>DOI</b> <code>10.6109/jkiice.2026.30.7.1262</code><br>
+            <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003365468" target="_blank" rel="noopener">KCI에서 논문 보기 →</a>
+          </p>
+        `,
+        en: `
+          <h4>Problem</h4>
+          <p>Commercial Anti-DDoS appliances, optimized for high-volume L3/L4 attacks, are typically run with <b>conservative thresholds and default policies</b> to protect availability. Under such configurations, <b>low-and-slow L7 attacks</b> that resemble legitimate traffic can bypass detection and open a gap.</p>
+          <h4>Proposed: HADA</h4>
+          <p>A hierarchical architecture that places an <b>inline Snort IPS behind</b> a commercial appliance running a vendor-recommended default policy.</p>
+          <h4>Evaluation Setup</h4>
+          <ul>
+            <li>L7 detection limits measured on a <b>physical HTTP testbed</b>.</li>
+            <li>Four attacks reproduced — RUDY, Slow Read, Invalid Method, Abnormal Status.</li>
+            <li>Screened by peak CPU usage, peak active connections, and false-negative rate.</li>
+            <li>Representatives selected — <b>Invalid Method</b> (compute exhaustion) and <b>RUDY</b> (connection exhaustion).</li>
+          </ul>
+          <h4>Rule Design</h4>
+          <p>Multi-stage Snort rules combining <b>TCP stream reassembly, HTTP normalization, and Flowbits-based state tracking</b>.</p>
+          <h4>Results</h4>
+          <ul>
+            <li>Reduced server <b>CPU load and active connections</b> for traffic that passed the appliance.</li>
+            <li>RTT and throughput stayed within <b>operationally acceptable ranges</b>.</li>
+          </ul>
+          <h4>Keywords</h4>
+          <div class="modal-stack"><span class="tag">Snort IPS</span><span class="tag">Flowbits</span><span class="tag">TCP Reassembly</span><span class="tag">HTTP Normalization</span><span class="tag">L7 DDoS</span><span class="tag">Defense-in-Depth</span></div>
+          <h4>Bibliographic Info</h4>
+          <p>
+            <b>DOI</b> <code>10.6109/jkiice.2026.30.7.1262</code><br>
+            <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003365468" target="_blank" rel="noopener">View on KCI →</a>
+          </p>
+        `
+      }
+    },
+    meca: {
+      title: 'MECA: 의료 클라우드 공동책임모델 보안 가시성 한계 분석 및 eBPF 기반 대응 방안',
+      meta: '🏆 Best Paper Award · 한국융합보안학회 하계학술대회 · 2026.06 · 논문지 풀페이퍼 투고 (심사 중) · 임현빈, 김아람, 전상훈 (수원대학교)',
+      body: {
+        kr: `
+          <h4>🏆 수상</h4>
+          <p><b>Best Paper Award</b> — Korea Convergence Security Association (KCSA) 2026 Summer Conference (Daejeon, Jun 2026) · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">기사 →</a></p>
+          <h4>진행 상태</h4>
+          <p>학회 우수논문 선정 후 <b>논문지 풀페이퍼로 확장하여 투고</b> · 심사 중</p>
+          <h4>문제 정의</h4>
+          <p>의료법 개정으로 EMR의 클라우드 운영이 허용되었으나, AWS · Azure · GCP의 네이티브 모니터링은 5-tuple 메타데이터 수준에 머물러 있다. 그 결과 <b>ISMS-P 2.9.4의 5개 접속로그 항목 중 2개(접속 일시 · 접속지)만</b> 충족하여 충족률 40%에 그친다.</p>
+          <h4>제안: MECA</h4>
+          <p>VM 내부 에이전트 형태로 동작하는 cloud-agnostic 컴플라이언스 로깅 프레임워크.</p>
+          <ul>
+            <li><b>eBPF SSL uprobe</b>로 OpenSSL <code>SSL_read</code> · <code>SSL_write</code>에 부착하여 TLS 비밀키 노출 없이 평문 페이로드 캡처 → 계정 ID · 정보주체 · 수행업무 추출</li>
+            <li><b>XDP</b>로 NIC 인그레스에서 5-tuple 캡처 → 접속 일시 · 접속지 IP 수집</li>
+            <li>두 경로를 <b>eBPF Maps</b>에서 상관 결합하여 ISMS-P 스키마로 송신</li>
+            <li><b>In-Kernel PII Masking</b> — 주민번호 · 비밀번호 · 연락처 등 민감 필드를 수집 시점에 즉시 <code>*</code>로 치환 (verifier 제약 준수 위해 정적 unrolling)</li>
+          </ul>
+          <h4>실험 결과</h4>
+          <ul>
+            <li>AWS EC2 + OpenEMR 7.0.2 환경, Synthea 합성 환자 데이터, 1,000건 트랜잭션</li>
+            <li>ISMS-P 2.9.4 충족률 <b>40% → 100%</b></li>
+            <li>PII 마스킹 Precision · Recall 모두 <b>100%</b></li>
+            <li>Welch's t-test (N=100) — 처리량 p=0.12, 지연시간 p=0.33 → <b>통계적으로 유의한 성능 저하 없음</b></li>
+          </ul>
+          <h4>차별성</h4>
+          <p>알고리즘 신규성보다 <b>한국 의료 클라우드 규제 컨텍스트에 특화된 ISMS-P 매핑</b>과 <b>커널 단계 PII 마스킹 통합</b>이라는 regulatory engineering 관점의 기여.</p>
+          <h4>Stack</h4>
+          <div class="modal-stack"><span class="tag">eBPF</span><span class="tag">XDP</span><span class="tag">libbpf</span><span class="tag">BCC</span><span class="tag">OpenSSL</span><span class="tag">OpenEMR</span><span class="tag">AWS EC2</span><span class="tag">Linux 6.8</span></div>
+        `,
+        en: `
+          <h4>🏆 Award</h4>
+          <p><b>Best Paper Award</b> — Korea Convergence Security Association (KCSA) 2026 Summer Conference (Daejeon, Jun 2026) · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">press →</a></p>
+          <h4>Status</h4>
+          <p>Selected as best paper, then <b>extended to a full journal paper</b> · currently under review</p>
+          <h4>Problem</h4>
+          <p>Korea's revised medical law permits cloud-hosted EMRs, but native monitoring on AWS, Azure, and GCP is limited to 5-tuple metadata. As a result, only <b>2 of the 5 ISMS-P §2.9.4 access-log items</b> (timestamp, source) are captured — a 40% coverage rate.</p>
+          <h4>Proposed: MECA</h4>
+          <p>A cloud-agnostic compliance-logging framework deployed as an in-VM agent.</p>
+          <ul>
+            <li><b>eBPF SSL uprobes</b> attach to OpenSSL <code>SSL_read</code> / <code>SSL_write</code> to capture plaintext payloads without exposing TLS keys — extracting account ID, data subject, and performed action.</li>
+            <li><b>XDP</b> at NIC ingress captures 5-tuple data for timestamp and source IP.</li>
+            <li>Both paths are correlated via <b>eBPF Maps</b> and emitted in the ISMS-P schema.</li>
+            <li><b>In-kernel PII masking</b> — sensitive fields (RRN, passwords, phone numbers) are replaced with <code>*</code> at capture time, statically unrolled to satisfy the eBPF verifier.</li>
+          </ul>
+          <h4>Evaluation</h4>
+          <ul>
+            <li>AWS EC2 + OpenEMR 7.0.2, Synthea synthetic patients, 1,000 transactions.</li>
+            <li>ISMS-P §2.9.4 coverage: <b>40% → 100%</b>.</li>
+            <li>PII masking precision &amp; recall: <b>100% / 100%</b>.</li>
+            <li>Welch's t-test (N=100) — throughput p=0.12, latency p=0.33 → <b>no statistically significant overhead</b>.</li>
+          </ul>
+          <h4>Contribution</h4>
+          <p>The contribution is regulatory engineering rather than algorithmic novelty — a <b>Korea-specific ISMS-P mapping</b> integrated with <b>in-kernel PII masking</b>.</p>
+          <h4>Stack</h4>
+          <div class="modal-stack"><span class="tag">eBPF</span><span class="tag">XDP</span><span class="tag">libbpf</span><span class="tag">BCC</span><span class="tag">OpenSSL</span><span class="tag">OpenEMR</span><span class="tag">AWS EC2</span><span class="tag">Linux 6.8</span></div>
+        `
+      }
+    },
+    icsids: {
+      title: 'Protocol Interpretation Divergence between ICS Intrusion Detection Systems and DNP3 Endpoints, and a Reassembly-Normalization Defense',
+      meta: 'KSC 2026 · 한국정보과학회 한국소프트웨어종합학술대회 · 숏페이퍼 투고 예정 · 제1저자 HyeonBin Im',
+      body: {
+        kr: `
+          <h4>문제</h4>
+          <p>ICS를 감시하는 NIDS는 경보 전에 프로토콜을 스스로 파싱·재조립한다. 그 해석이 현장 장비의 엔드포인트 스택과 다르면 <b>NIDS가 본 명령과 장비가 처리하는 명령이 갈린다</b>. TCP/IP 계층에서는 오래 연구된 문제지만 ICS 응용 계층에서 NIDS와 엔드포인트를 직접 대조한 사례는 드물다.</p>
+          <h4>방법 — 차등 감사</h4>
+          <p>IEEE 1815 준거 DNP3 프레임을 scapy로 직접 생성해 <b>Snort 3 · Zeek · Suricata</b>와 <b>실제 opendnp3 아웃스테이션</b>에 동일하게 투입하고 판정이 갈리는지 관측. 정답 기준은 엔드포인트의 응용 계층 전달 여부(라이브). Rust dnp3 스택으로 교차 검증.</p>
+          <h4>발견 — 양방향 불일치</h4>
+          <ul>
+            <li>9개 조작 변형 × 3 NIDS 카탈로그에서 <b>진짜 과탐 4건 · 진짜 회피 2건</b></li>
+            <li>과탐의 원인은 <b>링크 계층 출발주소 미검증</b> — 조각 없는 단일 프레임에서도 재현</li>
+            <li>회피의 원인은 <b>DNP3 전송 계층 재조립 차이</b> — TCP 세그먼트를 합쳐도 유지, 설정 스윕으로도 사라지지 않음</li>
+            <li>Modbus · IEC-104는 다중 프레임 재조립 계층이 없어 이 유형이 구조적으로 성립하지 않음</li>
+          </ul>
+          <h4>제안 — 재조립 정규화기</h4>
+          <p>NIDS 앞단에서 세션을 엔드포인트 규칙대로 재조립해 폐기할 트래픽은 드롭, 수용할 트래픽은 함수코드가 드러난 단일 정규 프레임으로 재발행. 조각 상호일치만 검사하는 <b>일반 정규화</b>는 발산 9→3, 엔드포인트 인가 주소맵까지 강제하는 <b>완전 정규화</b>는 <b>9→0</b>. 정상 명령 전달 보존, 미사용 32조합 검증 집합에서도 잔존 발산 0, 세션당 약 5 µs.</p>
+          <h4>상태 · 역할</h4>
+          <p><b>제1저자</b> — 실험 설계 · 구현 · 집필 · <b>KSC 2026</b>(한국정보과학회 한국소프트웨어종합학술대회) 숏페이퍼 투고 예정</p>
+          <h4>Stack</h4>
+          <div class="modal-stack"><span class="tag">DNP3 / IEEE 1815</span><span class="tag">Snort 3</span><span class="tag">Zeek</span><span class="tag">Suricata</span><span class="tag">opendnp3</span><span class="tag">Rust dnp3</span><span class="tag">scapy</span><span class="tag">Python</span></div>
+        `,
+        en: `
+          <h4>Problem</h4>
+          <p>An ICS NIDS parses and reassembles the protocol itself before alerting. When that interpretation differs from the endpoint stack on the plant floor, <b>the command the NIDS sees and the command the device executes diverge</b>. Well studied at the TCP/IP layer; rarely measured at the ICS application layer against a real endpoint.</p>
+          <h4>Method — Differential Audit</h4>
+          <p>IEEE 1815-conformant DNP3 frames generated with scapy are fed identically to <b>Snort 3 · Zeek · Suricata</b> and to a <b>live opendnp3 outstation</b>; ground truth is whether the endpoint delivers the command to its application layer. Cross-checked with a Rust dnp3 stack.</p>
+          <h4>Findings — Divergence in Both Directions</h4>
+          <ul>
+            <li>9 crafted variants × 3 NIDS: <b>4 true false positives · 2 true evasions</b></li>
+            <li>False positives stem from <b>unverified link-layer source addresses</b> — reproduced even on single, unfragmented frames</li>
+            <li>Evasions stem from <b>DNP3 transport-layer reassembly differences</b> — persist when fragments share one TCP segment and across configuration sweeps</li>
+            <li>Modbus and IEC-104 lack a multi-frame reassembly layer, so this class of divergence cannot arise there</li>
+          </ul>
+          <h4>Proposed — Reassembly Normalizer</h4>
+          <p>Placed in front of the NIDS, it reassembles each session by endpoint rules, drops what the endpoint would discard, and re-emits accepted traffic as a single canonical frame with the function code exposed. <b>Generic normalization</b> (fragment consistency only) reduces divergence 9→3; <b>full normalization</b> enforcing the endpoint's authorized address map reaches <b>9→0</b> with legitimate commands preserved, zero residual divergence on a held-out 32-combination set, and ~5 µs per session.</p>
+          <h4>Status · Role</h4>
+          <p><b>First author</b> — experiment design, implementation, and writing · short paper targeting <b>KSC 2026</b> (KIISE Korea Software Congress)</p>
+          <h4>Stack</h4>
+          <div class="modal-stack"><span class="tag">DNP3 / IEEE 1815</span><span class="tag">Snort 3</span><span class="tag">Zeek</span><span class="tag">Suricata</span><span class="tag">opendnp3</span><span class="tag">Rust dnp3</span><span class="tag">scapy</span><span class="tag">Python</span></div>
+        `
+      }
+    },
+    wisa: {
+      title: 'Design and Preliminary Validation of a Multi-Layer Cybersecurity Testbed for Nuclear I&C Systems',
+      meta: 'WISA 2026 · Poster · 27th World Conference on Information Security Applications · Jeju, Korea · Aug 2026',
+      body: {
+        kr: `
+          <h4>Venue</h4>
+          <p><b>27th World Conference on Information Security Applications (WISA 2026)</b> · 제주 · 2026.08</p>
+          <h4>Authors</h4>
+          <p>Yesol Seo, Jisoo Lee, <b>HyeonBin Im</b>, Aram Kim, Sanghoon Jeon</p>
+          <h4>Summary</h4>
+          <p>실험실 규모 온도제어 공정 위에 구축한 <b>원자력 I&amp;C 다층 사이버보안 테스트베드</b>. 온도 센서 · Arduino Opta PLC · HMI · 구동기 · 보안분석 서버로 구성되며 Modbus/TCP로 통신한다.</p>
+          <h4>Three Layers</h4>
+          <ul>
+            <li><b>네트워크</b> — Snort 기반 침입탐지, MITRE ATT&amp;CK for ICS 매핑 (Modbus 함수코드 검사 · 허가 호스트 검증 · 빈도 기반 탐지)</li>
+            <li><b>공정</b> — HAI 21.03 데이터셋으로 공간·시간 이상탐지 (PCA · DAGMM · Ridge-AR · USAD · GAF+CNN 비교)</li>
+            <li><b>제어</b> — AAKR 잔차 기반 FDIA 탐지 후 SVR 추정값으로 PLC 레지스터 자동 대체(override)</li>
+          </ul>
+          <h4>Preliminary Results</h4>
+          <ul>
+            <li>플러딩 계열 공격 탐지율 <b>99.7–100%</b> (정상 트래픽 오경보 0), 유효 Modbus 패턴을 유지한 MitM은 미탐</li>
+            <li>공정 이상탐지는 <b>Ridge-AR</b>이 point-wise · eTaPR F1 모두 최고</li>
+            <li>FDIA 실험에서 공격 구간 잔차 초과 → PLC 입력이 SVR 추정값으로 전환되는 자동 피드백 확인</li>
+          </ul>
+          <p>원자력안전위원회 · 한국원자력안전재단 원자력안전연구사업 지원 (RS-2026-25524055)</p>
+          <h4>Role</h4>
+          <ul><li>공저자 (3rd author) · 포스터 세션 공동 발표</li></ul>
+        `,
+        en: `
+          <h4>Venue</h4>
+          <p><b>27th World Conference on Information Security Applications (WISA 2026)</b> · Jeju, Korea · Aug 2026</p>
+          <h4>Authors</h4>
+          <p>Yesol Seo, Jisoo Lee, <b>HyeonBin Im</b>, Aram Kim, Sanghoon Jeon</p>
+          <h4>Summary</h4>
+          <p>A <b>multi-layer cybersecurity testbed for nuclear I&amp;C</b> built on a laboratory-scale temperature-control process — temperature sensor, Arduino Opta PLC, HMI, actuator, and a security analysis server communicating over Modbus/TCP.</p>
+          <h4>Three Layers</h4>
+          <ul>
+            <li><b>Network</b> — Snort-based intrusion detection mapped to MITRE ATT&amp;CK for ICS (Modbus function-code inspection, authorized-host verification, frequency-based detection)</li>
+            <li><b>Process</b> — spatial and temporal anomaly detection on HAI 21.03 (PCA · DAGMM · Ridge-AR · USAD · GAF+CNN)</li>
+            <li><b>Control</b> — AAKR residual-based FDIA detection, then SVR-estimated replacement written back to the PLC register (automatic override)</li>
+          </ul>
+          <h4>Preliminary Results</h4>
+          <ul>
+            <li>Flooding attacks detected at <b>99.7–100%</b> with no false alerts on normal traffic; MitM preserving valid Modbus patterns went undetected</li>
+            <li><b>Ridge-AR</b> achieved the highest point-wise and eTaPR F1 for process anomaly detection</li>
+            <li>FDIA experiment confirmed residual-threshold detection and automatic override feedback to the PLC</li>
+          </ul>
+          <p>Supported by the Nuclear Safety Research Program (KoFONS / NSSC), RS-2026-25524055</p>
+          <h4>Role</h4>
+          <ul><li>Co-author (3rd author) · co-presenter, poster session</li></ul>
+        `
+      }
+    },
+    nuclear: {
+      title: '원자력시설 사이버보안 가시성(Visibility) 확보 규제 방안 연구',
+      meta: '2026 · 3개년 과제 중 1단계 1차년도 참여 (종료) · 수원대학교',
+      body: {
+        kr: `
+          <h4>과제 개요</h4>
+          <p>원자력시설 운영환경 전반의 <b>사이버보안 가시성(Visibility)</b>을 체계적으로 정의·평가할 수 있는 규제기반 프레임워크를 개발하고, 필수디지털자산(CDA) 특성 기반 기술·운영·관리적 보안조치의 가시성 연계성을 분석하여 규제 효과성을 증대하는 3년 과제.</p>
+          <h4>배경</h4>
+          <ul>
+            <li>디지털 I&amp;C · OT 환경 확대로 원자력시설 공격면 증가</li>
+            <li>미국 NRC의 <b>RG 5.71 / RG 5.96(Draft)</b>, FERC/NERC <b>CIP-015</b>가 가시성 확보를 규제 의무로 전환하는 흐름</li>
+            <li>국내 규제(<b>RS-015</b> 등)에는 가시성 확보의 범위·방법·수준에 관한 구체적 기술 요건 부재</li>
+          </ul>
+          <h4>단계별 목표</h4>
+          <ul>
+            <li><b>1차년도</b> — 국내외 규제·표준 분석 → <b>원자력시설 가시성 확보 요소 도출</b></li>
+            <li><b>2차년도</b> — CDA 유형·기능별 매핑 → <b>가시성 기반 규제 개선 방안 도출</b></li>
+            <li><b>3차년도</b> — RS-015 정합성 분석 → <b>심·검사 지침 규제 개선 및 차등화 방안 개발</b></li>
+          </ul>
+          <h4>참여 내용</h4>
+          <ul>
+            <li><b>안전기술보고서(N-STAR) 공저자</b> — 1단계 1차년도 보고서 「원자력시설 주요 제어시스템 사이버보안 가시성 확보를 위한 국내외 규제요건 분석」 · 원자력안전위원회 제출 · 2026.07</li>
+            <li><b>미국(NRC·NEI) · 영국(ONR) · 한국(KINAC) 파트 담당</b> — 기관별 규제체계 상세 분석(부록 A)과 규제문서–가시성 요구사항 조항 매핑표(부록 B) 작성</li>
+            <li>7개 규제기관 26건 규제요건을 <b>4대 가시성(자산·네트워크·계정/접근·보안이벤트) × 기술적/운영·관리적 조치</b> 교차 분석틀로 정규화</li>
+            <li>1차년도 안전기술보고서 제출(2026.07)을 끝으로 <b>참여 종료</b></li>
+          </ul>
+          <h4>관련 표준·규제</h4>
+          <div class="modal-stack"><span class="tag">RG 5.71 Rev.1</span><span class="tag">RG 5.96 Draft</span><span class="tag">RS-015</span><span class="tag">CIP-015</span><span class="tag">10 CFR 73.54</span><span class="tag">NIST CSF</span></div>
+        `,
+        en: `
+          <h4>Overview</h4>
+          <p>Three-year project to build a <b>regulation-oriented framework for cybersecurity visibility</b> across nuclear facility operations. Analyzes the linkage between technical, operational, and administrative controls on critical digital assets (CDA) and translates the results into concrete regulatory improvements.</p>
+          <h4>Motivation</h4>
+          <ul>
+            <li>Expanding digital I&amp;C / OT surfaces widen the nuclear attack surface.</li>
+            <li>US NRC <b>RG 5.71 / RG 5.96 (Draft)</b> and FERC/NERC <b>CIP-015</b> are pivoting visibility from best-practice to regulatory obligation.</li>
+            <li>Korea's <b>RS-015</b> lacks concrete technical requirements on visibility scope, method, and level.</li>
+          </ul>
+          <h4>Phased Goals</h4>
+          <ul>
+            <li><b>Year 1</b> — Analyze domestic and international regulations / standards → <b>identify visibility elements for nuclear facilities</b>.</li>
+            <li><b>Year 2</b> — Map CDA types and functions → <b>derive visibility-based regulatory improvements</b>.</li>
+            <li><b>Year 3</b> — Assess alignment with RS-015 → <b>propose refined and tiered inspection guidelines</b>.</li>
+          </ul>
+          <h4>My Role</h4>
+          <ul>
+            <li><b>Co-author of the Nuclear Safety Technology Report (N-STAR)</b> — Phase 1, Year 1 report on regulatory requirements for cybersecurity visibility in nuclear control systems · submitted to NSSC · Jul 2026</li>
+            <li><b>Responsible for the US (NRC·NEI), UK (ONR), and Korea (KINAC) sections</b> — per-regulator detailed analysis (Appendix A) and clause-level mapping of regulatory documents to visibility requirements (Appendix B)</li>
+            <li>26 regulatory documents from 7 bodies normalized under a <b>four-domain visibility × technical / operational-administrative</b> cross-analysis framework</li>
+            <li><b>Participation concluded</b> with submission of the Year 1 report (Jul 2026)</li>
+          </ul>
+          <h4>Related Standards</h4>
+          <div class="modal-stack"><span class="tag">RG 5.71 Rev.1</span><span class="tag">RG 5.96 Draft</span><span class="tag">RS-015</span><span class="tag">CIP-015</span><span class="tag">10 CFR 73.54</span><span class="tag">NIST CSF</span></div>
+        `
+      }
+    },
+    hanium: {
+      title: '한이음 ICT멘토링 — 몰래카메라 탐지 시스템 (CAMWATCH)',
+      meta: '2026 · 5인 팀 · 관제 대시보드 · 백엔드 일부 · 인프라 · 배포 자동화',
+      body: {
+        kr: `
+          <h4>프로그램</h4>
+          <p>한이음 ICT멘토링(정보통신기획평가원 · 과학기술정보통신부) <b>5인 팀 과제</b>. 화장실 · 탈의실 등에 설치된 몰래카메라를 무선 트래픽으로 탐지하는 시스템.</p>
+          <h4>동작 구조</h4>
+          <p>Raspberry Pi 5에 무선 어댑터를 붙여 <b>802.11 프레임을 수동 수집</b> → 프레임 헤더 특징을 서버로 전송 → 서버 AI 파이프라인이 판정 → 관제 대시보드 표시. 패킷 내용은 암호화되어 읽지 않고 <b>송신 방향 · 크기 · 주기성 같은 메타데이터만</b> 사용한다.</p>
+          <h4>담당 — 관제 대시보드 (프론트엔드 전반)</h4>
+          <ul>
+            <li>React 단일 페이지로 <b>화면 5종</b> 구현 — 관제 현황 · 탐지 이력 · 경보 이력 · AI 탐지 V2 · 장치 관리</li>
+            <li>AI 판정 근거를 <b>등급(NORMAL/WATCH/WARNING/CRITICAL) · 확률 · 수집 품질 · 특징별 기여도</b>로 분해해 관리자가 검토 가능한 형태로 표시</li>
+            <li>WebSocket + 10초 주기 조회 병행, <b>지수 백오프 재연결</b>로 서버 재시작 후에도 화면이 스스로 복구</li>
+            <li>CRITICAL 전면 팝업 + 반복 경보 억제 규칙(경보 단위 1회, 닫으면 5분 억제) — 멘토 피드백 반영</li>
+            <li>562KB 실행 상세를 10초마다 재수신하던 것을 최신 실행 변경 시에만 조회하도록 캐싱</li>
+            <li>관제 콘솔 디자인 언어를 실측 토큰으로 정의, 재사용 컴포넌트(Panel · Stat · Tag · Table 등) 분리</li>
+          </ul>
+          <h4>담당 — 서버 백엔드 일부</h4>
+          <ul>
+            <li>엣지 장치 관측값 수집 API(시각 보정 · 장치 자동 등록), 지속성 기반 경보 승격 · 중복 제거 검증 로직과 테스트</li>
+            <li>경보 자동 통보, 주기 탐지 스케줄러(저장 실패 시 유실 방지), PostgreSQL 스키마 설계</li>
+          </ul>
+          <h4>담당 — 인프라 · 배포 자동화</h4>
+          <ul>
+            <li>Docker Compose(DB · 백엔드 · 프론트) + nginx 리버스 프록시 + Cloudflare Tunnel로 포트 개방 없이 HTTPS 공개, DB는 내부망 한정</li>
+            <li>PR → <b>검사 4종(프론트 빌드 · 백엔드 문법 · pytest · 펌웨어 컴파일)</b> 통과 → CI가 배포 브랜치 승격 → 서버 타이머 2분 주기 반영. 배포 브랜치는 CI만 쓰도록 잠금</li>
+            <li>워치독(5분) · 일일 DB 백업(14일 보존) · 실패 시 이전 상태 복귀</li>
+          </ul>
+          <h4>데이터 수집 연동</h4>
+          <ul>
+            <li>pcap → 특징 변환 파이프라인 일부 — 10초 윈도우 · 120초 시퀀스 · 특징 31개(패킷 수 · 업링크 비율 · 버스트 · 패킷 간격 · 신호 편차 등)</li>
+            <li>실제 카메라 없이 탐지 경로를 시험하기 위한 ESP32 트래픽 시뮬레이터</li>
+          </ul>
+          <h4>대표 문제 해결</h4>
+          <ul>
+            <li>수집 경로 전환 후 관제 화면이 2개월 전 데이터에서 멈춤 → 계약 문서상 누구 범위도 아닌 공백으로 확인, <b>서버 수정 없이 프론트에서 두 경로를 시각 기준으로 병합</b>해 복구</li>
+            <li>저장소와 서버 상태 불일치 → 저장소 기준으로 정합 후 검사 우회 경로를 구조적으로 차단</li>
+          </ul>
+          <p>AI 모델 설계·학습과 캡처 장비 물리 구성은 팀원 담당. 기여 규모는 git 기준 <b>커밋 35건 · 변경 파일 80종</b>, 팀원 PR 6건 검토, 서버–AI 파이프라인 API·DB 계약 문서 작성.</p>
+          <h4>Stack</h4>
+          <div class="modal-stack"><span class="tag">React 18</span><span class="tag">Vite</span><span class="tag">Tailwind CSS</span><span class="tag">shadcn/ui</span><span class="tag">recharts</span><span class="tag">WebSocket</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL 16</span><span class="tag">Docker Compose</span><span class="tag">nginx</span><span class="tag">Cloudflare Tunnel</span><span class="tag">systemd</span><span class="tag">Proxmox</span><span class="tag">GitHub Actions</span><span class="tag">pytest</span><span class="tag">Raspberry Pi 5</span></div>
+        `,
+        en: `
+          <h4>Program</h4>
+          <p>Hanium ICT Mentoring (IITP · MSIT) <b>5-person team project</b>. Detects hidden cameras in restrooms and changing rooms from wireless traffic.</p>
+          <h4>How It Works</h4>
+          <p>A Raspberry Pi 5 with a wireless adapter <b>passively captures 802.11 frames</b> → header-level features are sent to the server → an AI pipeline classifies → results appear on a monitoring dashboard. Payloads are encrypted and never read; only <b>metadata such as direction, size, and periodicity</b> is used.</p>
+          <h4>My Part — Monitoring Dashboard (all frontend)</h4>
+          <ul>
+            <li>Single-page React app with <b>five views</b> — overview · detection history · alert history · AI detection v2 · device management</li>
+            <li>Decomposes model output into <b>grade (NORMAL/WATCH/WARNING/CRITICAL), probability, capture quality, and per-feature contribution</b> so an operator can review the evidence</li>
+            <li>WebSocket plus 10-second polling, with <b>exponential-backoff reconnect</b> so the view self-recovers after a server restart</li>
+            <li>Full-screen CRITICAL popup with repeat-alert suppression (once per alert, 5-minute snooze) — from mentor feedback</li>
+            <li>Cached a 562 KB run-detail payload that was re-fetched every 10 s; now fetched only when the latest run changes</li>
+            <li>Console design language defined from measured tokens; reusable components (Panel · Stat · Tag · Table) split out</li>
+          </ul>
+          <h4>My Part — Backend (partial)</h4>
+          <ul>
+            <li>Ingest API for edge observations (clock correction, device auto-registration); persistence-based alert promotion and de-duplication with tests</li>
+            <li>Automatic alert notification, periodic detection scheduler with loss protection, PostgreSQL schema</li>
+          </ul>
+          <h4>My Part — Infrastructure &amp; CI/CD</h4>
+          <ul>
+            <li>Docker Compose (DB · backend · frontend) behind nginx and Cloudflare Tunnel — HTTPS without opening ports; DB restricted to the internal network</li>
+            <li>PR → <b>four checks (frontend build · backend syntax · pytest · firmware compile)</b> → CI promotes the deploy branch → server timer applies changes every 2 min. Deploy branch is locked to CI only</li>
+            <li>Watchdog (5 min), daily DB backup (14-day retention), rollback on failure</li>
+          </ul>
+          <h4>Data Pipeline</h4>
+          <ul>
+            <li>Part of the pcap → feature pipeline — 10 s windows, 120 s sequences, 31 features (packet count, uplink ratio, bursts, inter-arrival, RSSI variance, …)</li>
+            <li>ESP32 traffic simulator for exercising the detection path without a real camera</li>
+          </ul>
+          <h4>Representative Fixes</h4>
+          <ul>
+            <li>Dashboard frozen at two-month-old data after a capture-path migration → traced to a gap in the interface contract; <b>merged both paths on the frontend by timestamp without touching the server</b></li>
+            <li>Repository and server had drifted → reconciled to the repository and structurally closed the check-bypass route</li>
+          </ul>
+          <p>AI model design/training and capture-hardware assembly were handled by teammates. Contribution by git: <b>35 commits · 80 files</b>, 6 teammate PRs reviewed, and the server–AI API/DB contract document.</p>
+          <h4>Stack</h4>
+          <div class="modal-stack"><span class="tag">React 18</span><span class="tag">Vite</span><span class="tag">Tailwind CSS</span><span class="tag">shadcn/ui</span><span class="tag">recharts</span><span class="tag">WebSocket</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL 16</span><span class="tag">Docker Compose</span><span class="tag">nginx</span><span class="tag">Cloudflare Tunnel</span><span class="tag">systemd</span><span class="tag">Proxmox</span><span class="tag">GitHub Actions</span><span class="tag">pytest</span><span class="tag">Raspberry Pi 5</span></div>
+        `
+      }
+    },
+    modu: {
+      title: '모두의 창업 — 1인칭 보이스 자서전 서비스',
+      meta: '2026 · 1라운드 참가 후 종료 · 중소벤처기업부 / 창업진흥원',
+      body: {
+        kr: `
+          <h4>프로그램</h4>
+          <p><b>중소벤처기업부 · 창업진흥원 · 소상공인시장진흥공단</b>이 공동 주관하는 <b>모두의 창업</b> 예비창업 지원 프로그램. IT 분야 · 경기 지역 · <b>수원대학교</b> 멘토 기관.</p>
+          <h4>아이디어</h4>
+          <p>"사진은 매년 정리되는데 <b>목소리는 사라진다.</b>" — 흩어진 개인 음성 기록을 발굴하여 시간축으로 엮어주는 <b>1인칭 보이스 자서전(Voice Memoir) 서비스</b>.</p>
+          <h4>문제 인식</h4>
+          <ul>
+            <li>가족 · 개인의 목소리는 통화 · 음성 메모 · 영상 여기저기에 흩어진 채 방치</li>
+            <li>사진 · 영상은 매년 정리 · 회상되지만, 음성 자산은 검색도 회고도 어려움</li>
+            <li>사후에 목소리는 되찾을 수 없는 유일한 감각</li>
+          </ul>
+          <h4>진행 상태</h4>
+          <ul>
+            <li>2026.05 — 아이디어 지원서 제출</li>
+            <li>아이디어 심사 통과 (일반 / 기술 부문)</li>
+            <li>1라운드 진출 — 멘토링 · MVP 구체화</li>
+            <li><b>1라운드에서 종료</b> — 2라운드 미진출 · 2026</li>
+          </ul>
+        `,
+        en: `
+          <h4>Program</h4>
+          <p>An early-founder support program co-hosted by the <b>Ministry of SMEs and Startups (MSS)</b>, <b>KISED</b>, and the Korea Small Business Institute. IT category · Gyeonggi region · mentored by <b>The University of Suwon</b>.</p>
+          <h4>Idea</h4>
+          <p>"Photos get organized every year — <b>voices disappear.</b>" A <b>first-person Voice Memoir</b> service that gathers scattered personal voice fragments and weaves them along a timeline.</p>
+          <h4>Problem</h4>
+          <ul>
+            <li>Personal / family voices sit fragmented across calls, memos, and videos.</li>
+            <li>Photos and videos are curated yearly; voice assets are neither searchable nor revisited.</li>
+            <li>Once gone, voice is the one sense that can't be reconstructed.</li>
+          </ul>
+          <h4>Status</h4>
+          <ul>
+            <li>May 2026 — Idea application submitted.</li>
+            <li>Idea review passed (general and technical tracks).</li>
+            <li>Advanced to Round 1 — mentoring and MVP scoping.</li>
+            <li><b>Concluded at Round 1</b> — did not advance to Round 2 · 2026</li>
+          </ul>
+        `
+      }
+    }
+  };
+
+  const backdrop = document.getElementById('modal-backdrop');
+  const mTitle = document.getElementById('modal-title');
+  const mMeta = document.getElementById('modal-meta');
+  const mBody = document.getElementById('modal-body');
+  let lastFocus = null;
+  function openModal(key) {
+    const d = modalData[key];
+    if (!d) return;
+    const lang = localStorage.getItem('lang') || 'en';
+    mTitle.textContent = d.title;
+    mMeta.textContent = d.meta;
+    mBody.innerHTML = d.body[lang] || d.body.kr;
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    lastFocus = document.activeElement;
+    setTimeout(() => document.getElementById('modal-close').focus(), 40);
+  }
+  function closeModal() {
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  document.querySelectorAll('[data-modal]').forEach(el => {
+    el.addEventListener('click', () => openModal(el.getAttribute('data-modal')));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter') openModal(el.getAttribute('data-modal')); });
+    el.setAttribute('tabindex', '0');
+  });
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (!backdrop.classList.contains('open')) return;
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key !== 'Tab') return;
+    const f = backdrop.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])');
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+    else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+  });
+</script>
+
+</body>
+</html>
