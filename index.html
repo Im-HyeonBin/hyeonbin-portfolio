@@ -1033,9 +1033,9 @@ footer {
             <span class="pill pill-green" data-i18n="res.hada.pill">Published</span>
           </div>
         </div>
-        <div class="card card-clickable" data-modal="meca">
+        <div class="card card-clickable" data-modal="mecaj">
           <div class="card-body">
-            <p class="card-name">MECA: Analysis of Security Visibility Limitations under the Shared Responsibility Model in Medical Cloud Environments and eBPF-based Countermeasures</p>
+            <p class="card-name">MECA: Ensuring Regulatory Access-Log Visibility in Medical Clouds via eBPF-Based Kernel-Layer Auditing</p>
             <p class="card-desc" data-i18n="res.meca.desc">융합보안논문지 (KCI) · 2026 · 한국융합보안학회 하계학술대회 수상작 확장 · 임현빈, 김아람, 전상훈</p>
           </div>
           <div class="card-right">
@@ -1491,15 +1491,53 @@ footer {
         `
       }
     },
+    mecaj: {
+      title: 'MECA: eBPF 기반 커널 계층 감사를 통한 의료 클라우드 접속기록 규제 가시성 확보',
+      meta: '융합보안논문지 (KCI) 게재 승인 · 2026 · 임현빈, 김아람, 전상훈 (수원대학교)',
+      body: {
+        kr: `
+          <h4>문제</h4>
+          <p>클라우드 제공자의 네이티브 로깅은 네트워크·인프라 계층에서 동작해 ISMS-P 2.9.4가 요구하는 접속기록 다섯 항목 중 <b>계정 식별자 · 정보주체 · 수행 업무</b>를 남기지 못한다. 애플리케이션 감사 로그로 남길 수는 있으나 감사 대상이 직접 생성하므로 <b>침해 시 위조될 수 있다</b>.</p>
+          <h4>제안</h4>
+          <p>애플리케이션을 신뢰하거나 수정하지 않고 커널에서 접속기록을 확보하는 eBPF 기반 감사 계층 <b>MECA</b>(Medical eBPF Compliance Architecture). <b>L4 · L7 이중 수집</b>, <b>프로세스 식별자 기준 상관</b>, <b>인커널 마스킹</b>을 결합한다.</p>
+          <h4>결과 (AWS 실측)</h4>
+          <ul>
+            <li>네이티브 로깅이 놓친 세 항목을 포함해 <b>다섯 항목 모두 수집</b></li>
+            <li>기준 부하 오버헤드 — 처리량 <b>-2.82%</b> · 지연 <b>+7.55 ms</b></li>
+            <li>애플리케이션 로그가 <b>삭제·위조되어도</b> MECA 접속기록은 독립적으로 보존</li>
+          </ul>
+          <h4>이력</h4>
+          <p>한국융합보안학회 2026 하계학술대회 발표 · 수상작을 풀페이퍼로 확장 → <b>융합보안논문지(KCI) 게재 승인</b> · 2026.09</p>
+          <h4>Keywords</h4>
+          <div class="modal-stack"><span class="tag">eBPF</span><span class="tag">XDP</span><span class="tag">SSL uprobe</span><span class="tag">BCC</span><span class="tag">OpenSSL</span><span class="tag">OpenEMR</span><span class="tag">AWS EC2</span><span class="tag">ISMS-P 2.9.4</span></div>
+        `,
+        en: `
+          <h4>Problem</h4>
+          <p>Cloud-native logging operates at the network and infrastructure layers and cannot record three of the five access-record items required by ISMS-P 2.9.4 — <b>account identifier, data subject, and performed action</b>. The application can log them itself, but that log is produced by the audited application and <b>can be forged once it is compromised</b>.</p>
+          <h4>Proposed</h4>
+          <p><b>MECA</b> (Medical eBPF Compliance Architecture), a kernel-layer audit tier that neither trusts nor modifies the application, combining <b>L4 and L7 hooks</b>, <b>correlation by process identifier</b>, and <b>in-kernel masking</b>.</p>
+          <h4>Results (AWS measurement)</h4>
+          <ul>
+            <li><b>All five items captured</b>, including the three native logging misses</li>
+            <li>Baseline overhead — throughput <b>-2.82%</b>, latency <b>+7.55 ms</b></li>
+            <li>Access records <b>survived deletion and forgery</b> of application logs</li>
+          </ul>
+          <h4>History</h4>
+          <p>Presented at the KCSA 2026 Summer Conference (award), extended to a full paper → <b>accepted to the Convergence Security Journal (KCI)</b> · Sep 2026</p>
+          <h4>Keywords</h4>
+          <div class="modal-stack"><span class="tag">eBPF</span><span class="tag">XDP</span><span class="tag">SSL uprobe</span><span class="tag">BCC</span><span class="tag">OpenSSL</span><span class="tag">OpenEMR</span><span class="tag">AWS EC2</span><span class="tag">ISMS-P 2.9.4</span></div>
+        `
+      }
+    },
     meca: {
       title: 'MECA: 의료 클라우드 공동책임모델 보안 가시성 한계 분석 및 eBPF 기반 대응 방안',
-      meta: '융합보안논문지 (KCI) 게재 승인 · 2026 · 🏆 한국융합보안학회 하계학술대회 수상작 확장 · 임현빈, 김아람, 전상훈 (수원대학교)',
+      meta: '🏆 한국융합보안학회 하계학술대회 · 대전 · 2026.06 · 임현빈, 김아람, 전상훈 (수원대학교)',
       body: {
         kr: `
           <h4>🏆 수상</h4>
           <p><b>Best Paper Award</b> — Korea Convergence Security Association (KCSA) 2026 Summer Conference (Daejeon, Jun 2026) · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">기사 →</a></p>
           <h4>진행 상태</h4>
-          <p>학회 우수논문 선정 후 풀페이퍼로 확장 · <b>융합보안논문지(KCI) 게재 승인</b> · 2026.09</p>
+          <p>풀페이퍼로 확장 → <b>융합보안논문지(KCI) 게재 승인</b> · 2026.09 (제목 변경: 「eBPF 기반 커널 계층 감사를 통한 의료 클라우드 접속기록 규제 가시성 확보」)</p>
           <h4>문제 정의</h4>
           <p>의료법 개정으로 EMR의 클라우드 운영이 허용되었으나, AWS · Azure · GCP의 네이티브 모니터링은 5-tuple 메타데이터 수준에 머물러 있다. 그 결과 <b>ISMS-P 2.9.4의 5개 접속로그 항목 중 2개(접속 일시 · 접속지)만</b> 충족하여 충족률 40%에 그친다.</p>
           <h4>제안: MECA</h4>
@@ -1526,7 +1564,7 @@ footer {
           <h4>🏆 Award</h4>
           <p><b>Best Paper Award</b> — Korea Convergence Security Association (KCSA) 2026 Summer Conference (Daejeon, Jun 2026) · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">press →</a></p>
           <h4>Status</h4>
-          <p>Selected as best paper, then extended to a full paper · <b>accepted to the Convergence Security Journal (KCI)</b> · Sep 2026</p>
+          <p>Extended to a full paper → <b>accepted to the Convergence Security Journal (KCI)</b> · Sep 2026, retitled "Ensuring Regulatory Access-Log Visibility in Medical Clouds via eBPF-Based Kernel-Layer Auditing"</p>
           <h4>Problem</h4>
           <p>Korea's revised medical law permits cloud-hosted EMRs, but native monitoring on AWS, Azure, and GCP is limited to 5-tuple metadata. As a result, only <b>2 of the 5 ISMS-P §2.9.4 access-log items</b> (timestamp, source) are captured — a 40% coverage rate.</p>
           <h4>Proposed: MECA</h4>
