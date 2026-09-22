@@ -407,7 +407,7 @@ nav.up {
   color: var(--ink-3);
 }
 
-.card-right { flex-shrink: 0; }
+.card-right { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
 .card-year {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11.5px;
@@ -905,7 +905,7 @@ footer {
 
   .card { padding: 14px 12px; flex-wrap: wrap; align-items: flex-start; row-gap: 10px; }
   .card-body { flex: 1 1 0; min-width: 0; }
-  .card-right { flex-basis: 100%; }
+  .card-right { flex-basis: 100%; flex-direction: row; flex-wrap: wrap; align-items: center; }
   .card-year + .card-body ~ .card-right { padding-left: 52px; }
   .card-year { font-size: 11px; padding-top: 2px; }
 
@@ -971,7 +971,7 @@ footer {
       <h1 class="hero-h1" data-i18n="hero.h1">Security &amp; <span>Cloud Engineer</span></h1>
 
       <div class="hero-stats">
-        <span><b>3</b> papers <span style="color:var(--ink-3)">(1 journal · 2 conference)</span></span>
+        <span><b>3</b> papers <span style="color:var(--ink-3)">(2 journal · 1 conference)</span></span>
         <span>🏆 <b>1</b> award</span>
       </div>
 
@@ -1033,18 +1033,19 @@ footer {
             <span class="pill pill-green" data-i18n="res.hada.pill">Published</span>
           </div>
         </div>
-      </div>
-      <div class="card-group">
-        <p class="card-group-label" data-i18n="res.conf.label">Conference</p>
         <div class="card card-clickable" data-modal="meca">
           <div class="card-body">
             <p class="card-name">MECA: Analysis of Security Visibility Limitations under the Shared Responsibility Model in Medical Cloud Environments and eBPF-based Countermeasures</p>
-            <p class="card-desc" data-i18n="res.meca.desc">의료 클라우드 SRM 가시성 한계 · eBPF 기반 ISMS-P 컴플라이언스 로깅 · 한국융합보안학회 하계학술대회 · 2026.06 · 논문지 풀페이퍼 확장 투고 (심사 중)</p>
+            <p class="card-desc" data-i18n="res.meca.desc">융합보안논문지 (KCI) · 2026 · 한국융합보안학회 하계학술대회 수상작 확장 · 임현빈, 김아람, 전상훈</p>
           </div>
           <div class="card-right">
-            <span class="pill pill-amber" data-i18n="res.meca.pill">🏆 Best Paper Award</span>
+            <span class="pill pill-green" data-i18n="res.meca.pill">Accepted</span>
+            <span class="pill pill-amber" data-i18n="res.meca.award">🏆 Best Paper Award</span>
           </div>
         </div>
+      </div>
+      <div class="card-group">
+        <p class="card-group-label" data-i18n="res.conf.label">Conference</p>
         <div class="card card-clickable" data-modal="wisa">
           <div class="card-body">
             <p class="card-name">Design and Preliminary Validation of a Multi-Layer Cybersecurity Testbed for Nuclear I&amp;C Systems</p>
@@ -1118,6 +1119,7 @@ footer {
   <section class="sec f" id="news">
     <p class="sec-title" data-i18n="sec.news">News</p>
     <ul class="news-list">
+      <li><time>2026.09</time><span data-i18n="news.6">MECA extended paper accepted to the Convergence Security Journal (KCI)</span></li>
       <li><time>2026.08</time><span data-i18n="news.1">Poster on a multi-layer cybersecurity testbed for nuclear I&amp;C systems presented at WISA 2026, Jeju</span></li>
       <li><time>2026.07</time><span data-i18n="news.2">HADA published in JKIICE, vol. 30, no. 7</span></li>
       <li><time>2026.07</time><span data-i18n="news.3">Co-authored the Year-1 Nuclear Safety Technology Report (N-STAR) on cybersecurity visibility regulation, submitted to NSSC</span></li>
@@ -1315,8 +1317,9 @@ footer {
       'res.hada.desc': 'JKIICE Vol.30 No.7, pp.1262–1274 · 2026 · 임현빈, 전상훈',
       'res.hada.pill': 'Published',
       'res.conf.label': 'Conference',
-      'res.meca.desc': '의료 클라우드 SRM 가시성 한계 · eBPF 기반 ISMS-P 컴플라이언스 로깅 · 한국융합보안학회 하계학술대회 · 2026.06 · 논문지 풀페이퍼 확장 투고 (심사 중)',
-      'res.meca.pill': '🏆 Best Paper Award',
+      'res.meca.desc': '융합보안논문지 (KCI) · 2026 · 한국융합보안학회 하계학술대회 수상작 확장 · 임현빈, 김아람, 전상훈',
+      'res.meca.pill': 'Accepted',
+      'res.meca.award': '🏆 Best Paper Award',
       'res.wisa.desc': '원자력 I&amp;C 다층 사이버보안 테스트베드 설계 · 예비 검증 · WISA 2026 · 제주 · 2026.08 · 포스터 · 공저',
       'res.wisa.pill': 'Poster',
       'res.prep.label': 'In Preparation',
@@ -1336,6 +1339,7 @@ footer {
       'proj.modu.pill': 'Round 1 · Concluded',
       'contact.email.label': 'Email',
       'contact.loc.label': 'Location',
+      'news.6': 'MECA extended paper accepted to the Convergence Security Journal (KCI)',
       'news.1': 'Poster on a multi-layer cybersecurity testbed for nuclear I&amp;C systems presented at WISA 2026, Jeju',
       'news.2': 'HADA published in JKIICE, vol. 30, no. 7',
       'news.3': 'Co-authored the Year-1 Nuclear Safety Technology Report (N-STAR) on cybersecurity visibility regulation, submitted to NSSC',
@@ -1362,8 +1366,9 @@ footer {
       'res.hada.desc': 'JKIICE Vol.30 No.7, pp.1262–1274 · 2026 · HyeonBin Im, Sanghoon Jeon',
       'res.hada.pill': 'Published',
       'res.conf.label': 'Conference',
-      'res.meca.desc': 'Medical cloud SRM visibility · eBPF-based ISMS-P compliance logging · KCSA Summer Conference · Jun 2026 · extended full paper under review',
-      'res.meca.pill': "🏆 Best Paper Award",
+      'res.meca.desc': 'Convergence Security Journal (KCI) · 2026 · extended from the KCSA 2026 award paper · HyeonBin Im, Aram Kim, Sanghoon Jeon',
+      'res.meca.pill': 'Accepted',
+      'res.meca.award': '🏆 Best Paper Award',
       'res.wisa.desc': 'Multi-layer cybersecurity testbed for nuclear I&amp;C · WISA 2026 · Jeju · Aug 2026 · poster · co-author',
       'res.wisa.pill': 'Poster',
       'res.prep.label': 'In Preparation',
@@ -1383,6 +1388,7 @@ footer {
       'proj.modu.pill': 'Round 1 · Concluded',
       'contact.email.label': 'Email',
       'contact.loc.label': 'Location',
+      'news.6': 'MECA extended paper accepted to the Convergence Security Journal (KCI)',
       'news.1': 'Poster on a multi-layer cybersecurity testbed for nuclear I&amp;C systems presented at WISA 2026, Jeju',
       'news.2': 'HADA published in JKIICE, vol. 30, no. 7',
       'news.3': 'Co-authored the Year-1 Nuclear Safety Technology Report (N-STAR) on cybersecurity visibility regulation, submitted to NSSC',
@@ -1477,13 +1483,13 @@ footer {
     },
     meca: {
       title: 'MECA: 의료 클라우드 공동책임모델 보안 가시성 한계 분석 및 eBPF 기반 대응 방안',
-      meta: '🏆 Best Paper Award · 한국융합보안학회 하계학술대회 · 2026.06 · 논문지 풀페이퍼 투고 (심사 중) · 임현빈, 김아람, 전상훈 (수원대학교)',
+      meta: '융합보안논문지 (KCI) 게재 승인 · 2026 · 🏆 한국융합보안학회 하계학술대회 수상작 확장 · 임현빈, 김아람, 전상훈 (수원대학교)',
       body: {
         kr: `
           <h4>🏆 수상</h4>
           <p><b>Best Paper Award</b> — Korea Convergence Security Association (KCSA) 2026 Summer Conference (Daejeon, Jun 2026) · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">기사 →</a></p>
           <h4>진행 상태</h4>
-          <p>학회 우수논문 선정 후 <b>논문지 풀페이퍼로 확장하여 투고</b> · 심사 중</p>
+          <p>학회 우수논문 선정 후 풀페이퍼로 확장 · <b>융합보안논문지(KCI) 게재 승인</b> · 2026.09</p>
           <h4>문제 정의</h4>
           <p>의료법 개정으로 EMR의 클라우드 운영이 허용되었으나, AWS · Azure · GCP의 네이티브 모니터링은 5-tuple 메타데이터 수준에 머물러 있다. 그 결과 <b>ISMS-P 2.9.4의 5개 접속로그 항목 중 2개(접속 일시 · 접속지)만</b> 충족하여 충족률 40%에 그친다.</p>
           <h4>제안: MECA</h4>
@@ -1510,7 +1516,7 @@ footer {
           <h4>🏆 Award</h4>
           <p><b>Best Paper Award</b> — Korea Convergence Security Association (KCSA) 2026 Summer Conference (Daejeon, Jun 2026) · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">press →</a></p>
           <h4>Status</h4>
-          <p>Selected as best paper, then <b>extended to a full journal paper</b> · currently under review</p>
+          <p>Selected as best paper, then extended to a full paper · <b>accepted to the Convergence Security Journal (KCI)</b> · Sep 2026</p>
           <h4>Problem</h4>
           <p>Korea's revised medical law permits cloud-hosted EMRs, but native monitoring on AWS, Azure, and GCP is limited to 5-tuple metadata. As a result, only <b>2 of the 5 ISMS-P §2.9.4 access-log items</b> (timestamp, source) are captured — a 40% coverage rate.</p>
           <h4>Proposed: MECA</h4>
