@@ -47,4 +47,4 @@ The script stages only the public files into a temporary folder and uploads that
 
 ## License
 
-Code (HTML/CSS/JS) — MIT. Text, images, and publications — all rights reserved.
+All rights reserved.
