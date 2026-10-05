@@ -37,7 +37,13 @@ Any static file server works.
 
 ## Deploy
 
-The files are served by nginx behind Cloudflare Tunnel. Deployment is a plain file copy — nothing here assumes a particular host.
+Hosted on Cloudflare Pages as plain static files, with no build step. Response headers (CSP, HSTS, and the rest) are defined in `_headers`.
+
+```bash
+./deploy.sh
+```
+
+The script stages only the public files into a temporary folder and uploads that folder with `wrangler pages deploy`, so repository internals never reach the server.
 
 ## License
 

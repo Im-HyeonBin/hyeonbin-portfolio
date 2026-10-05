@@ -3,3 +3,4 @@
 status.json
 update-status.sh
 node_modules/
+.wrangler/
