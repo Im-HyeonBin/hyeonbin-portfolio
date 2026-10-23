@@ -1100,7 +1100,7 @@ footer {
         <div class="card card-clickable" data-modal="hanium">
           <span class="card-year">2026</span>
           <div class="card-body">
-            <p class="card-name" data-i18n="proj.hanium.name">한이음 ICT멘토링 — 몰래카메라 탐지 시스템 (CAMWATCH)</p>
+            <p class="card-name" data-i18n="proj.hanium.name">한이음 ICT멘토링 — 몰래카메라 탐지 시스템</p>
             <p class="card-desc" data-i18n="proj.hanium.desc">802.11 메타데이터 기반 몰래카메라 탐지 · 5인 팀 · 관제 대시보드 프론트엔드 · 백엔드 일부 · 인프라 · 배포 자동화 · 2026</p>
           </div>
           <div class="card-right">
@@ -1192,7 +1192,7 @@ footer {
   </section>
 
   <footer>
-    <span class="ft-left">© 2026 HyeonBin Im · <span id="last-updated">—</span></span>
+    <span class="ft-left">© 2026 HyeonBin Im</span>
     <div class="ft-right"><a href="#" data-u="im" data-d="hyeonbin.net"></a></div>
   </footer>
 
@@ -1274,16 +1274,6 @@ footer {
   const contactMail = document.getElementById('contact-mail');
   contactMail.addEventListener('click', () => copyEmail(contactMail.querySelector('.contact-value'), EMAIL));
 
-  // ── LAST UPDATED ──
-  (() => {
-    const lu = document.getElementById('last-updated');
-    if (!lu) return;
-    const lm = new Date(document.lastModified);
-    if (isNaN(lm)) { lu.textContent = 'updated recently'; return; }
-    const days = Math.floor((Date.now() - lm.getTime()) / 86_400_000);
-    lu.textContent = days <= 0 ? 'last update: today' : `last update: ${days}d ago`;
-  })();
-
   // ── THEME TOGGLE ──
   const themeBtn = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
@@ -1338,7 +1328,7 @@ footer {
       'proj.group.research': 'Research',
       'proj.group.competition': 'Competition',
       'proj.group.startup': 'Startup',
-      'proj.hanium.name': '한이음 ICT멘토링 — 몰래카메라 탐지 시스템 (CAMWATCH)',
+      'proj.hanium.name': '한이음 ICT멘토링 — 몰래카메라 탐지 시스템',
       'proj.hanium.desc': '802.11 메타데이터 기반 몰래카메라 탐지 · 5인 팀 · 관제 대시보드 프론트엔드 · 백엔드 일부 · 인프라 · 배포 자동화 · 2026',
       'proj.hanium.pill': 'In Progress',
       'proj.nuclear.name': '원자력시설 사이버보안 가시성(Visibility) 확보 규제 방안 연구',
@@ -1389,7 +1379,7 @@ footer {
       'proj.group.research': 'Research',
       'proj.group.competition': 'Competition',
       'proj.group.startup': 'Startup',
-      'proj.hanium.name': 'Hanium ICT Mentoring — Hidden Camera Detection System (CAMWATCH)',
+      'proj.hanium.name': 'Hanium ICT Mentoring — Hidden Camera Detection System',
       'proj.hanium.desc': '802.11 metadata-based hidden camera detection · 5-person team · dashboard frontend · partial backend · infra &amp; CI/CD · 2026',
       'proj.hanium.pill': 'In Progress',
       'proj.nuclear.name': 'Cybersecurity Visibility Regulatory Framework for Nuclear Facilities',
@@ -1745,7 +1735,7 @@ footer {
       }
     },
     hanium: {
-      title: '한이음 ICT멘토링 — 몰래카메라 탐지 시스템 (CAMWATCH)',
+      title: '한이음 ICT멘토링 — 몰래카메라 탐지 시스템',
       meta: '2026 · 5인 팀 · 관제 대시보드 · 백엔드 일부 · 인프라 · 배포 자동화',
       body: {
         kr: `
