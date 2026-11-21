@@ -972,8 +972,8 @@ footer {
       <h1 class="hero-h1" data-i18n="hero.h1">Security &amp; <span>Cloud Engineer</span></h1>
 
       <div class="hero-stats">
-        <span><b>5</b> publications <span style="color:var(--ink-3)">(2 journal · 3 conference)</span></span>
-        <span>🏆 <b>1</b> award</span>
+        <span data-i18n="hero.stats.pub">논문 <b>5</b>편 <span style="color:var(--ink-3)">(학술지 2 · 학술대회 3)</span></span>
+        <span data-i18n="hero.stats.award">🏆 수상 <b>1</b>건</span>
       </div>
 
       <p class="hero-sub" data-i18n="hero.sub">
@@ -1027,7 +1027,7 @@ footer {
         <p class="card-group-label">KCI</p>
         <div class="card card-clickable" data-modal="hada">
           <div class="card-body">
-            <p class="card-name">HADA: A Hierarchical Anti-DDoS Architecture for Mitigating L7 Detection Gaps</p>
+            <p class="card-name" data-i18n="res.hada.title">HADA: 상용 Anti-DDoS 환경에서 L7 탐지 공백 완화를 위한 계층형 Anti-DDoS 아키텍처</p>
             <p class="card-desc" data-i18n="res.hada.desc">JKIICE Vol.30 No.7, pp.1262–1274 · 2026 · 임현빈, 전상훈</p>
           </div>
           <div class="card-right">
@@ -1036,7 +1036,7 @@ footer {
         </div>
         <div class="card card-clickable" data-modal="mecaj">
           <div class="card-body">
-            <p class="card-name">MECA: A Medical eBPF Compliance Architecture for Access-Log Visibility in Cloud-Based EMR Systems</p>
+            <p class="card-name" data-i18n="res.meca.title">MECA: 의료 클라우드 접속기록 가시성을 위한 eBPF 기반 규제 감사 아키텍처</p>
             <p class="card-desc" data-i18n="res.meca.desc">융합보안논문지 (KCI) 26(4), pp.277–285 · 2026 · 한국융합보안학회 하계학술대회 수상작 확장 · 임현빈, 김아람, 전상훈</p>
           </div>
           <div class="card-right">
@@ -1048,7 +1048,7 @@ footer {
         <p class="card-group-label" data-i18n="res.conf.label">Conference</p>
         <div class="card card-clickable" data-modal="meca">
           <div class="card-body">
-            <p class="card-name">MECA: Analysis of Security Visibility Limitations under the Shared Responsibility Model in Medical Cloud Environments and eBPF-based Countermeasures</p>
+            <p class="card-name" data-i18n="res.mecac.title">MECA: 의료 클라우드 공동책임모델 보안 가시성 한계 분석 및 eBPF 기반 대응 방안</p>
             <p class="card-desc" data-i18n="res.mecac.desc">한국융합보안학회 하계학술대회 · 대전 · 2026.06 · 임현빈, 김아람, 전상훈</p>
           </div>
           <div class="card-right">
@@ -1066,7 +1066,7 @@ footer {
         </div>
         <div class="card card-clickable" data-modal="icsids">
           <div class="card-body">
-            <p class="card-name">An Endpoint-Specific Normalizer for Resolving DNP3 Interpretation Divergence in ICS Intrusion Detection Systems</p>
+            <p class="card-name" data-i18n="res.icsids.title">산업제어 침입탐지시스템의 DNP3 해석 불일치 해소를 위한 엔드포인트 정규화기</p>
             <p class="card-desc" data-i18n="res.icsids.desc">Snort · Zeek · Suricata vs. opendnp3 · 해석 불일치 9건→0건 · 정상 명령 손실 없음 · KSC 2026 (한국정보과학회) · 경주 · 2026.12 · 포스터 · 임현빈, 전상훈</p>
           </div>
           <div class="card-right">
@@ -1326,61 +1326,67 @@ footer {
   // ── I18N ──
   const i18n = {
     kr: {
-      'nav.about': 'About', 'nav.news': 'News', 'nav.education': 'Education', 'nav.experience': 'Experience',
-      'nav.research': 'Research', 'nav.projects': 'Projects',
-      'nav.contact': 'Contact',
+      'nav.about': '소개', 'nav.news': '소식', 'nav.education': '학력', 'nav.experience': '경험',
+      'nav.research': '연구', 'nav.projects': '프로젝트',
+      'nav.contact': '연락처',
       'hero.name-ko': '임현빈',
       'hero.h1': 'Security &amp; <span>Cloud Engineer</span>',
       'hero.sub': '<b>수원대학교</b> 정보보호 · 클라우드융복합 전공.<br>클라우드·네트워크 인프라와 그 보안에 관심이 있습니다.',
       'hero.cv': '이력서',
       'hero.stats.grad': '<b>2028.02</b>',
-      'sec.about': 'About', 'sec.news': 'News', 'sec.education': 'Education', 'sec.experience': 'Experience',
-      'sec.research': 'Research', 'sec.projects': 'Projects',
-      'sec.contact': 'Contact',
+      'hero.stats.pub': '논문 <b>5</b>편 <span style="color:var(--ink-3)">(학술지 2 · 학술대회 3)</span>',
+      'hero.stats.award': '🏆 수상 <b>1</b>건',
+      'sec.about': '소개', 'sec.news': '소식', 'sec.education': '학력', 'sec.experience': '경험',
+      'sec.research': '연구', 'sec.projects': '프로젝트',
+      'sec.contact': '연락처',
       'about.bio': '<b>클라우드 · 시스템 · 네트워크 인프라</b>와 그 보안에 관심이 있습니다.',
       'edu.univ.name': '수원대학교',
       'edu.univ.desc': '정보보호학과 · 클라우드융복합학과 (복수전공) · 2028.02 졸업 예정',
-      'edu.univ.pill': 'Enrolled',
+      'edu.univ.pill': '재학 중',
       'edu.ra.name': '학부연구생',
       'edu.ra.desc': '2025.12 – 2026.12 · WCPS Lab(Wearable Cyber-Physical Systems Lab) · 원자력 보안 연구팀',
-      'edu.ra.pill': 'Completed',
-      'res.hada.desc': 'JKIICE Vol.30 No.7, pp.1262–1274 · 2026 · 임현빈, 전상훈',
-      'res.hada.pill': 'Published',
-      'res.conf.label': 'Conference',
+      'edu.ra.pill': '종료',
+      'res.hada.title': 'HADA: 상용 Anti-DDoS 환경에서 L7 탐지 공백 완화를 위한 계층형 Anti-DDoS 아키텍처',
+      'res.hada.desc': '한국정보통신학회논문지 (KCI) 30(7), pp.1262–1274 · 2026 · 임현빈, 전상훈',
+      'res.hada.pill': '게재',
+      'res.conf.label': '학술대회',
+      'res.meca.title': 'MECA: 의료 클라우드 접속기록 가시성을 위한 eBPF 기반 규제 감사 아키텍처',
+      'res.mecac.title': 'MECA: 의료 클라우드 공동책임모델 보안 가시성 한계 분석 및 eBPF 기반 대응 방안',
+      'res.icsids.title': '산업제어 침입탐지시스템의 DNP3 해석 불일치 해소를 위한 엔드포인트 정규화기',
       'res.meca.desc': '융합보안논문지 (KCI) 26(4), pp.277–285 · 2026 · 한국융합보안학회 하계학술대회 수상작 확장 · 임현빈, 김아람, 전상훈',
-      'res.meca.pill': 'Published',
+      'res.meca.pill': '게재',
       'res.mecac.desc': '한국융합보안학회 하계학술대회 · 대전 · 2026.06 · 임현빈, 김아람, 전상훈',
-      'res.mecac.pill': '🏆 Best Paper Award',
+      'res.mecac.pill': '🏆 우수논문상',
       'res.wisa.desc': '원자력 I&amp;C 다층 사이버보안 테스트베드 설계 · 예비 검증 · WISA 2026 · 제주 · 2026.08 · 포스터 · 공저',
-      'res.wisa.pill': 'Poster',
+      'res.wisa.pill': '포스터',
       'res.icsids.desc': 'Snort · Zeek · Suricata vs. opendnp3 · 해석 불일치 9건→0건 · 정상 명령 손실 없음 · KSC 2026 (한국정보과학회) · 경주 · 2026.12 · 포스터 · 임현빈, 전상훈',
-      'res.icsids.pill': 'Accepted',
-      'proj.group.research': 'Research',
-      'proj.group.competition': 'Competition',
-      'proj.group.startup': 'Startup',
-      'proj.group.personal': 'Personal',
+      'res.icsids.pill': '채택',
+      'proj.group.research': '연구 과제',
+      'proj.group.competition': '공모전',
+      'proj.group.startup': '창업',
+      'proj.group.personal': '개인 프로젝트',
       'proj.hanium.name': '한이음 ICT멘토링 — 몰래카메라 탐지 시스템',
       'proj.hanium.desc': '802.11 메타데이터 기반 몰래카메라 탐지 · 5인 팀 · 관제 대시보드 프론트엔드 · 백엔드 일부 · 인프라 · 배포 자동화 · 2026',
-      'proj.hanium.pill': 'Completed',
+      'proj.hanium.pill': '완료',
       'proj.nuclear.name': '원자력시설 사이버보안 가시성(Visibility) 확보 규제 방안 연구',
       'proj.nuclear.desc': '원자력안전위원회 규제 프레임워크 · CDA 보안 가시성 · RG 5.71 / 5.96 · RS-015 · 1단계 1차년도 참여 · N-STAR 공저 · 2026.04 – 2026.10',
-      'proj.nuclear.pill': 'Contributed',
+      'proj.nuclear.pill': '참여',
       'proj.modu.name': '모두의 창업 — 1인칭 보이스 자서전 서비스',
       'proj.modu.desc': '중소벤처기업부 · 창업진흥원 주관 예비창업 프로그램 · 1라운드 멘토링 중 하차(2026.07) · 이후 MVP 직접 구현 · GitHub 공개',
-      'proj.modu.pill': 'MVP Released',
+      'proj.modu.pill': 'MVP 공개',
       'proj.hp.name': '허니팟 위협 관측 시스템',
       'proj.hp.desc': '개인 운영 · 홈랩 서버 · Cowrie · 가짜 관리자 웹 · 다중 포트 카나리 · 실시간 탐지 · 자동 차단 · 2026.04 –',
-      'proj.hp.pill': 'Running',
-      'contact.email.label': 'Email',
-      'contact.loc.label': 'Location',
-      'news.8': "Built and open-sourced voice-memoir, the MVP of my Everyone's Startup idea",
-      'news.7': 'Short paper on DNP3 interpretation divergence in ICS intrusion detection accepted to KSC 2026',
-      'news.6': 'MECA extended paper published in the Convergence Security Journal (KCI), vol. 26, no. 4',
-      'news.1': 'Poster on a multi-layer cybersecurity testbed for nuclear I&amp;C systems presented at WISA 2026, Jeju',
-      'news.2': 'HADA published in JKIICE, vol. 30, no. 7',
-      'news.3': 'Co-authored the Year-1 Nuclear Safety Technology Report (N-STAR) on cybersecurity visibility regulation, submitted to NSSC',
-      'news.4': 'MECA received the Best Paper Award at the KCSA Summer Conference, Daejeon · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">press →</a>',
-      'news.5': "Advanced to Round 1 of Everyone's Startup (MSS · KISED)",
+      'proj.hp.pill': '운영 중',
+      'contact.email.label': '이메일',
+      'contact.loc.label': '위치',
+      'news.8': '모두의 창업 아이디어를 MVP(voice-memoir)로 직접 구현해 GitHub에 공개',
+      'news.7': '산업제어 침입탐지시스템의 DNP3 해석 불일치를 다룬 숏페이퍼, KSC 2026 채택',
+      'news.6': 'MECA 확장 논문, 융합보안논문지(KCI) 제26권 4호 게재',
+      'news.1': 'WISA 2026(제주)에서 원자력 I&amp;C 다층 사이버보안 테스트베드 포스터 발표',
+      'news.2': 'HADA, 한국정보통신학회논문지(JKIICE) 제30권 7호 게재',
+      'news.3': '원자력시설 사이버보안 가시성 규제 1차년도 안전기술보고서(N-STAR) 공저, 원자력안전위원회 제출',
+      'news.4': 'MECA, 한국융합보안학회 하계학술대회(대전) 우수논문상 수상 · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">기사 →</a>',
+      'news.5': '모두의 창업(중소벤처기업부 · 창업진흥원) 1라운드 진출',
       'contact.loc.value': '수원대학교 · 경기도 화성시'
     },
     en: {
@@ -1392,6 +1398,8 @@ footer {
       'hero.sub': "Majoring in <b>Information Security &amp; Cloud Computing</b> at The University of Suwon.<br>Interested in cloud and network infrastructure, and its security.",
       'hero.cv': 'Resume',
       'hero.stats.grad': '<b>Feb 2028</b>',
+      'hero.stats.pub': '<b>5</b> publications <span style="color:var(--ink-3)">(2 journal · 3 conference)</span>',
+      'hero.stats.award': '🏆 <b>1</b> award',
       'sec.about': 'About', 'sec.news': 'News', 'sec.education': 'Education', 'sec.experience': 'Experience',
       'sec.research': 'Research', 'sec.projects': 'Projects',
       'sec.contact': 'Contact',
@@ -1402,18 +1410,22 @@ footer {
       'edu.ra.name': 'Undergraduate Research Assistant',
       'edu.ra.desc': 'Dec 2025 – Dec 2026 · WCPS Lab (Wearable Cyber-Physical Systems Lab) · Nuclear Security Research Team',
       'edu.ra.pill': 'Completed',
-      'res.hada.desc': 'JKIICE Vol.30 No.7, pp.1262–1274 · 2026 · HyeonBin Im, Sanghoon Jeon',
+      'res.hada.title': 'HADA: A Hierarchical Anti-DDoS Architecture for Mitigating L7 Detection Gaps',
+      'res.meca.title': 'MECA: A Medical eBPF Compliance Architecture for Access-Log Visibility in Cloud-Based EMR Systems',
+      'res.mecac.title': 'MECA: Analysis of Security Visibility Limitations under the Shared Responsibility Model in Medical Cloud Environments and eBPF-based Countermeasures',
+      'res.icsids.title': 'An Endpoint-Specific Normalizer for Resolving DNP3 Interpretation Divergence in ICS Intrusion Detection Systems',
+      'res.hada.desc': 'JKIICE (KCI) 30(7), pp.1262–1274 · 2026 · HyeonBin Im, Sanghoon Jeon',
       'res.hada.pill': 'Published',
       'res.conf.label': 'Conference',
-      'res.meca.desc': 'Convergence Security Journal (KCI) 26(4), pp.277–285 · 2026 · extended from the KCSA 2026 award paper · HyeonBin Im, Aram Kim, Sanghoon Jeon',
+      'res.meca.desc': 'Convergence Security Journal (KCI) 26(4), pp.277–285 · 2026 · extended version of the KCSA 2026 award-winning paper · HyeonBin Im, Aram Kim, Sanghoon Jeon',
       'res.meca.pill': 'Published',
-      'res.mecac.desc': 'KCSA Summer Conference · Daejeon · Jun 2026 · HyeonBin Im, Aram Kim, Sanghoon Jeon',
+      'res.mecac.desc': 'KCSA 2026 Summer Conference · Daejeon · Jun 2026 · HyeonBin Im, Aram Kim, Sanghoon Jeon',
       'res.mecac.pill': '🏆 Best Paper Award',
       'res.wisa.desc': 'Multi-layer cybersecurity testbed for nuclear I&amp;C · WISA 2026 · Jeju · Aug 2026 · poster · co-author',
       'res.wisa.pill': 'Poster',
       'res.icsids.desc': 'Snort · Zeek · Suricata vs. opendnp3 · interpretation divergence 9 → 0 with no legitimate command lost · KSC 2026 (KIISE Korea Software Congress) · Gyeongju · Dec 2026 · poster · HyeonBin Im, Sanghoon Jeon',
       'res.icsids.pill': 'Accepted',
-      'proj.group.research': 'Research',
+      'proj.group.research': 'Research Project',
       'proj.group.competition': 'Competition',
       'proj.group.startup': 'Startup',
       'proj.group.personal': 'Personal',
@@ -1424,7 +1436,7 @@ footer {
       'proj.nuclear.desc': 'NSSC regulatory framework · CDA security visibility · RG 5.71 / 5.96 · RS-015 · Phase 1 Year 1 · N-STAR co-author · Apr – Oct 2026',
       'proj.nuclear.pill': 'Contributed',
       'proj.modu.name': "Everyone's Startup — First-Person Voice Memoir Service",
-      'proj.modu.desc': 'MSS · KISED pre-founder program · withdrew during Round 1 mentoring (Jul 2026) · built and open-sourced the MVP afterwards',
+      'proj.modu.desc': 'Pre-founder program run by MSS · KISED · withdrew during Round 1 mentoring (Jul 2026) · later built the MVP myself and open-sourced it',
       'proj.modu.pill': 'MVP Released',
       'proj.hp.name': 'Honeypot Threat Monitoring System',
       'proj.hp.desc': 'Personal project · home lab server · Cowrie · fake admin web · multi-port canary · real-time detection · automatic blocking · Apr 2026 –',
@@ -1452,6 +1464,7 @@ footer {
     document.documentElement.lang = l === 'kr' ? 'ko' : 'en';
     langBtn.textContent = l === 'kr' ? 'EN' : '한글';
     localStorage.setItem('lang', l);
+    if (window.reopenModal) window.reopenModal();
   }
   if (!localStorage.getItem('lang-default-en')) {
     localStorage.removeItem('lang');
@@ -1467,8 +1480,8 @@ footer {
   // ── RESEARCH MODAL ──
   const modalData = {
     hada: {
-      title: 'HADA: A Hierarchical Anti-DDoS Architecture for Mitigating L7 Detection Gaps',
-      meta: 'KCI 등재 · JKIICE Vol.30 No.7, pp.1262–1274 · 2026 · HyeonBin Im, Sanghoon Jeon',
+      title: { kr: 'HADA: 상용 Anti-DDoS 환경에서 L7 탐지 공백 완화를 위한 계층형 Anti-DDoS 아키텍처', en: 'HADA: A Hierarchical Anti-DDoS Architecture for Mitigating L7 Detection Gaps' },
+      meta: { kr: '한국정보통신학회논문지 (KCI) 제30권 7호, pp.1262–1274 · 2026 · 임현빈, 전상훈 (수원대학교)', en: 'Journal of the Korea Institute of Information and Communication Engineering (KCI), vol. 30, no. 7, pp. 1262–1274, 2026 · HyeonBin Im, Sanghoon Jeon (The University of Suwon)' },
       body: {
         kr: `
           <h4>문제 정의</h4>
@@ -1489,7 +1502,7 @@ footer {
             <li>상용 장비를 통과한 공격 트래픽에 대해 서버 <b>CPU 부하와 활성 연결 수 감소</b></li>
             <li>RTT와 처리량 변화는 <b>운영상 수용 가능한 범위</b> 내 유지</li>
           </ul>
-          <h4>Keywords</h4>
+          <h4>키워드</h4>
           <div class="modal-stack"><span class="tag">Snort IPS</span><span class="tag">Flowbits</span><span class="tag">TCP Reassembly</span><span class="tag">HTTP Normalization</span><span class="tag">L7 DDoS</span><span class="tag">Defense-in-Depth</span></div>
           <h4>서지정보</h4>
           <p>
@@ -1527,8 +1540,8 @@ footer {
       }
     },
     mecaj: {
-      title: 'MECA: 의료 클라우드 접속기록 가시성을 위한 eBPF 기반 규제 감사 아키텍처',
-      meta: '융합보안논문지 (KCI) 26권 4호 · 2026 · 임현빈, 김아람, 전상훈 (수원대학교)',
+      title: { kr: 'MECA: 의료 클라우드 접속기록 가시성을 위한 eBPF 기반 규제 감사 아키텍처', en: 'MECA: A Medical eBPF Compliance Architecture for Access-Log Visibility in Cloud-Based EMR Systems' },
+      meta: { kr: '융합보안논문지 (KCI) 제26권 4호, pp.277–285 · 2026 · 임현빈, 김아람, 전상훈 (수원대학교)', en: 'Convergence Security Journal (KCI), vol. 26, no. 4, pp. 277–285, 2026 · HyeonBin Im, Aram Kim, Sanghoon Jeon (The University of Suwon)' },
       body: {
         kr: `
           <h4>문제</h4>
@@ -1543,7 +1556,7 @@ footer {
           </ul>
           <h4>이력</h4>
           <p>한국융합보안학회 2026 하계학술대회 발표 · 수상작을 풀페이퍼로 확장 → <b>융합보안논문지(KCI) 제26권 4호 게재</b> (pp.277–285) · DOI <a href="https://doi.org/10.33778/kcsa.2026.26.4.277" target="_blank" rel="noopener">10.33778/kcsa.2026.26.4.277</a></p>
-          <h4>Keywords</h4>
+          <h4>키워드</h4>
           <div class="modal-stack"><span class="tag">eBPF</span><span class="tag">XDP</span><span class="tag">SSL uprobe</span><span class="tag">BCC</span><span class="tag">OpenSSL</span><span class="tag">OpenEMR</span><span class="tag">AWS EC2</span><span class="tag">ISMS-P 2.9.4</span></div>
         `,
         en: `
@@ -1565,40 +1578,40 @@ footer {
       }
     },
     meca: {
-      title: 'MECA: 의료 클라우드 공동책임모델 보안 가시성 한계 분석 및 eBPF 기반 대응 방안',
-      meta: '🏆 한국융합보안학회 하계학술대회 · 대전 · 2026.06 · 임현빈, 김아람, 전상훈 (수원대학교)',
+      title: { kr: 'MECA: 의료 클라우드 공동책임모델 보안 가시성 한계 분석 및 eBPF 기반 대응 방안', en: 'MECA: Analysis of Security Visibility Limitations under the Shared Responsibility Model in Medical Cloud Environments and eBPF-based Countermeasures' },
+      meta: { kr: '🏆 한국융합보안학회 2026 하계학술대회 · 대전 · 2026.06 · 임현빈, 김아람, 전상훈 (수원대학교)', en: '🏆 KCSA 2026 Summer Conference · Daejeon · Jun 2026 · HyeonBin Im, Aram Kim, Sanghoon Jeon (The University of Suwon)' },
       body: {
         kr: `
           <h4>🏆 수상</h4>
-          <p><b>Best Paper Award</b> — Korea Convergence Security Association (KCSA) 2026 Summer Conference (Daejeon, Jun 2026) · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">기사 →</a></p>
-          <h4>진행 상태</h4>
+          <p><b>우수논문상</b> — 한국융합보안학회 2026 하계학술대회 (대전, 2026.06) · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">기사 →</a></p>
+          <h4>이후</h4>
           <p>풀페이퍼로 확장 → <b>융합보안논문지(KCI) 제26권 4호 게재</b> (pp.277–285) · DOI <a href="https://doi.org/10.33778/kcsa.2026.26.4.277" target="_blank" rel="noopener">10.33778/kcsa.2026.26.4.277</a> · 게재 제목: 「MECA: 의료 클라우드 접속기록 가시성을 위한 eBPF 기반 규제 감사 아키텍처」</p>
           <h4>문제 정의</h4>
           <p>의료법 개정으로 EMR의 클라우드 운영이 허용되었으나, AWS · Azure · GCP의 네이티브 모니터링은 5-tuple 메타데이터 수준에 머물러 있다. 그 결과 <b>ISMS-P 2.9.4의 5개 접속로그 항목 중 2개(접속 일시 · 접속지)만</b> 충족하여 충족률 40%에 그친다.</p>
           <h4>제안: MECA</h4>
-          <p>VM 내부 에이전트 형태로 동작하는 cloud-agnostic 컴플라이언스 로깅 프레임워크.</p>
+          <p>VM 안에서 에이전트로 동작해 특정 클라우드에 묶이지 않는 규제 대응 로깅 프레임워크.</p>
           <ul>
             <li><b>eBPF SSL uprobe</b>로 OpenSSL <code>SSL_read</code> · <code>SSL_write</code>에 부착하여 TLS 비밀키 노출 없이 평문 페이로드 캡처 → 계정 ID · 정보주체 · 수행업무 추출</li>
             <li><b>XDP</b>로 NIC 인그레스에서 5-tuple 캡처 → 접속 일시 · 접속지 IP 수집</li>
             <li>두 경로를 <b>eBPF Maps</b>에서 상관 결합하여 ISMS-P 스키마로 송신</li>
-            <li><b>In-Kernel PII Masking</b> — 주민번호 · 비밀번호 · 연락처 등 민감 필드를 수집 시점에 즉시 <code>*</code>로 치환 (verifier 제약 준수 위해 정적 unrolling)</li>
+            <li><b>커널 내 개인정보 마스킹</b> — 주민번호 · 비밀번호 · 연락처 등 민감 필드를 수집 시점에 즉시 <code>*</code>로 치환 (verifier 제약 준수 위해 정적 unrolling)</li>
           </ul>
           <h4>실험 결과</h4>
           <ul>
             <li>AWS EC2 + OpenEMR 7.0.2 환경, Synthea 합성 환자 데이터, 1,000건 트랜잭션</li>
             <li>ISMS-P 2.9.4 충족률 <b>40% → 100%</b></li>
             <li>PII 마스킹 Precision · Recall 모두 <b>100%</b></li>
-            <li>Welch's t-test (N=100) — 처리량 p=0.12, 지연시간 p=0.33 → <b>통계적으로 유의한 성능 저하 없음</b></li>
+            <li>Welch's t-test (N=100) — 처리량 p=0.12, 지연시간 p=0.33 → <b>통계적으로 유의한 성능 저하는 관찰되지 않음</b></li>
           </ul>
           <h4>차별성</h4>
-          <p>알고리즘 신규성보다 <b>한국 의료 클라우드 규제 컨텍스트에 특화된 ISMS-P 매핑</b>과 <b>커널 단계 PII 마스킹 통합</b>이라는 regulatory engineering 관점의 기여.</p>
-          <h4>Stack</h4>
+          <p>새로운 알고리즘보다는 <b>국내 의료 클라우드 규제에 맞춘 ISMS-P 항목 매핑</b>과 <b>커널 단계 개인정보 마스킹</b>을 실제 시스템으로 구현한 데 의의가 있다.</p>
+          <h4>기술 스택</h4>
           <div class="modal-stack"><span class="tag">eBPF</span><span class="tag">XDP</span><span class="tag">libbpf</span><span class="tag">BCC</span><span class="tag">OpenSSL</span><span class="tag">OpenEMR</span><span class="tag">AWS EC2</span><span class="tag">Linux 6.8</span></div>
         `,
         en: `
           <h4>🏆 Award</h4>
           <p><b>Best Paper Award</b> — Korea Convergence Security Association (KCSA) 2026 Summer Conference (Daejeon, Jun 2026) · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">press →</a></p>
-          <h4>Status</h4>
+          <h4>Follow-up</h4>
           <p>Extended to a full paper → <b>published in the Convergence Security Journal (KCI), vol. 26, no. 4, pp. 277–285, 2026</b> · DOI <a href="https://doi.org/10.33778/kcsa.2026.26.4.277" target="_blank" rel="noopener">10.33778/kcsa.2026.26.4.277</a> · published as "MECA: A Medical eBPF Compliance Architecture for Access-Log Visibility in Cloud-Based EMR Systems"</p>
           <h4>Problem</h4>
           <p>Korea's revised medical law permits cloud-hosted EMRs, but native monitoring on AWS, Azure, and GCP is limited to 5-tuple metadata. As a result, only <b>2 of the 5 ISMS-P §2.9.4 access-log items</b> (timestamp, source) are captured — a 40% coverage rate.</p>
@@ -1625,8 +1638,8 @@ footer {
       }
     },
     icsids: {
-      title: 'An Endpoint-Specific Normalizer for Resolving DNP3 Interpretation Divergence in ICS Intrusion Detection Systems',
-      meta: 'KSC 2026 · 한국정보과학회 한국소프트웨어종합학술대회 · 경주 · 2026.12 · 숏페이퍼 채택 · 포스터 발표 · 임현빈, 전상훈 (수원대학교)',
+      title: { kr: '산업제어 침입탐지시스템의 DNP3 해석 불일치 해소를 위한 엔드포인트 정규화기', en: 'An Endpoint-Specific Normalizer for Resolving DNP3 Interpretation Divergence in ICS Intrusion Detection Systems' },
+      meta: { kr: 'KSC 2026 · 한국정보과학회 한국소프트웨어종합학술대회 · 경주 · 2026.12 · 숏페이퍼 채택 · 포스터 발표 · 임현빈, 전상훈 (수원대학교)', en: 'KSC 2026 · KIISE Korea Software Congress · Gyeongju · Dec 2026 · short paper, accepted · poster · HyeonBin Im, Sanghoon Jeon (The University of Suwon)' },
       body: {
         kr: `
           <h4>문제</h4>
@@ -1644,7 +1657,7 @@ footer {
           <p>소프트웨어 엔드포인트와 직접 생성한 정상 트래픽만 사용했고, 인라인 배치 시 지연과 처리량은 다루지 않았다.</p>
           <h4>상태 · 역할</h4>
           <p><b>제1저자</b> — 실험 설계 · 구현 · 집필 · <b>KSC 2026</b>(한국정보과학회 한국소프트웨어종합학술대회) 숏페이퍼 채택 (2026.11) · 2026.12 경주 포스터 발표</p>
-          <h4>Stack</h4>
+          <h4>기술 스택</h4>
           <div class="modal-stack"><span class="tag">DNP3 / IEEE 1815</span><span class="tag">Snort 3</span><span class="tag">Zeek</span><span class="tag">Suricata</span><span class="tag">opendnp3</span><span class="tag">Rust dnp3</span><span class="tag">scapy</span><span class="tag">Python</span></div>
         `,
         en: `
@@ -1669,31 +1682,31 @@ footer {
       }
     },
     wisa: {
-      title: 'Design and Preliminary Validation of a Multi-Layer Cybersecurity Testbed for Nuclear I&C Systems',
-      meta: 'WISA 2026 · Poster · 27th World Conference on Information Security Applications · Jeju, Korea · Aug 2026',
+      title: { kr: 'Design and Preliminary Validation of a Multi-Layer Cybersecurity Testbed for Nuclear I&C Systems', en: 'Design and Preliminary Validation of a Multi-Layer Cybersecurity Testbed for Nuclear I&C Systems' },
+      meta: { kr: 'WISA 2026 (제27회 World Conference on Information Security Applications) · 제주 · 2026.08 · 포스터 · 공저', en: 'WISA 2026 (27th World Conference on Information Security Applications) · Jeju, Korea · Aug 2026 · poster · co-author' },
       body: {
         kr: `
-          <h4>Venue</h4>
-          <p><b>27th World Conference on Information Security Applications (WISA 2026)</b> · 제주 · 2026.08</p>
-          <h4>Authors</h4>
+          <h4>학회</h4>
+          <p><b>제27회 World Conference on Information Security Applications (WISA 2026)</b> · 제주 · 2026.08</p>
+          <h4>저자</h4>
           <p>Yesol Seo, Jisoo Lee, <b>HyeonBin Im</b>, Aram Kim, Sanghoon Jeon</p>
-          <h4>Summary</h4>
+          <h4>요약</h4>
           <p>실험실 규모 온도제어 공정 위에 구축한 <b>원자력 I&amp;C 다층 사이버보안 테스트베드</b>. 온도 센서 · Arduino Opta PLC · HMI · 구동기 · 보안분석 서버로 구성되며 Modbus/TCP로 통신한다.</p>
-          <h4>Three Layers</h4>
+          <h4>세 계층</h4>
           <ul>
             <li><b>네트워크</b> — Snort 기반 침입탐지, MITRE ATT&amp;CK for ICS 매핑 (Modbus 함수코드 검사 · 허가 호스트 검증 · 빈도 기반 탐지)</li>
             <li><b>공정</b> — HAI 21.03 데이터셋으로 공간·시간 이상탐지 (PCA · DAGMM · Ridge-AR · USAD · GAF+CNN 비교)</li>
-            <li><b>제어</b> — AAKR 잔차 기반 FDIA 탐지 후 SVR 추정값으로 PLC 레지스터 자동 대체(override)</li>
+            <li><b>제어</b> — AAKR 잔차 기반 FDIA 탐지 후, SVR 추정값을 PLC 레지스터에 자동으로 대신 써 넣음</li>
           </ul>
-          <h4>Preliminary Results</h4>
+          <h4>예비 결과</h4>
           <ul>
             <li>플러딩 계열 공격 탐지율 <b>99.7–100%</b> (정상 트래픽 오경보 0), 유효 Modbus 패턴을 유지한 MitM은 미탐</li>
             <li>공정 이상탐지는 <b>Ridge-AR</b>이 point-wise · eTaPR F1 모두 최고</li>
             <li>FDIA 실험에서 공격 구간 잔차 초과 → PLC 입력이 SVR 추정값으로 전환되는 자동 피드백 확인</li>
           </ul>
           <p>원자력안전위원회 · 한국원자력안전재단 원자력안전연구사업 지원 (RS-2026-25524055)</p>
-          <h4>Role</h4>
-          <ul><li>공저자 (3rd author) · 포스터 세션 공동 발표</li></ul>
+          <h4>역할</h4>
+          <ul><li>공저자 (제3저자) · 포스터 세션 공동 발표</li></ul>
         `,
         en: `
           <h4>Venue</h4>
@@ -1721,8 +1734,8 @@ footer {
       }
     },
     nuclear: {
-      title: '원자력시설 사이버보안 가시성(Visibility) 확보 규제 방안 연구',
-      meta: '2026.04 – 2026.10 참여 · 3개년 과제 중 1단계 1차년도 · 수원대학교',
+      title: { kr: '원자력시설 사이버보안 가시성(Visibility) 확보 규제 방안 연구', en: 'Cybersecurity Visibility Regulatory Framework for Nuclear Facilities' },
+      meta: { kr: '2026.04 – 2026.10 참여 · 3개년 과제 중 1단계 1차년도 · 수원대학교', en: 'Participated Apr – Oct 2026 · Phase 1, Year 1 of a three-year project · The University of Suwon' },
       body: {
         kr: `
           <h4>과제 개요</h4>
@@ -1777,8 +1790,8 @@ footer {
       }
     },
     hanium: {
-      title: '한이음 ICT멘토링 — 몰래카메라 탐지 시스템',
-      meta: '2026 · 5인 팀 · 관제 대시보드 · 백엔드 일부 · 인프라 · 배포 자동화',
+      title: { kr: '한이음 ICT멘토링 — 몰래카메라 탐지 시스템', en: 'Hanium ICT Mentoring — Hidden Camera Detection System' },
+      meta: { kr: '2026 · 5인 팀 · 관제 대시보드 · 백엔드 일부 · 인프라 · 배포 자동화', en: '2026 · 5-person team · monitoring dashboard · partial backend · infrastructure · CI/CD' },
       body: {
         kr: `
           <h4>프로그램</h4>
@@ -1816,7 +1829,7 @@ footer {
             <li>저장소와 서버 상태 불일치 → 저장소 기준으로 정합 후 검사 우회 경로를 구조적으로 차단</li>
           </ul>
           <p>AI 모델 설계·학습과 캡처 장비 물리 구성은 팀원 담당. 기여 규모는 git 기준 <b>커밋 35건 · 변경 파일 80종</b>, 팀원 PR 6건 검토, 서버–AI 파이프라인 API·DB 계약 문서 작성.</p>
-          <h4>Stack</h4>
+          <h4>기술 스택</h4>
           <div class="modal-stack"><span class="tag">React 18</span><span class="tag">Vite</span><span class="tag">Tailwind CSS</span><span class="tag">shadcn/ui</span><span class="tag">recharts</span><span class="tag">WebSocket</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL 16</span><span class="tag">Docker Compose</span><span class="tag">nginx</span><span class="tag">Cloudflare Tunnel</span><span class="tag">systemd</span><span class="tag">Proxmox</span><span class="tag">GitHub Actions</span><span class="tag">pytest</span><span class="tag">Raspberry Pi 5</span></div>
         `,
         en: `
@@ -1861,8 +1874,8 @@ footer {
       }
     },
     honeypot: {
-      title: '허니팟 위협 관측 시스템',
-      meta: '2026.04 – 운영 중 · 개인 프로젝트 · 홈랩 서버(Proxmox VM)',
+      title: { kr: '허니팟 위협 관측 시스템', en: 'Honeypot Threat Monitoring System' },
+      meta: { kr: '2026.04 – 운영 중 · 개인 프로젝트 · 홈랩 서버(Proxmox VM)', en: 'Apr 2026 – present · personal project · home lab server (Proxmox VM)' },
       body: {
         kr: `
           <h4>개요</h4>
@@ -1894,7 +1907,7 @@ footer {
             <li>점검 중 Splunk · MongoDB가 외부에 열려 있던 것을 발견해 차단</li>
             <li>허니팟 컨테이너에서 같은 LAN의 다른 서버로 접근 가능 → DOCKER-USER 체인으로 사설망 전체를 막고 외부 인터넷만 허용</li>
           </ul>
-          <h4>Stack</h4>
+          <h4>기술 스택</h4>
           <div class="modal-stack"><span class="tag">Cowrie</span><span class="tag">Docker Compose</span><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">SQLite</span><span class="tag">iptables</span><span class="tag">UFW</span><span class="tag">systemd</span><span class="tag">Cloudflare Tunnel</span><span class="tag">AbuseIPDB</span><span class="tag">VirusTotal</span></div>
         `,
         en: `
@@ -1933,8 +1946,8 @@ footer {
       }
     },
     modu: {
-      title: '모두의 창업 — 1인칭 보이스 자서전 서비스',
-      meta: '2026 · 1라운드 멘토링 중 개인 사정으로 하차 (2026.07) · 이후 MVP 직접 구현 · 공개',
+      title: { kr: '모두의 창업 — 1인칭 보이스 자서전 서비스', en: 'Everyone\'s Startup — First-Person Voice Memoir Service' },
+      meta: { kr: '2026 · 1라운드 멘토링 중 개인 사정으로 하차 (2026.07) · 이후 MVP 직접 구현 · 공개', en: '2026 · withdrew for personal reasons during Round 1 mentoring (Jul 2026) · later built and open-sourced the MVP' },
       body: {
         kr: `
           <h4>프로그램</h4>
@@ -1962,7 +1975,7 @@ footer {
             <li>한국어 실제 영상(MSDWild, 영상 17개 · 27명) — <b>80%</b>를 찾음, 섞여 들어간 다른 사람 목소리는 사람별 가운데값 7~8%</li>
           </ul>
           <p>실제 가족 녹음으로는 아직 검증하지 않음. 한 녹음 안에 아주 닮은 두 목소리가 있으면 섞일 수 있음.</p>
-          <h4>Stack</h4>
+          <h4>기술 스택</h4>
           <div class="modal-stack"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">Streamlit</span><span class="tag">pytest</span><span class="tag">GitHub Actions</span></div>
         `,
         en: `
@@ -2003,18 +2016,21 @@ footer {
   const mMeta = document.getElementById('modal-meta');
   const mBody = document.getElementById('modal-body');
   let lastFocus = null;
+  let currentModal = null;
   function openModal(key) {
     const d = modalData[key];
     if (!d) return;
     const lang = localStorage.getItem('lang') || 'en';
-    mTitle.textContent = d.title;
-    mMeta.textContent = d.meta;
+    currentModal = key;
+    mTitle.textContent = d.title[lang] || d.title.kr;
+    mMeta.textContent = d.meta[lang] || d.meta.kr;
     mBody.innerHTML = d.body[lang] || d.body.kr;
     backdrop.classList.add('open');
     document.body.style.overflow = 'hidden';
     lastFocus = document.activeElement;
     setTimeout(() => document.getElementById('modal-close').focus(), 40);
   }
+  window.reopenModal = () => { if (currentModal && backdrop.classList.contains('open')) openModal(currentModal); };
   function closeModal() {
     backdrop.classList.remove('open');
     document.body.style.overflow = '';
