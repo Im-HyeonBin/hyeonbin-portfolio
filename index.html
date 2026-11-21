@@ -19,201 +19,1466 @@
   <link rel="icon" href="favicon.png?v=2" />
   <link rel="apple-touch-icon" href="favicon.png?v=2" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-<style>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+::selection { background: var(--indigo-l); }
+
 :root {
-  --bg: #ffffff; --ink: #18181b; --ink-2: #52525b; --ink-3: #a1a1aa;
-  --line: #ececee; --hover: #f7f7f8; --accent: #b45309;
+  --bg:       #ffffff;
+  --bg-sub:   #fafafa;
+  --ink:      #09090b;
+  --ink-2:    #52525b;
+  --ink-3:    #a1a1aa;
+  --border:   #f4f4f5;
+  --border-2: #e4e4e7;
+  --indigo:   #6366f1;
+  --indigo-l: #eef2ff;
+  --nav-bg:   rgba(255,255,255,.85);
+  --card-hover: #fafafa;
+  --shadow:   rgba(0,0,0,.08);
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0c0c0d; --ink: #f4f4f5; --ink-2: #a1a1aa; --ink-3: #71717a;
-    --line: #232326; --hover: #161618; --accent: #f59e0b;
+[data-theme="dark"] {
+  --bg:       #0a0a0a;
+  --bg-sub:   #18181b;
+  --ink:      #fafafa;
+  --ink-2:    #a1a1aa;
+  --ink-3:    #71717a;
+  --border:   #27272a;
+  --border-2: #27272a;
+  --indigo:   #818cf8;
+  --indigo-l: #1e1b4b;
+  --nav-bg:   rgba(10,10,10,.8);
+  --card-hover: #18181b;
+  --shadow:   rgba(0,0,0,.4);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background .2s, color .2s;
+}
+
+/* ── SCROLL PROGRESS ── */
+#progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--indigo);
+  z-index: 200;
+  transition: width .08s linear;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  justify-content: space-between;
+  transition: background .2s, box-shadow .2s;
+}
+nav.up {
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--border-2);
+}
+.n-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.n-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-2);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.n-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.n-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.n-menu { display: flex; gap: 4px; list-style: none; }
+.n-menu a {
+  display: block;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink-2);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background .12s, color .12s;
+}
+.n-menu a:hover { background: var(--bg-sub); color: var(--ink); }
+.n-menu a.active { color: var(--indigo); font-weight: 500; background: var(--indigo-l); }
+.n-tool.n-hamburger { display: none; }
+
+.n-tools { display: flex; align-items: center; gap: 4px; }
+.n-tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  min-width: 30px;
+  padding: 0 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--ink-2);
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background .12s, color .12s, border-color .12s;
+  letter-spacing: .02em;
+}
+.n-tool:hover { background: var(--bg-sub); color: var(--ink); border-color: var(--ink-3); }
+.n-tool svg { width: 14px; height: 14px; }
+
+/* ── WRAP ── */
+.wrap {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 80px);
+}
+
+/* ── HERO ── */
+.hero {
+  padding-top: clamp(100px, 14vh, 160px);
+  padding-bottom: clamp(64px, 10vh, 112px);
+  display: grid;
+  grid-template-columns: clamp(200px, 22vw, 320px) 1fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+.hero-text {}
+.hero-photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  justify-self: start;
+}
+.hero-photo-img {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 3px solid var(--border-2);
+  box-shadow: 0 8px 32px var(--shadow);
+  display: block;
+}
+.hero-photo-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -.02em;
+  text-align: center;
+  width: 220px;
+}
+.hero-photo-name-ko {
+  font-size: 13px;
+  color: var(--ink-3);
+  text-align: center;
+  width: 220px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: var(--indigo-l);
+  border: 1px solid var(--border-2);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--indigo);
+  margin-bottom: 28px;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--indigo);
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: .3; }
+}
+
+.hero-h1 {
+  font-size: clamp(28px, 3.2vw, 48px);
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 16px;
+  white-space: nowrap;
+}
+.hero-h1 span {
+  color: var(--ink-3);
+  font-weight: 400;
+}
+
+.hero-sub {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  font-weight: 400;
+  max-width: 480px;
+  letter-spacing: -.01em;
+  margin-bottom: 36px;
+}
+.hero-sub b { color: var(--ink); font-weight: 500; }
+
+.hero-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.hero-links a, .hero-links button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .12s, color .12s, box-shadow .12s;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+}
+.btn-primary:hover {
+  opacity: .9;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.btn-ghost {
+  background: var(--bg-sub);
+  color: var(--ink-2);
+  border: 1px solid var(--border-2);
+}
+.btn-ghost:hover {
+  background: var(--card-hover);
+  color: var(--ink);
+}
+
+/* ── SECTION ── */
+.sec {
+  padding: clamp(40px, 6vh, 72px) 0;
+  border-top: 1px solid var(--border-2);
+  display: grid;
+  grid-template-columns: clamp(140px, 18vw, 240px) 1fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+.sec-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-top: 4px;
+  position: sticky;
+  top: 72px;
+}
+
+/* ── ABOUT ── */
+.about-bio {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  margin-bottom: 32px;
+  font-weight: 400;
+  letter-spacing: -.01em;
+}
+.about-bio b { color: var(--ink); font-weight: 500; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  background: var(--bg-sub);
+  border: 1px solid var(--border-2);
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--ink-2);
+  letter-spacing: -.01em;
+}
+
+/* ── STACK GROUPS ── */
+.stack-groups { display: flex; flex-direction: column; gap: 22px; }
+.stack-group { display: grid; grid-template-columns: 110px 1fr; gap: 18px; align-items: start; }
+.stack-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding-top: 6px;
+}
+@media (max-width: 600px) {
+  .stack-group { grid-template-columns: 1fr; gap: 8px; }
+  .stack-label { padding-top: 0; }
+}
+
+/* ── CARD LIST ── */
+.card-list { display: flex; flex-direction: column; gap: 2px; }
+.card-group { display: flex; flex-direction: column; gap: 2px; }
+.card-group-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 12px 0 4px 0;
+}
+.card-group + .card-group { border-top: 1px solid var(--border-2); margin-top: 4px; }
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 10px;
+  transition: background .12s;
+  cursor: default;
+}
+.card:hover { background: var(--card-hover); }
+.card-clickable { cursor: pointer; }
+.card-clickable:hover { background: var(--card-hover); transform: translateX(2px); transition: background .12s, transform .18s; }
+
+.card-body { flex: 1; }
+.card-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -.02em;
+  margin-bottom: 2px;
+}
+.card-desc {
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+.card-right { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.card-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--ink-2);
+  flex-shrink: 0;
+  width: 36px;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: 100px;
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.pill::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+}
+.pill-amber  { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+.pill-amber::before { background: #f59e0b; }
+.pill-indigo { background: var(--indigo-l); color: var(--indigo); border: 1px solid var(--border-2); }
+.pill-indigo::before { background: var(--indigo); }
+.pill-green  { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+.pill-green::before { background: #22c55e; }
+[data-theme="dark"] .pill-amber { background: #422006; color: #fbbf24; border-color: #78350f; }
+[data-theme="dark"] .pill-green { background: #052e16; color: #4ade80; border-color: #14532d; }
+
+/* ── CONTACT ── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+@media (max-width: 600px) { .contact-grid { grid-template-columns: 1fr; } }
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--border-2);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--ink);
+  cursor: pointer;
+  background: transparent;
+  width: 100%;
+  font-family: inherit;
+  text-align: left;
+  transition: background .12s, border-color .12s, transform .18s;
+}
+.contact-item:hover { background: var(--bg-sub); border-color: var(--ink-3); transform: translateY(-1px); }
+.contact-icon {
+  width: 34px; height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--indigo-l);
+  color: var(--indigo);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.contact-icon svg { width: 16px; height: 16px; }
+.contact-text { flex: 1; min-width: 0; }
+.contact-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 2px;
+}
+.contact-value {
+  font-size: 13px;
+  color: var(--ink);
+  letter-spacing: -.01em;
+  overflow-wrap: anywhere;
+}
+
+/* ── HERO STATS ── */
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--ink-3);
+  letter-spacing: .02em;
+  margin: 0 0 24px;
+}
+.hero-stats span + span::before {
+  content: '·';
+  margin-right: 14px;
+  color: var(--border-2);
+}
+.hero-stats b { color: var(--ink-2); font-weight: 500; }
+@media (max-width: 600px) {
+  .hero-stats { justify-content: center; }
+}
+
+/* ── HOMELAB DIAGRAM ── */
+.homelab-svg {
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  margin: 0 auto 22px;
+  display: block;
+}
+.hl-edges line { stroke: var(--border-2); stroke-width: 1.5; fill: none; }
+.hl-node rect {
+  fill: var(--bg-sub);
+  stroke: var(--border-2);
+  stroke-width: 1;
+  transition: stroke .2s, fill .2s;
+}
+.hl-node text {
+  fill: var(--ink);
+  font-size: 12px;
+  font-weight: 500;
+  text-anchor: middle;
+  font-family: 'JetBrains Mono', monospace;
+}
+.hl-node .hl-sub { fill: var(--ink-3); font-size: 10.5px; font-weight: 400; }
+.hl-node--accent rect { fill: var(--indigo-l); stroke: var(--indigo); }
+.hl-node--accent text { fill: var(--indigo); }
+.hl-node:hover rect { stroke: var(--indigo); }
+
+/* ── HOMELAB ── */
+.homelab-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.homelab-head .updated { display: inline-flex; align-items: center; gap: 6px; }
+.homelab-head .live-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: blink 2s ease-in-out infinite;
+}
+.homelab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+}
+.vm-card {
+  border: 1px solid var(--border-2);
+  border-radius: 12px;
+  padding: 16px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: background .12s, border-color .12s;
+}
+.vm-card:hover { background: var(--bg-sub); border-color: var(--ink-3); }
+.vm-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.vm-host {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -.01em;
+}
+.vm-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.vm-status .dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--ink-3);
+}
+.vm-status.online { color: #16a34a; }
+.vm-status.online .dot { background: #22c55e; box-shadow: 0 0 8px rgba(34,197,94,.5); }
+.vm-status.offline { color: #dc2626; }
+.vm-status.offline .dot { background: #ef4444; }
+[data-theme="dark"] .vm-status.online { color: #4ade80; }
+[data-theme="dark"] .vm-status.offline { color: #f87171; }
+
+.vm-role {
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.vm-meta {
+  display: flex;
+  gap: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-3);
+}
+.vm-bars { display: flex; flex-direction: column; gap: 6px; }
+.vm-bar-row {
+  display: grid;
+  grid-template-columns: 28px 1fr 34px;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--ink-3);
+  letter-spacing: .04em;
+}
+.vm-bar {
+  height: 4px;
+  background: var(--border-2);
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+}
+.vm-bar-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--indigo);
+  border-radius: 100px;
+  transition: width .5s cubic-bezier(.16,1,.3,1);
+}
+.vm-bar-fill.warn { background: #f59e0b; }
+.vm-bar-fill.crit { background: #ef4444; }
+.vm-val { text-align: right; color: var(--ink-2); }
+
+/* ── MODAL ── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+.modal-backdrop.open { opacity: 1; pointer-events: auto; }
+.modal {
+  background: var(--bg);
+  border: 1px solid var(--border-2);
+  border-radius: 14px;
+  max-width: 620px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 28px 32px;
+  box-shadow: 0 24px 60px var(--shadow);
+  transform: translateY(10px);
+  transition: transform .25s cubic-bezier(.16,1,.3,1);
+}
+.modal-backdrop.open .modal { transform: none; }
+.modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.modal-close {
+  width: 32px; height: 32px;
+  background: var(--bg-sub);
+  border: 1px solid var(--border-2);
+  border-radius: 8px;
+  color: var(--ink-2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+  line-height: 1;
+}
+.modal-close:hover { background: var(--card-hover); color: var(--ink); }
+.modal-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--ink-3);
+  letter-spacing: .04em;
+  margin-bottom: 20px;
+}
+.modal-body {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+.modal-body h4 {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin: 20px 0 8px;
+}
+.modal-body h4:first-child { margin-top: 0; }
+.modal-body ul { padding-left: 18px; margin: 4px 0; }
+.modal-body li { margin-bottom: 4px; }
+.modal-body p { margin-bottom: 10px; }
+.modal-body b { color: var(--ink); font-weight: 500; }
+.modal-body a {
+  color: var(--indigo);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-2);
+  transition: border-color .12s;
+}
+.modal-body a:hover { border-bottom-color: var(--indigo); }
+.modal-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.modal-stack .tag { font-size: 11.5px; height: 24px; padding: 0 10px; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border-2);
+  padding: 24px 0 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ft-left {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+.ft-right a {
+  font-size: 13px;
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color .12s;
+}
+.ft-right a:hover { color: var(--ink); }
+
+/* ── FADE ── */
+.f {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1);
+}
+.f.on { opacity: 1; transform: none; }
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .f { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── PRINT (Resume) ── */
+@media print {
+  @page { size: A4; margin: 14mm; }
+  :root, [data-theme="dark"] {
+    --bg: #fff !important; --bg-sub: #fff !important;
+    --ink: #000 !important; --ink-2: #222 !important; --ink-3: #555 !important;
+    --border: #ddd !important; --border-2: #ccc !important;
+    --indigo: #3730a3 !important; --indigo-l: #eef2ff !important;
+    --shadow: rgba(0,0,0,.1) !important; --card-hover: transparent !important;
+  }
+  html, body { background: #fff !important; color: #000 !important; }
+  #progress, nav, footer, #homelab, .modal-backdrop, .n-tools, .hero-links { display: none !important; }
+  .f { opacity: 1 !important; transform: none !important; }
+  .wrap { padding: 0 !important; max-width: none !important; }
+  .hero {
+    padding: 0 0 12mm !important;
+    grid-template-columns: 30mm 1fr !important;
+    gap: 10mm !important;
+    align-items: start !important;
+  }
+  .hero-photo-img { width: 28mm !important; height: 28mm !important; border-width: 1px !important; box-shadow: none !important; }
+  .hero-photo-name, .hero-photo-name-ko { width: auto !important; font-size: 9pt !important; }
+  .hero-badge { display: none !important; }
+  .hero-h1 { font-size: 20pt !important; white-space: normal !important; margin-bottom: 4mm !important; }
+  .hero-sub { font-size: 10pt !important; line-height: 1.5 !important; margin-bottom: 2mm !important; max-width: none !important; }
+  .sec {
+    padding: 6mm 0 !important;
+    grid-template-columns: 30mm 1fr !important;
+    gap: 10mm !important;
+    page-break-inside: avoid !important;
+    border-color: #ccc !important;
+  }
+  .sec-title { position: static !important; font-size: 9pt !important; }
+  .about-bio { font-size: 10pt !important; line-height: 1.6 !important; margin-bottom: 0 !important; }
+  .card { padding: 2mm 0 !important; page-break-inside: avoid !important; }
+  .card:hover { background: transparent !important; transform: none !important; }
+  .card-clickable { cursor: default !important; }
+  .card-name { font-size: 10.5pt !important; }
+  .card-desc { font-size: 9pt !important; color: #444 !important; }
+  .card-year { font-size: 9pt !important; }
+  .pill { border: 1px solid #777 !important; background: transparent !important; color: #000 !important; }
+  .pill::before { display: none !important; }
+  .tag { border: 1px solid #aaa !important; background: transparent !important; color: #000 !important; font-size: 9pt !important; height: auto !important; padding: 1mm 2.5mm !important; }
+  .tags { gap: 2mm !important; }
+  .contact-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 3mm !important; }
+  .contact-item { padding: 2mm 3mm !important; border-color: #bbb !important; }
+  .contact-icon { display: none !important; }
+  .contact-label { font-size: 8pt !important; }
+  .contact-value { font-size: 9pt !important; }
+  a { color: inherit !important; text-decoration: none !important; }
+}
+
+/* ── NEWS ── */
+.news-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.news-list li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: baseline; font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+.news-list a { color: var(--indigo); text-decoration: none; border-bottom: 1px solid var(--border-2); white-space: nowrap; }
+.news-list a:hover { border-bottom-color: var(--indigo); }
+.news-list time { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+@media (max-width: 600px) { .news-list li { grid-template-columns: 56px 1fr; gap: 12px; font-size: 13.5px; } }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .sec {
+    grid-template-columns: 160px 1fr;
+    gap: 32px;
   }
 }
-:root[data-theme="dark"] {
-  --bg: #0c0c0d; --ink: #f4f4f5; --ink-2: #a1a1aa; --ink-3: #71717a;
-  --line: #232326; --hover: #161618; --accent: #f59e0b;
-}
-html { -webkit-text-size-adjust: 100%; }
-body {
-  background: var(--bg); color: var(--ink);
-  font: 15px/1.65 'Inter', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-:lang(ko) body { word-break: keep-all; }
-a { color: inherit; text-decoration: none; }
-.wrap { max-width: 640px; margin: 0 auto; padding: 72px 20px 56px; }
 
-.top { display: flex; justify-content: flex-end; gap: 14px; margin-bottom: 40px; }
-.top button {
-  background: none; border: 0; color: var(--ink-3); font: inherit; font-size: 13px; cursor: pointer;
+@media (max-width: 600px) {
+  nav { padding: 0 16px; height: 52px; }
+  .n-tool.n-hamburger { display: inline-flex; }
+  .n-menu {
+    display: none;
+    position: fixed;
+    top: 52px;
+    left: 0; right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border-2);
+    flex-direction: column;
+    padding: 10px 16px 14px;
+    gap: 2px;
+    box-shadow: 0 8px 24px var(--shadow);
+  }
+  .n-menu.open { display: flex; }
+  .n-menu a { padding: 10px 12px; font-size: 14px; }
+  .n-right { gap: 6px; }
+
+  .wrap { padding: 0 20px; }
+  .hero {
+    padding-top: 80px;
+    padding-bottom: 48px;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    justify-items: center;
+    text-align: center;
+  }
+  .hero-photo { order: -1; align-self: center; justify-self: center; }
+  .hero-links { justify-content: center; }
+  .hero-photo-img { width: 120px; height: 120px; }
+
+  .sec {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 36px 0;
+  }
+  .sec-title { position: static; }
+
+  .hero-badge { font-size: 11px; padding: 4px 10px; }
+  .hero-sub { font-size: 14px; }
+  .hero-links { flex-wrap: wrap; gap: 8px; }
+  .btn-primary, .btn-ghost { height: 40px; font-size: 13px; }
+
+  .card { padding: 14px 12px; flex-wrap: wrap; align-items: flex-start; row-gap: 10px; }
+  .card-body { flex: 1 1 0; min-width: 0; }
+  .card-right { flex-basis: 100%; flex-direction: row; flex-wrap: wrap; align-items: center; }
+  .card-year + .card-body ~ .card-right { padding-left: 52px; }
+  .card-year { font-size: 11px; padding-top: 2px; }
+
+  .tags { gap: 6px; }
+  .tag { font-size: 12px; height: 26px; padding: 0 10px; }
+
+  .modal { padding: 22px 20px; }
+  .modal-title { font-size: 17px; }
+
+  footer { flex-direction: column; align-items: flex-start; gap: 8px; padding-bottom: 48px; }
 }
-.top button:hover { color: var(--ink); }
 
-header { display: flex; gap: 18px; align-items: center; }
-header img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex: none; }
-h1 { font-size: 22px; font-weight: 600; letter-spacing: -.01em; }
-h1 small { font-size: 15px; font-weight: 400; color: var(--ink-3); margin-left: 6px; }
-.role { color: var(--ink-2); }
-.intro { margin-top: 20px; color: var(--ink-2); }
-.links { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 14px; }
-.links a { color: var(--ink); border-bottom: 1px solid var(--line); }
-.links a:hover { border-color: var(--ink); }
-
-section { margin-top: 56px; }
-h2 {
-  font-size: 13px; font-weight: 500; color: var(--ink-3); letter-spacing: .02em;
-  padding-bottom: 10px; border-bottom: 1px solid var(--line); margin-bottom: 4px;
-}
-.row {
-  display: grid; grid-template-columns: 96px 1fr; gap: 20px;
-  padding: 12px 8px; margin: 0 -8px; border-radius: 6px;
-}
-.row[data-modal] { cursor: pointer; }
-.row[data-modal]:hover, .row[data-modal]:focus-visible { background: var(--hover); outline: none; }
-.date { font: 12.5px/1.65 'JetBrains Mono', monospace; color: var(--ink-3); padding-top: 2px; }
-.t { font-weight: 500; }
-.s { color: var(--ink-2); font-size: 14px; }
-.tag { color: var(--accent); font-size: 13px; white-space: nowrap; }
-
-footer { margin-top: 64px; font-size: 13px; color: var(--ink-3); }
-
-/* modal */
-.mb { position: fixed; inset: 0; background: rgba(0,0,0,.4); display: none; align-items: flex-start; justify-content: center; padding: 6vh 16px; overflow-y: auto; z-index: 10; }
-.mb.open { display: flex; }
-.m { background: var(--bg); color: var(--ink); max-width: 640px; width: 100%; border-radius: 10px; padding: 28px 28px 32px; position: relative; }
-.m h3 { font-size: 17px; font-weight: 600; line-height: 1.45; padding-right: 28px; }
-.m .meta { color: var(--ink-3); font-size: 13px; margin-top: 6px; }
-.m .x { position: absolute; top: 18px; right: 18px; background: none; border: 0; font-size: 22px; color: var(--ink-3); cursor: pointer; }
-.m .x:focus:not(:focus-visible) { outline: none; }
-.m .body { margin-top: 18px; font-size: 14px; color: var(--ink-2); }
-.m .body h4 { color: var(--ink); font-size: 13.5px; font-weight: 600; margin: 18px 0 6px; }
-.m .body ul { padding-left: 18px; }
-.m .body li { margin: 3px 0; }
-.m .body a { color: var(--ink); border-bottom: 1px solid var(--line); }
-.m .body b { color: var(--ink); font-weight: 500; }
-.m .body code { font: 12.5px 'JetBrains Mono', monospace; }
-.m .modal-stack { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; color: var(--ink-3); }
-.m .modal-stack .tag { color: var(--ink-3); }
-
-@media (max-width: 520px) {
-  .wrap { padding-top: 40px; }
-  .date br { display: none; }
-  .row { grid-template-columns: 1fr; gap: 2px; }
-  .m { padding: 22px 18px 26px; }
-}
-</style>
+  </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <button id="lang" type="button">한국어</button>
-    <button id="theme" type="button" data-k="ui.theme">Theme</button>
-  </div>
 
-  <header>
-    <img src="avatar.jpg" alt="" />
-    <div>
-      <h1><span data-k="name">HyeonBin Im</span><small data-k="name2">임현빈</small></h1>
-      <p class="role">Security &amp; Cloud Engineer</p>
+<div id="progress"></div>
+
+<nav id="nav">
+  <a class="n-logo" href="#">
+    <div class="n-avatar">
+      <img id="avatar-img" src="avatar.jpg" alt="HyeonBin Im" />
     </div>
-  </header>
-  <p class="intro" data-k="intro"></p>
-  <div class="links">
-    <a href="https://github.com/Im-HyeonBin" target="_blank" rel="noopener">GitHub</a>
-    <a href="/cv.pdf" target="_blank" rel="noopener">CV</a>
-    <a href="https://www.linkedin.com/in/hyeonbin-im-220477437/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="#" data-u="im" data-d="hyeonbin.net"></a>
+    HyeonBin Im
+  </a>
+  <div class="n-right">
+    <ul class="n-menu">
+      <li><a href="#about" data-i18n="nav.about">About</a></li>
+      <li><a href="#education" data-i18n="nav.education">Education</a></li>
+      <li><a href="#research" data-i18n="nav.research">Research</a></li>
+      <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+      <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+      <li><a href="#news" data-i18n="nav.news">News</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div class="n-tools">
+      <button class="n-tool" id="lang-toggle" title="Language" aria-label="Toggle language">KR</button>
+      <button class="n-tool" id="theme-toggle" title="Theme" aria-label="Toggle theme">
+        <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+      <button class="n-tool n-hamburger" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg id="hamburger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="7" x2="20" y2="7"/>
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="17" x2="20" y2="17"/>
+        </svg>
+      </button>
+    </div>
   </div>
+</nav>
 
-  <section>
-    <h2 data-k="h.pub"></h2>
-    <div class="row" data-modal="icsids"><span class="date">2026.12</span><div><p class="t" data-k="p.icsids.t"></p><p class="s" data-k="p.icsids.s"></p></div></div>
-    <div class="row" data-modal="mecaj"><span class="date">2026.09</span><div><p class="t" data-k="p.mecaj.t"></p><p class="s" data-k="p.mecaj.s"></p></div></div>
-    <div class="row" data-modal="wisa"><span class="date">2026.08</span><div><p class="t">Design and Preliminary Validation of a Multi-Layer Cybersecurity Testbed for Nuclear I&amp;C Systems</p><p class="s" data-k="p.wisa.s"></p></div></div>
-    <div class="row" data-modal="hada"><span class="date">2026.07</span><div><p class="t" data-k="p.hada.t"></p><p class="s" data-k="p.hada.s"></p></div></div>
-    <div class="row" data-modal="meca"><span class="date">2026.06</span><div><p class="t" data-k="p.meca.t"></p><p class="s"><span data-k="p.meca.s"></span> · <span class="tag" data-k="p.meca.tag"></span></p></div></div>
+<div class="wrap">
+
+  <section class="hero">
+    <div class="hero-photo">
+      <img class="hero-photo-img" src="avatar.jpg" alt="HyeonBin Im" />
+      <p class="hero-photo-name">HyeonBin Im</p>
+    </div>
+
+    <div class="hero-text">
+      <h1 class="hero-h1" data-i18n="hero.h1">Security &amp; <span>Cloud Engineer</span></h1>
+
+      <div class="hero-stats">
+        <span data-i18n="hero.stats.pub">논문 <b>5</b>편 <span style="color:var(--ink-3)">(학술지 2 · 학술대회 3)</span></span>
+        <span data-i18n="hero.stats.award">🏆 수상 <b>1</b>건</span>
+      </div>
+
+      <p class="hero-sub" data-i18n="hero.sub">
+        <b>수원대학교</b> 정보보호 · 클라우드융복합 전공.<br>
+        클라우드·네트워크 인프라와 그 보안에 관심이 있습니다.
+      </p>
+
+      <div class="hero-links">
+        <a class="btn-primary" href="https://github.com/Im-HyeonBin" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+        <a class="btn-ghost" href="/cv.pdf" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          CV
+        </a>
+        <a class="btn-ghost" href="#" id="mail" data-u="im" data-d="hyeonbin.net"></a>
+      </div>
+    </div>
   </section>
 
-  <section>
-    <h2 data-k="h.proj"></h2>
-    <div class="row" data-modal="honeypot"><span class="date" data-k="d.hp"></span><div><p class="t" data-k="j.hp.t"></p><p class="s"><span data-k="j.hp.s"></span> · <span class="tag" data-k="j.hp.tag"></span></p></div></div>
-    <div class="row" data-modal="modu"><span class="date">2026.11</span><div><p class="t" data-k="j.modu.t"></p><p class="s" data-k="j.modu.s"></p></div></div>
-    <div class="row" data-modal="hanium"><span class="date">2026</span><div><p class="t" data-k="j.hanium.t"></p><p class="s" data-k="j.hanium.s"></p></div></div>
-    <div class="row" data-modal="nuclear"><span class="date" data-k="d.nuc"></span><div><p class="t" data-k="j.nuc.t"></p><p class="s" data-k="j.nuc.s"></p></div></div>
+  <section class="sec f" id="about">
+    <p class="sec-title" data-i18n="sec.about">About</p>
+    <p class="about-bio" data-i18n="about.bio">
+      <b>클라우드 · 시스템 · 네트워크 인프라</b>와 그 보안에 관심이 있습니다.
+    </p>
   </section>
 
-  <section>
-    <h2 data-k="h.bg"></h2>
-    <div class="row"><span class="date" data-k="d.ra"></span><div><p class="t" data-k="b.ra.t"></p><p class="s" data-k="b.ra.s"></p></div></div>
-    <div class="row"><span class="date" data-k="d.univ"></span><div><p class="t" data-k="b.univ.t"></p><p class="s" data-k="b.univ.s"></p></div></div>
+  <section class="sec f" id="education">
+    <p class="sec-title" data-i18n="sec.education">Education</p>
+    <div class="card-list">
+      <div class="card">
+        <span class="card-year">2022</span>
+        <div class="card-body">
+          <p class="card-name" data-i18n="edu.univ.name">수원대학교</p>
+          <p class="card-desc" data-i18n="edu.univ.desc">정보보호학과 · 클라우드융복합학과 (복수전공) · 2028.02 졸업 예정</p>
+        </div>
+        <div class="card-right">
+          <span class="pill pill-green" data-i18n="edu.univ.pill">Enrolled</span>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <footer>© 2026 HyeonBin Im</footer>
+  <section class="sec f" id="research">
+    <p class="sec-title" data-i18n="sec.research">Research</p>
+    <div class="card-list">
+      <div class="card-group">
+        <p class="card-group-label">KCI</p>
+        <div class="card card-clickable" data-modal="hada">
+          <div class="card-body">
+            <p class="card-name" data-i18n="res.hada.title">HADA: 상용 Anti-DDoS 환경에서 L7 탐지 공백 완화를 위한 계층형 Anti-DDoS 아키텍처</p>
+            <p class="card-desc" data-i18n="res.hada.desc">JKIICE Vol.30 No.7, pp.1262–1274 · 2026 · 임현빈, 전상훈</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-green" data-i18n="res.hada.pill">Published</span>
+          </div>
+        </div>
+        <div class="card card-clickable" data-modal="mecaj">
+          <div class="card-body">
+            <p class="card-name" data-i18n="res.meca.title">MECA: 의료 클라우드 접속기록 가시성을 위한 eBPF 기반 규제 감사 아키텍처</p>
+            <p class="card-desc" data-i18n="res.meca.desc">융합보안논문지 (KCI) 26(4), pp.277–285 · 2026 · 한국융합보안학회 하계학술대회 수상작 확장 · 임현빈, 김아람, 전상훈</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-green" data-i18n="res.meca.pill">Published</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-group">
+        <p class="card-group-label" data-i18n="res.conf.label">Conference</p>
+        <div class="card card-clickable" data-modal="meca">
+          <div class="card-body">
+            <p class="card-name" data-i18n="res.mecac.title">MECA: 의료 클라우드 공동책임모델 보안 가시성 한계 분석 및 eBPF 기반 대응 방안</p>
+            <p class="card-desc" data-i18n="res.mecac.desc">한국융합보안학회 하계학술대회 · 대전 · 2026.06 · 임현빈, 김아람, 전상훈</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-amber" data-i18n="res.mecac.pill">🏆 Best Paper Award</span>
+          </div>
+        </div>
+        <div class="card card-clickable" data-modal="wisa">
+          <div class="card-body">
+            <p class="card-name">Design and Preliminary Validation of a Multi-Layer Cybersecurity Testbed for Nuclear I&amp;C Systems</p>
+            <p class="card-desc" data-i18n="res.wisa.desc">원자력 I&amp;C 다층 사이버보안 테스트베드 설계 · 예비 검증 · WISA 2026 · 제주 · 2026.08 · 포스터 · 공저</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-green" data-i18n="res.wisa.pill">Poster</span>
+          </div>
+        </div>
+        <div class="card card-clickable" data-modal="icsids">
+          <div class="card-body">
+            <p class="card-name" data-i18n="res.icsids.title">산업제어 침입탐지시스템의 DNP3 해석 불일치 해소를 위한 엔드포인트 정규화기</p>
+            <p class="card-desc" data-i18n="res.icsids.desc">Snort · Zeek · Suricata vs. opendnp3 · 해석 불일치 9건→0건 · 정상 명령 손실 없음 · KSC 2026 (한국정보과학회) · 경주 · 2026.12 · 포스터 · 임현빈, 전상훈</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-green" data-i18n="res.icsids.pill">Accepted</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec f" id="projects">
+    <p class="sec-title" data-i18n="sec.projects">Projects</p>
+    <div class="card-list">
+      <div class="card-group">
+        <p class="card-group-label" data-i18n="proj.group.research">Research</p>
+        <div class="card card-clickable" data-modal="nuclear">
+          <span class="card-year">2026</span>
+          <div class="card-body">
+            <p class="card-name" data-i18n="proj.nuclear.name">원자력시설 사이버보안 가시성(Visibility) 확보 규제 방안 연구</p>
+            <p class="card-desc" data-i18n="proj.nuclear.desc">원자력안전위원회 규제 프레임워크 · CDA 보안 가시성 · RG 5.71 / 5.96 · RS-015 · 1단계 1차년도 참여 · N-STAR 공저 · 2026.04 – 2026.10</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-green" data-i18n="proj.nuclear.pill">Contributed</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-group">
+        <p class="card-group-label" data-i18n="proj.group.competition">Competition</p>
+        <div class="card card-clickable" data-modal="hanium">
+          <span class="card-year">2026</span>
+          <div class="card-body">
+            <p class="card-name" data-i18n="proj.hanium.name">한이음 ICT멘토링 — 몰래카메라 탐지 시스템</p>
+            <p class="card-desc" data-i18n="proj.hanium.desc">802.11 메타데이터 기반 몰래카메라 탐지 · 5인 팀 · 관제 대시보드 프론트엔드 · 백엔드 일부 · 인프라 · 배포 자동화 · 2026</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-green" data-i18n="proj.hanium.pill">Completed</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-group">
+        <p class="card-group-label" data-i18n="proj.group.startup">Startup</p>
+        <div class="card card-clickable" data-modal="modu">
+          <span class="card-year">2026</span>
+          <div class="card-body">
+            <p class="card-name" data-i18n="proj.modu.name">모두의 창업 — 1인칭 보이스 자서전 서비스</p>
+            <p class="card-desc" data-i18n="proj.modu.desc">중소벤처기업부 · 창업진흥원 주관 예비창업 프로그램 · 1라운드 멘토링 중 하차(2026.07) · 이후 MVP 직접 구현 · GitHub 공개</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-green" data-i18n="proj.modu.pill">MVP Released</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-group">
+        <p class="card-group-label" data-i18n="proj.group.personal">Personal</p>
+        <div class="card card-clickable" data-modal="honeypot">
+          <span class="card-year">2026</span>
+          <div class="card-body">
+            <p class="card-name" data-i18n="proj.hp.name">허니팟 위협 관측 시스템</p>
+            <p class="card-desc" data-i18n="proj.hp.desc">개인 운영 · 홈랩 서버 · Cowrie · 가짜 관리자 웹 · 다중 포트 카나리 · 실시간 탐지 · 자동 차단 · 2026.04 –</p>
+          </div>
+          <div class="card-right">
+            <span class="pill pill-green" data-i18n="proj.hp.pill">Running</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec f" id="experience">
+    <p class="sec-title" data-i18n="sec.experience">Experience</p>
+    <div class="card-list">
+      <div class="card">
+        <span class="card-year">2025</span>
+        <div class="card-body">
+          <p class="card-name" data-i18n="edu.ra.name">학부연구생</p>
+          <p class="card-desc" data-i18n="edu.ra.desc">2025.12 – 2026.12 · WCPS Lab(Wearable Cyber-Physical Systems Lab) · 원자력 보안 연구팀</p>
+        </div>
+        <div class="card-right">
+          <span class="pill pill-green" data-i18n="edu.ra.pill">Completed</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec f" id="news">
+    <p class="sec-title" data-i18n="sec.news">News</p>
+    <ul class="news-list">
+      <li><time>2026.11</time><span data-i18n="news.8">Built and open-sourced voice-memoir, the MVP of my Everyone's Startup idea</span></li>
+      <li><time>2026.11</time><span data-i18n="news.7">Short paper on DNP3 interpretation divergence in ICS intrusion detection accepted to KSC 2026</span></li>
+      <li><time>2026.09</time><span data-i18n="news.6">MECA extended paper published in the Convergence Security Journal (KCI), vol. 26, no. 4</span></li>
+      <li><time>2026.08</time><span data-i18n="news.1">Poster on a multi-layer cybersecurity testbed for nuclear I&amp;C systems presented at WISA 2026, Jeju</span></li>
+      <li><time>2026.07</time><span data-i18n="news.2">HADA published in JKIICE, vol. 30, no. 7</span></li>
+      <li><time>2026.07</time><span data-i18n="news.3">Co-authored the Year-1 Nuclear Safety Technology Report (N-STAR) on cybersecurity visibility regulation, submitted to NSSC</span></li>
+      <li><time>2026.06</time><span data-i18n="news.4">MECA received the Best Paper Award at the KCSA Summer Conference, Daejeon · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">press →</a></span></li>
+      <li><time>2026.05</time><span data-i18n="news.5">Advanced to Round 1 of Everyone's Startup (MSS · KISED)</span></li>
+    </ul>
+  </section>
+
+  <section class="sec f" id="contact">
+    <p class="sec-title" data-i18n="sec.contact">Contact</p>
+    <div>
+      <div class="contact-grid">
+        <button class="contact-item" id="contact-mail" type="button">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div class="contact-text">
+            <div class="contact-label" data-i18n="contact.email.label">Email</div>
+            <div class="contact-value" data-u="im" data-d="hyeonbin.net"></div>
+          </div>
+        </button>
+        <a class="contact-item" href="https://github.com/Im-HyeonBin" target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </div>
+          <div class="contact-text">
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">@Im-HyeonBin</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://www.linkedin.com/in/hyeonbin-im-220477437/" target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+            </svg>
+          </div>
+          <div class="contact-text">
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">HyeonBin Im</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://map.naver.com/p/search/수원대학교" target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div class="contact-text">
+            <div class="contact-label" data-i18n="contact.loc.label">Location</div>
+            <div class="contact-value" data-i18n="contact.loc.value">수원대학교 · 경기도 화성시</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="ft-left">© 2026 HyeonBin Im</span>
+    <div class="ft-right"><a href="#" data-u="im" data-d="hyeonbin.net"></a></div>
+  </footer>
+
 </div>
 
-<div class="mb" id="mb">
-  <div class="m" role="dialog" aria-modal="true" aria-labelledby="m-title">
-    <button class="x" id="m-x" aria-label="Close">×</button>
-    <h3 id="m-title"></h3>
-    <p class="meta" id="m-meta"></p>
-    <div class="body" id="m-body"></div>
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-head">
+      <h3 class="modal-title" id="modal-title"></h3>
+      <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+    </div>
+    <p class="modal-meta" id="modal-meta"></p>
+    <div class="modal-body" id="modal-body"></div>
   </div>
 </div>
 
 <script>
-const T = {
-  kr: {
-    'ui.theme': '테마', 'name': '임현빈', 'name2': 'HyeonBin Im',
-    'intro': '수원대학교에서 정보보호와 클라우드융복합을 복수전공하고 있습니다. 클라우드·시스템·네트워크 인프라와 그 보안에 관심이 있습니다.',
-    'h.pub': '논문', 'h.proj': '프로젝트', 'h.bg': '학력 · 경력',
-    'p.icsids.t': '산업제어 침입탐지시스템의 DNP3 해석 불일치 해소를 위한 엔드포인트 정규화기',
-    'p.icsids.s': 'KSC 2026 (한국정보과학회) · 포스터 · 채택',
-    'p.mecaj.t': 'MECA: 의료 클라우드 접속기록 가시성을 위한 eBPF 기반 규제 감사 아키텍처',
-    'p.mecaj.s': '융합보안논문지 (KCI) 26(4)',
-    'p.wisa.s': 'WISA 2026 · 포스터 · 공저',
-    'p.hada.t': 'HADA: 상용 Anti-DDoS 환경에서 L7 탐지 공백 완화를 위한 계층형 Anti-DDoS 아키텍처',
-    'p.hada.s': '한국정보통신학회논문지 (KCI) 30(7)',
-    'p.meca.t': 'MECA: 의료 클라우드 공동책임모델 보안 가시성 한계 분석 및 eBPF 기반 대응 방안',
-    'p.meca.s': '한국융합보안학회 하계학술대회', 'p.meca.tag': '우수논문상',
-    'd.hp': '2026.04 –',
-    'j.hp.t': '허니팟 위협 관측 시스템', 'j.hp.s': '공격 접속을 수집해 자동 차단하는 개인 운영 시스템', 'j.hp.tag': '운영 중',
-    'j.modu.t': 'voice-memoir', 'j.modu.s': '모두의 창업 아이디어를 직접 구현해 공개한 MVP',
-    'j.hanium.t': '한이음 ICT멘토링 · 몰래카메라 탐지 시스템', 'j.hanium.s': '5인 팀 · 관제 대시보드, 인프라, 배포 자동화 담당',
-    'd.nuc': '2026.04 – 10',
-    'j.nuc.t': '원자력시설 사이버보안 가시성 규제 연구', 'j.nuc.s': '원자력안전위원회 과제 · 안전기술보고서(N-STAR) 공저',
-    'd.ra': '2025.12 – 2026.12', 'd.univ': '2022 – 2028.02',
-    'b.ra.t': '학부연구생', 'b.ra.s': 'WCPS Lab 원자력 보안 연구팀 · 수원대학교',
-    'b.univ.t': '수원대학교', 'b.univ.s': '정보보호학과 · 클라우드융복합학과 (복수전공) · 졸업 예정'
-  },
-  en: {
-    'ui.theme': 'Theme', 'name': 'HyeonBin Im', 'name2': '임현빈',
-    'intro': 'Double major in Information Security and Cloud Computing at The University of Suwon. Interested in cloud, systems, and network infrastructure, and securing it.',
-    'h.pub': 'Publications', 'h.proj': 'Projects', 'h.bg': 'Education · Experience',
-    'p.icsids.t': 'An Endpoint-Specific Normalizer for Resolving DNP3 Interpretation Divergence in ICS Intrusion Detection Systems',
-    'p.icsids.s': 'KSC 2026 (KIISE) · poster · accepted',
-    'p.mecaj.t': 'MECA: A Medical eBPF Compliance Architecture for Access-Log Visibility in Cloud-Based EMR Systems',
-    'p.mecaj.s': 'Convergence Security Journal (KCI) 26(4)',
-    'p.wisa.s': 'WISA 2026 · poster · co-author',
-    'p.hada.t': 'HADA: A Hierarchical Anti-DDoS Architecture for Mitigating L7 Detection Gaps',
-    'p.hada.s': 'JKIICE (KCI) 30(7)',
-    'p.meca.t': 'MECA: Analysis of Security Visibility Limitations under the Shared Responsibility Model in Medical Cloud Environments and eBPF-based Countermeasures',
-    'p.meca.s': 'KCSA Summer Conference', 'p.meca.tag': 'Best Paper Award',
-    'd.hp': 'Apr 2026 –',
-    'j.hp.t': 'Honeypot Threat Monitoring', 'j.hp.s': 'Personally operated system that records attacks and blocks them automatically', 'j.hp.tag': 'running',
-    'j.modu.t': 'voice-memoir', 'j.modu.s': "Open-source MVP built from my Everyone's Startup idea",
-    'j.hanium.t': 'Hanium ICT Mentoring · Hidden Camera Detection', 'j.hanium.s': '5-person team · monitoring dashboard, infrastructure, CI/CD',
-    'd.nuc': 'Apr – Oct 2026',
-    'j.nuc.t': 'Cybersecurity Visibility Regulation for Nuclear Facilities', 'j.nuc.s': 'NSSC-funded project · co-author of the N-STAR report',
-    'd.ra': 'Dec 2025 – Dec 2026', 'd.univ': '2022 – Feb 2028',
-    'b.ra.t': 'Undergraduate Research Assistant', 'b.ra.s': 'WCPS Lab, Nuclear Security Research Team · The University of Suwon',
-    'b.univ.t': 'The University of Suwon', 'b.univ.s': 'B.S. Information Security · Cloud Computing (double major) · expected'
+  // ── SCROLL PROGRESS ──
+  const progress = document.getElementById('progress');
+  const nav = document.getElementById('nav');
+  const updateScroll = () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progress.style.width = pct + '%';
+    nav.classList.toggle('up', scrollY > 8);
+  };
+  addEventListener('scroll', updateScroll, { passive: true });
+  updateScroll();
+
+  // ── REVEAL ──
+  const obs = new IntersectionObserver(
+    es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); }}),
+    { threshold: .08 }
+  );
+  document.querySelectorAll('.f').forEach(el => obs.observe(el));
+
+  // ── MOBILE NAV DRAWER ──
+  const navMenu = document.querySelector('.n-menu');
+  const navToggle = document.getElementById('nav-toggle');
+  navToggle.addEventListener('click', () => {
+    const open = navMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navMenu.addEventListener('click', e => {
+    if (e.target.tagName === 'A') {
+      navMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // ── ACTIVE NAV HIGHLIGHT ──
+  const navLinks = document.querySelectorAll('.n-menu a[href^="#"]');
+  const sections = [...navLinks].map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  const navObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  sections.forEach(s => navObs.observe(s));
+
+  // ── EMAIL (runtime-assembled to evade scrapers) ──
+  document.querySelectorAll('[data-u][data-d]').forEach(el => {
+    const addr = el.dataset.u + '@' + el.dataset.d;
+    if (el.tagName === 'A') el.setAttribute('href', 'mailto:' + addr);
+    if (!el.textContent.trim()) el.textContent = addr;
+  });
+  const EMAIL = 'im' + '@' + 'hyeonbin.net';
+  function copyEmail(targetEl, originalText) {
+    navigator.clipboard?.writeText(EMAIL).then(() => {
+      targetEl.textContent = 'Copied!';
+      setTimeout(() => targetEl.textContent = originalText ?? EMAIL, 1600);
+    });
   }
-};
-const modalData = {
+  const mail = document.getElementById('mail');
+  mail.addEventListener('click', e => { e.preventDefault(); copyEmail(mail, EMAIL); });
+  const contactMail = document.getElementById('contact-mail');
+  contactMail.addEventListener('click', () => copyEmail(contactMail.querySelector('.contact-value'), EMAIL));
+
+  // ── THEME TOGGLE ──
+  const themeBtn = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const sunSVG = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
+  const moonSVG = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  function applyTheme(t, persist) {
+    document.documentElement.setAttribute('data-theme', t);
+    themeIcon.innerHTML = t === 'dark' ? moonSVG : sunSVG;
+    if (persist) localStorage.setItem('theme', t);
+  }
+  const mql = matchMedia('(prefers-color-scheme: dark)');
+  const saved = localStorage.getItem('theme');
+  applyTheme(saved || (mql.matches ? 'dark' : 'light'), false);
+  themeBtn.addEventListener('click', () => {
+    const cur = document.documentElement.getAttribute('data-theme');
+    applyTheme(cur === 'dark' ? 'light' : 'dark', true);
+  });
+  mql.addEventListener('change', e => {
+    if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'dark' : 'light', false);
+  });
+
+  // ── I18N ──
+  const i18n = {
+    kr: {
+      'nav.about': '소개', 'nav.news': '소식', 'nav.education': '학력', 'nav.experience': '경험',
+      'nav.research': '연구', 'nav.projects': '프로젝트',
+      'nav.contact': '연락처',
+      'hero.name-ko': '임현빈',
+      'hero.h1': 'Security &amp; <span>Cloud Engineer</span>',
+      'hero.sub': '<b>수원대학교</b> 정보보호 · 클라우드융복합 전공.<br>클라우드·네트워크 인프라와 그 보안에 관심이 있습니다.',
+      'hero.cv': '이력서',
+      'hero.stats.grad': '<b>2028.02</b>',
+      'hero.stats.pub': '논문 <b>5</b>편 <span style="color:var(--ink-3)">(학술지 2 · 학술대회 3)</span>',
+      'hero.stats.award': '🏆 수상 <b>1</b>건',
+      'sec.about': '소개', 'sec.news': '소식', 'sec.education': '학력', 'sec.experience': '경험',
+      'sec.research': '연구', 'sec.projects': '프로젝트',
+      'sec.contact': '연락처',
+      'about.bio': '<b>클라우드 · 시스템 · 네트워크 인프라</b>와 그 보안에 관심이 있습니다.',
+      'edu.univ.name': '수원대학교',
+      'edu.univ.desc': '정보보호학과 · 클라우드융복합학과 (복수전공) · 2028.02 졸업 예정',
+      'edu.univ.pill': '재학 중',
+      'edu.ra.name': '학부연구생',
+      'edu.ra.desc': '2025.12 – 2026.12 · WCPS Lab(Wearable Cyber-Physical Systems Lab) · 원자력 보안 연구팀',
+      'edu.ra.pill': '종료',
+      'res.hada.title': 'HADA: 상용 Anti-DDoS 환경에서 L7 탐지 공백 완화를 위한 계층형 Anti-DDoS 아키텍처',
+      'res.hada.desc': '한국정보통신학회논문지 (KCI) 30(7), pp.1262–1274 · 2026 · 임현빈, 전상훈',
+      'res.hada.pill': '게재',
+      'res.conf.label': '학술대회',
+      'res.meca.title': 'MECA: 의료 클라우드 접속기록 가시성을 위한 eBPF 기반 규제 감사 아키텍처',
+      'res.mecac.title': 'MECA: 의료 클라우드 공동책임모델 보안 가시성 한계 분석 및 eBPF 기반 대응 방안',
+      'res.icsids.title': '산업제어 침입탐지시스템의 DNP3 해석 불일치 해소를 위한 엔드포인트 정규화기',
+      'res.meca.desc': '융합보안논문지 (KCI) 26(4), pp.277–285 · 2026 · 한국융합보안학회 하계학술대회 수상작 확장 · 임현빈, 김아람, 전상훈',
+      'res.meca.pill': '게재',
+      'res.mecac.desc': '한국융합보안학회 하계학술대회 · 대전 · 2026.06 · 임현빈, 김아람, 전상훈',
+      'res.mecac.pill': '🏆 우수논문상',
+      'res.wisa.desc': '원자력 I&amp;C 다층 사이버보안 테스트베드 설계 · 예비 검증 · WISA 2026 · 제주 · 2026.08 · 포스터 · 공저',
+      'res.wisa.pill': '포스터',
+      'res.icsids.desc': 'Snort · Zeek · Suricata vs. opendnp3 · 해석 불일치 9건→0건 · 정상 명령 손실 없음 · KSC 2026 (한국정보과학회) · 경주 · 2026.12 · 포스터 · 임현빈, 전상훈',
+      'res.icsids.pill': '채택',
+      'proj.group.research': '연구 과제',
+      'proj.group.competition': '공모전',
+      'proj.group.startup': '창업',
+      'proj.group.personal': '개인 프로젝트',
+      'proj.hanium.name': '한이음 ICT멘토링 — 몰래카메라 탐지 시스템',
+      'proj.hanium.desc': '802.11 메타데이터 기반 몰래카메라 탐지 · 5인 팀 · 관제 대시보드 프론트엔드 · 백엔드 일부 · 인프라 · 배포 자동화 · 2026',
+      'proj.hanium.pill': '완료',
+      'proj.nuclear.name': '원자력시설 사이버보안 가시성(Visibility) 확보 규제 방안 연구',
+      'proj.nuclear.desc': '원자력안전위원회 규제 프레임워크 · CDA 보안 가시성 · RG 5.71 / 5.96 · RS-015 · 1단계 1차년도 참여 · N-STAR 공저 · 2026.04 – 2026.10',
+      'proj.nuclear.pill': '참여',
+      'proj.modu.name': '모두의 창업 — 1인칭 보이스 자서전 서비스',
+      'proj.modu.desc': '중소벤처기업부 · 창업진흥원 주관 예비창업 프로그램 · 1라운드 멘토링 중 하차(2026.07) · 이후 MVP 직접 구현 · GitHub 공개',
+      'proj.modu.pill': 'MVP 공개',
+      'proj.hp.name': '허니팟 위협 관측 시스템',
+      'proj.hp.desc': '개인 운영 · 홈랩 서버 · Cowrie · 가짜 관리자 웹 · 다중 포트 카나리 · 실시간 탐지 · 자동 차단 · 2026.04 –',
+      'proj.hp.pill': '운영 중',
+      'contact.email.label': '이메일',
+      'contact.loc.label': '위치',
+      'news.8': '모두의 창업 아이디어를 MVP(voice-memoir)로 직접 구현해 GitHub에 공개',
+      'news.7': '산업제어 침입탐지시스템의 DNP3 해석 불일치를 다룬 숏페이퍼, KSC 2026 채택',
+      'news.6': 'MECA 확장 논문, 융합보안논문지(KCI) 제26권 4호 게재',
+      'news.1': 'WISA 2026(제주)에서 원자력 I&amp;C 다층 사이버보안 테스트베드 포스터 발표',
+      'news.2': 'HADA, 한국정보통신학회논문지(JKIICE) 제30권 7호 게재',
+      'news.3': '원자력시설 사이버보안 가시성 규제 1차년도 안전기술보고서(N-STAR) 공저, 원자력안전위원회 제출',
+      'news.4': 'MECA, 한국융합보안학회 하계학술대회(대전) 우수논문상 수상 · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">기사 →</a>',
+      'news.5': '모두의 창업(중소벤처기업부 · 창업진흥원) 1라운드 진출',
+      'contact.loc.value': '수원대학교 · 경기도 화성시'
+    },
+    en: {
+      'nav.about': 'About', 'nav.news': 'News', 'nav.education': 'Education', 'nav.experience': 'Experience',
+      'nav.research': 'Research', 'nav.projects': 'Projects',
+      'nav.contact': 'Contact',
+      'hero.name-ko': 'HyeonBin Im',
+      'hero.h1': 'Security &amp; <span>Cloud Engineer</span>',
+      'hero.sub': "Majoring in <b>Information Security &amp; Cloud Computing</b> at The University of Suwon.<br>Interested in cloud and network infrastructure, and its security.",
+      'hero.cv': 'Resume',
+      'hero.stats.grad': '<b>Feb 2028</b>',
+      'hero.stats.pub': '<b>5</b> publications <span style="color:var(--ink-3)">(2 journal · 3 conference)</span>',
+      'hero.stats.award': '🏆 <b>1</b> award',
+      'sec.about': 'About', 'sec.news': 'News', 'sec.education': 'Education', 'sec.experience': 'Experience',
+      'sec.research': 'Research', 'sec.projects': 'Projects',
+      'sec.contact': 'Contact',
+      'about.bio': 'Interested in <b>cloud, systems, and network infrastructure</b> — and securing it.',
+      'edu.univ.name': 'The University of Suwon',
+      'edu.univ.desc': 'B.S. in Information Security &amp; Cloud Computing (double major) · Expected Feb 2028',
+      'edu.univ.pill': 'Enrolled',
+      'edu.ra.name': 'Undergraduate Research Assistant',
+      'edu.ra.desc': 'Dec 2025 – Dec 2026 · WCPS Lab (Wearable Cyber-Physical Systems Lab) · Nuclear Security Research Team',
+      'edu.ra.pill': 'Completed',
+      'res.hada.title': 'HADA: A Hierarchical Anti-DDoS Architecture for Mitigating L7 Detection Gaps',
+      'res.meca.title': 'MECA: A Medical eBPF Compliance Architecture for Access-Log Visibility in Cloud-Based EMR Systems',
+      'res.mecac.title': 'MECA: Analysis of Security Visibility Limitations under the Shared Responsibility Model in Medical Cloud Environments and eBPF-based Countermeasures',
+      'res.icsids.title': 'An Endpoint-Specific Normalizer for Resolving DNP3 Interpretation Divergence in ICS Intrusion Detection Systems',
+      'res.hada.desc': 'JKIICE (KCI) 30(7), pp.1262–1274 · 2026 · HyeonBin Im, Sanghoon Jeon',
+      'res.hada.pill': 'Published',
+      'res.conf.label': 'Conference',
+      'res.meca.desc': 'Convergence Security Journal (KCI) 26(4), pp.277–285 · 2026 · extended version of the KCSA 2026 award-winning paper · HyeonBin Im, Aram Kim, Sanghoon Jeon',
+      'res.meca.pill': 'Published',
+      'res.mecac.desc': 'KCSA 2026 Summer Conference · Daejeon · Jun 2026 · HyeonBin Im, Aram Kim, Sanghoon Jeon',
+      'res.mecac.pill': '🏆 Best Paper Award',
+      'res.wisa.desc': 'Multi-layer cybersecurity testbed for nuclear I&amp;C · WISA 2026 · Jeju · Aug 2026 · poster · co-author',
+      'res.wisa.pill': 'Poster',
+      'res.icsids.desc': 'Snort · Zeek · Suricata vs. opendnp3 · interpretation divergence 9 → 0 with no legitimate command lost · KSC 2026 (KIISE Korea Software Congress) · Gyeongju · Dec 2026 · poster · HyeonBin Im, Sanghoon Jeon',
+      'res.icsids.pill': 'Accepted',
+      'proj.group.research': 'Research Project',
+      'proj.group.competition': 'Competition',
+      'proj.group.startup': 'Startup',
+      'proj.group.personal': 'Personal',
+      'proj.hanium.name': 'Hanium ICT Mentoring — Hidden Camera Detection System',
+      'proj.hanium.desc': '802.11 metadata-based hidden camera detection · 5-person team · dashboard frontend · partial backend · infra &amp; CI/CD · 2026',
+      'proj.hanium.pill': 'Completed',
+      'proj.nuclear.name': 'Cybersecurity Visibility Regulatory Framework for Nuclear Facilities',
+      'proj.nuclear.desc': 'NSSC regulatory framework · CDA security visibility · RG 5.71 / 5.96 · RS-015 · Phase 1 Year 1 · N-STAR co-author · Apr – Oct 2026',
+      'proj.nuclear.pill': 'Contributed',
+      'proj.modu.name': "Everyone's Startup — First-Person Voice Memoir Service",
+      'proj.modu.desc': 'Pre-founder program run by MSS · KISED · withdrew during Round 1 mentoring (Jul 2026) · later built the MVP myself and open-sourced it',
+      'proj.modu.pill': 'MVP Released',
+      'proj.hp.name': 'Honeypot Threat Monitoring System',
+      'proj.hp.desc': 'Personal project · home lab server · Cowrie · fake admin web · multi-port canary · real-time detection · automatic blocking · Apr 2026 –',
+      'proj.hp.pill': 'Running',
+      'contact.email.label': 'Email',
+      'contact.loc.label': 'Location',
+      'news.8': "Built and open-sourced voice-memoir, the MVP of my Everyone's Startup idea",
+      'news.7': 'Short paper on DNP3 interpretation divergence in ICS intrusion detection accepted to KSC 2026',
+      'news.6': 'MECA extended paper published in the Convergence Security Journal (KCI), vol. 26, no. 4',
+      'news.1': 'Poster on a multi-layer cybersecurity testbed for nuclear I&amp;C systems presented at WISA 2026, Jeju',
+      'news.2': 'HADA published in JKIICE, vol. 30, no. 7',
+      'news.3': 'Co-authored the Year-1 Nuclear Safety Technology Report (N-STAR) on cybersecurity visibility regulation, submitted to NSSC',
+      'news.4': 'MECA received the Best Paper Award at the KCSA Summer Conference, Daejeon · <a href="https://www.veritas-a.com/news/articleView.html?idxno=618757" target="_blank" rel="noopener">press →</a>',
+      'news.5': "Advanced to Round 1 of Everyone's Startup (MSS · KISED)",
+      'contact.loc.value': 'The University of Suwon · Hwaseong, Gyeonggi'
+    }
+  };
+  const langBtn = document.getElementById('lang-toggle');
+  function applyLang(l) {
+    const dict = i18n[l];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (dict[k] != null) el.innerHTML = dict[k];
+    });
+    document.documentElement.lang = l === 'kr' ? 'ko' : 'en';
+    langBtn.textContent = l === 'kr' ? 'EN' : '한글';
+    localStorage.setItem('lang', l);
+    if (window.reopenModal) window.reopenModal();
+  }
+  if (!localStorage.getItem('lang-default-en')) {
+    localStorage.removeItem('lang');
+    localStorage.setItem('lang-default-en', '1');
+  }
+  const savedLang = localStorage.getItem('lang') || 'en';
+  applyLang(savedLang);
+  langBtn.addEventListener('click', () => {
+    const cur = localStorage.getItem('lang') || 'en';
+    applyLang(cur === 'kr' ? 'en' : 'kr');
+  });
+
+  // ── RESEARCH MODAL ──
+  const modalData = {
     hada: {
       title: { kr: 'HADA: 상용 Anti-DDoS 환경에서 L7 탐지 공백 완화를 위한 계층형 Anti-DDoS 아키텍처', en: 'HADA: A Hierarchical Anti-DDoS Architecture for Mitigating L7 Detection Gaps' },
       meta: { kr: '한국정보통신학회논문지 (KCI) 제30권 7호, pp.1262–1274 · 2026 · 임현빈, 전상훈 (수원대학교)', en: 'Journal of the Korea Institute of Information and Communication Engineering (KCI), vol. 30, no. 7, pp. 1262–1274, 2026 · HyeonBin Im, Sanghoon Jeon (The University of Suwon)' },
@@ -746,56 +2011,49 @@ const modalData = {
     }
   };
 
-const get = k => { try { return localStorage.getItem(k); } catch { return null; } };
-const set = (k, v) => { try { localStorage.setItem(k, v); } catch {} };
-let lang = get('lang') === 'kr' ? 'kr' : 'en';
-let current = null;
-function applyLang() {
-  document.querySelectorAll('[data-k]').forEach(el => { const v = T[lang][el.dataset.k]; if (v != null) el.textContent = v; });
-  document.documentElement.lang = lang === 'kr' ? 'ko' : 'en';
-  document.getElementById('lang').textContent = lang === 'kr' ? 'English' : '한국어';
-  if (current) openModal(current);
-}
-document.getElementById('lang').onclick = () => { lang = lang === 'kr' ? 'en' : 'kr'; set('lang', lang); applyLang(); };
-
-const root = document.documentElement;
-const savedTheme = get('theme'); if (savedTheme) root.dataset.theme = savedTheme;
-document.getElementById('theme').onclick = () => {
-  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-  root.dataset.theme = dark ? 'light' : 'dark'; set('theme', root.dataset.theme);
-};
-
-document.querySelectorAll('[data-u][data-d]').forEach(el => {
-  const a = el.dataset.u + '@' + el.dataset.d; el.href = 'mailto:' + a; el.textContent = a;
-});
-
-const mb = document.getElementById('mb');
-let lastFocus = null;
-function openModal(key) {
-  const d = modalData[key]; if (!d) return;
-  current = key;
-  document.getElementById('m-title').textContent = d.title[lang] || d.title.kr;
-  document.getElementById('m-meta').textContent = d.meta[lang] || d.meta.kr;
-  document.getElementById('m-body').innerHTML = d.body[lang] || d.body.kr;
-  if (!mb.classList.contains('open')) {
+  const backdrop = document.getElementById('modal-backdrop');
+  const mTitle = document.getElementById('modal-title');
+  const mMeta = document.getElementById('modal-meta');
+  const mBody = document.getElementById('modal-body');
+  let lastFocus = null;
+  let currentModal = null;
+  function openModal(key) {
+    const d = modalData[key];
+    if (!d) return;
+    const lang = localStorage.getItem('lang') || 'en';
+    currentModal = key;
+    mTitle.textContent = d.title[lang] || d.title.kr;
+    mMeta.textContent = d.meta[lang] || d.meta.kr;
+    mBody.innerHTML = d.body[lang] || d.body.kr;
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
     lastFocus = document.activeElement;
-    mb.classList.add('open'); document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('m-x').focus(), 30);
+    setTimeout(() => document.getElementById('modal-close').focus(), 40);
   }
-}
-function closeModal() {
-  current = null; mb.classList.remove('open'); document.body.style.overflow = '';
-  if (lastFocus) lastFocus.focus();
-}
-document.querySelectorAll('[data-modal]').forEach(el => {
-  el.tabIndex = 0;
-  el.onclick = () => openModal(el.dataset.modal);
-  el.onkeydown = e => { if (e.key === 'Enter') openModal(el.dataset.modal); };
-});
-document.getElementById('m-x').onclick = closeModal;
-mb.onclick = e => { if (e.target === mb) closeModal(); };
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && current) closeModal(); });
-applyLang();
+  window.reopenModal = () => { if (currentModal && backdrop.classList.contains('open')) openModal(currentModal); };
+  function closeModal() {
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  document.querySelectorAll('[data-modal]').forEach(el => {
+    el.addEventListener('click', () => openModal(el.getAttribute('data-modal')));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter') openModal(el.getAttribute('data-modal')); });
+    el.setAttribute('tabindex', '0');
+  });
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (!backdrop.classList.contains('open')) return;
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key !== 'Tab') return;
+    const f = backdrop.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])');
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+    else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+  });
 </script>
+
 </body>
 </html>
